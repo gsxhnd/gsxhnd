@@ -5,7 +5,7 @@
 
 ## Project Roadmap
 
-[Garage](https://github.com/gsxhnd/garage)
-[ThingsTower](https://github.com/gsxhnd/ThingsTower):
-[Railgun](https://github.com/gsxhnd/garage)
-[Stellaris](https://github.com/gsxhnd/Stellaris)
+- [Garage](https://github.com/gsxhnd/garage)
+- [ThingsTower](https://github.com/gsxhnd/ThingsTower)
+- [Railgun](https://github.com/gsxhnd/garage)
+- [Stellaris](https://github.com/gsxhnd/Stellaris)
