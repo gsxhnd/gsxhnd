@@ -1,4 +1,5 @@
 # Hey
+
 <!-- markdownlint-disable MD001 MD033 -->
 
 ![stats](https://github-readme-stats.vercel.app/api?username=gsxhnd&bg_color=30,e96443,904e95&title_color=fff&text_color=fff)
@@ -71,7 +72,7 @@
   <img src="https://skillicons.dev/icons?i=pytorch" height="40" alt="pytorch logo"  />
 </div>
 
-## Project && Template
+## ✴️ Project && Template
 
 Project:
 
@@ -86,9 +87,9 @@ Template:
 - [Typescript API Template](https://github.com/gsxhnd/ts-api-template): Typescript + Koa + Winston + Nodeomo
 - [Go API Template](https://github.com/gsxhnd/go-api-template): Go + Gin + Zap + Wire + GRPC
 
-## The Great Target
+## 🗼 The Great Target
 
-|    | Type  |Progress|
-|  ----  | ----  | ---- |
-| Japanese  | Luanguage |  ![Jp](https://progress-bar.dev/28/)|
-| Franch  | Luanguage |![fr](https://progress-bar.dev/00/)|
+| Target   | Type        | Progress                            |
+| -------- | ----------- | ----------------------------------- |
+| 🇯🇵Japanese | Luanguage | ![jp](https://progress-bar.dev/10/) |
+| 🇫🇷Franch   | Luanguage | ![fr](https://progress-bar.dev/01/) |
