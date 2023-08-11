@@ -87,7 +87,7 @@ Template:
 - [Typescript API Template](https://github.com/gsxhnd/ts-api-template): Typescript + Koa + Winston + Nodeomo
 - [Go API Template](https://github.com/gsxhnd/go-api-template): Go + Gin + Zap + Wire + GRPC
 
-## 🗼 The Great Target
+## 🗼 Learning Target
 
 | Target   | Type        | Progress                            |
 | -------- | ----------- | ----------------------------------- |
