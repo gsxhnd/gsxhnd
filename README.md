@@ -76,9 +76,12 @@
 
 Project:
 
+北斗七星 由天枢(Dubhe)、天璇(Merak)、天玑(Phecda)、天权(Megrez)、玉衡(Alioth)、开阳(Mizar)、瑶光(Alkaid)，七颗星组成。
+> 《晋书·天文志》：“枢为天，璇为地，玑为人，权为时，衡为音，开阳为律，摇光为星。”
+
 - [Garage](https://github.com/gsxhnd/garage): Set of mine command include crawl ffmpeg
-- [ThingsTower](https://github.com/gsxhnd/ThingsTower): MQTT Broker, support v3 v4 v5
-- [Railgun](https://github.com/gsxhnd/garage): Go http web framwork
+- [Dubhe](https://github.com/gsxhnd/Dubhe): MQTT Broker, support v3 v4 v5
+- [Railgun](https://github.com/gsxhnd/railgun): Go http web framwork
 - [Stellaris](https://github.com/gsxhnd/Stellaris): Proxy
 
 Template:
