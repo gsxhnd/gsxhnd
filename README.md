@@ -8,69 +8,39 @@
 
 ### Code with
 
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" height="40" alt="apple logo"  />
-  <img height="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" height="40" alt="ubuntu logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=vscode" height="40" alt="vscode logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=neovim" height="40" alt="neovim logo"  />
-  <img height="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="bash logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=git" height="40" alt="git logo"  />
-</div>
+![macos](https://img.shields.io/badge/macOS-M2-white?style=flat&logo=Apple)
+![ubuntu](https://img.shields.io/badge/-ubuntu-white?style=flat&logo=ubuntu)
+![vscode](https://img.shields.io/badge/-vscode-blue?style=flat&logo=visualstudiocode)
+![neovim](https://img.shields.io/badge/-Neovim-grey?style=flat&logo=neovim)
+![zsh](https://img.shields.io/badge/-zsh-grey?style=flat&logo=gnubash&logoColor=white)
+![git](https://img.shields.io/badge/-Git-ee462c?style=flat&logo=git&logoColor=white")
+![alacritty](https://img.shields.io/badge/-Alacritty-grey?style=flat&logo=alacritty)
+![obsidian](https://img.shields.io/badge/-Obsidian-grey?style=flat&logo=obsidian)
 
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" height="40" alt="go logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=rust" height="40" alt="rust logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=nodejs" height="40" alt="nodejs logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=ts" height="40" alt="typescript logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=js" height="40" alt="javascript logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=py" height="40" alt="python logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=dart" height="40" alt="dart logo"  />
-</div>
+![go](https://img.shields.io/badge/-Go-grey?style=flat&logo=go)
+![rust](https://img.shields.io/badge/-Rust-grey?style=flat&logo=rust)
+![nodejs](https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=white)
+![typescript](https://img.shields.io/badge/-TypeScript-2b6dbf?style=flat&logo=typescript&logoColor=white)
+![javascript](https://img.shields.io/badge/JavaScript-ES6-f6da1c?style=flat&logo=javascript&logoColor=f6da1c)
+![python](https://img.shields.io/badge/Python-grey?style=flat&logo=python)
+![dart](https://img.shields.io/badge/Dart-grey?style=flat&logo=dart)
 
-<div align="left">
-  <img src="https://skillicons.dev/icons?i=vue" height="40" alt="vuejs logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=vite" height="40" alt="vite logo"  />
-  <img height="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg" height="40" alt="storybook logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=flutter" height="40" alt="flutter logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=md" height="40" alt="markdown logo"  />
-</div>
+![vue](https://img.shields.io/badge/-Vue-46b882?style=flat&logo=vue.js&logoColor=white)
+![vite](https://img.shields.io/badge/-Vite-646cff?style=flat&logo=vite&logoColor=white)
+![flutter](https://img.shields.io/badge/-Flutter-grey?style=flat&logo=flutter)
+![storybook](https://img.shields.io/badge/-Storybook-grey?style=flat&logo=storybook)
+![reactivex](https://img.shields.io/badge/-Reactivex-grey?style=flat&logo=reactivex)
 
-<div align="left">
-  <img src="https://skillicons.dev/icons?i=docker" height="40" alt="docker logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=kubernetes" height="40" alt="kubernetes logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=reactivex" height="40" alt="reactivex logo"  />
-</div>
+![docker](https://img.shields.io/badge/-Docker-grey?style=flat&logo=docker)
+![kubernetes](https://img.shields.io/badge/-Kubernetes-grey?style=flat&logo=kubernetes)
+![helm](https://img.shields.io/badge/-Helm-grey?style=flat&logo=helm)
 
 ### Learning
 
-<div align="left">
-  <img src="https://skillicons.dev/icons?i=blender" height="40" alt="blender logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=wasm" height="40" alt="webassembly logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=lua" height="40" alt="lua logo"  />
-  <img height="10" />
-  <img src="https://skillicons.dev/icons?i=tensorflow" height="40" alt="tensorflow logo"  />
-  <img width="10" />
-  <img src="https://skillicons.dev/icons?i=pytorch" height="40" alt="pytorch logo"  />
-</div>
+![blender](https://img.shields.io/badge/-Blender-grey?style=flat&logo=blender)
+![wasm](https://img.shields.io/badge/-Webassembly-white?style=flat&logo=webassembly)
+![lua](https://img.shields.io/badge/-Lua-grey?style=flat&logo=lua)
+![tensorflow](https://img.shields.io/badge/-Tensorflow-grey?style=flat&logo=tensorflow)
 
 ## ✴️ Project && Template
 
