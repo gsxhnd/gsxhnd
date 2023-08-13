@@ -13,7 +13,7 @@
 ![vscode](https://img.shields.io/badge/-vscode-blue?style=flat&logo=visualstudiocode)
 ![neovim](https://img.shields.io/badge/-Neovim-grey?style=flat&logo=neovim)
 ![zsh](https://img.shields.io/badge/-zsh-grey?style=flat&logo=gnubash&logoColor=white)
-![git](https://img.shields.io/badge/-Git-ee462c?style=flat&logo=git&logoColor=white")
+![git](https://img.shields.io/badge/-Git-ee462c?style=flat&logo=git&logoColor=white)
 ![alacritty](https://img.shields.io/badge/-Alacritty-grey?style=flat&logo=alacritty)
 ![obsidian](https://img.shields.io/badge/-Obsidian-grey?style=flat&logo=obsidian)
 
