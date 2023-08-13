@@ -43,6 +43,7 @@
 ![wasm](https://img.shields.io/badge/-Webassembly-white?style=flat&logo=webassembly)
 ![lua](https://img.shields.io/badge/-Lua-grey?style=flat&logo=lua)
 ![tensorflow](https://img.shields.io/badge/-Tensorflow-grey?style=flat&logo=tensorflow)
+![affinityphoto](https://img.shields.io/badge/-AffinityPhoto-blue?style=flat&logo=affinityphoto&logoColor=white)
 
 ## ✴️ Project && Template
 
