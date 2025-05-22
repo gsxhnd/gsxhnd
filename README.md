@@ -60,9 +60,3 @@ Template:
 - [Typescript API Template](https://github.com/gsxhnd/ts-api-template): Typescript + Nodemon + Koa + Winston
 - [Go API Template](https://github.com/gsxhnd/go-api-template): Go + Gin + Zap + Wire + GRPC + OpenTelemetry
 
-## 🗼 Learning Target
-
-| Target     | Type      | Progress                            |
-| ---------- | --------- | ----------------------------------- |
-| 🇯🇵Japanese | Luanguage | ![jp](https://progress-bar.dev/10/) |
-| 🇫🇷Franch   | Luanguage | ![fr](https://progress-bar.dev/01/) |
