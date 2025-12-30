@@ -1,0 +1,240 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { defineCollection } from "astro:content";
+import { glob, file } from "astro/loaders";
+import { type CollectionEntry, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allNews = await Astro.glob("../../content/news/*.md");
+
+  return allNews.map((post: any) => {
+    // 从 file 属性提取 slug
+    const filename = post.file.split("/").pop()?.replace(".md", "") || "";
+
+    return {
+      params: { slug: filename },
+      props: { post },
+    };
+  });
+}
+
+const { params } = Astro.params;
+const { page } = Astro.props;
+---
+
+<Layout title={`123 | CName Inc.`}>
+  <section class="page-header">
+    <div class="page-header__container"></div>
+  </section>
+
+  <article class="news-detail">
+    <div class="news-detail__container"></div>
+  </article>
+</Layout>
+
+<style lang="scss">
+  .page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      h1 {
+        font-size: 1.8rem;
+        margin: 0 0 1rem 0;
+
+        @media (min-width: 768px) {
+          font-size: 2.5rem;
+        }
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+
+        @media (min-width: 768px) {
+          font-size: 1rem;
+        }
+
+        time {
+          opacity: 0.9;
+        }
+
+        .type {
+          background: rgba(255, 255, 255, 0.2);
+          padding: 0.25rem 0.6rem;
+          border-radius: 3px;
+          font-size: 0.8rem;
+
+          @media (min-width: 768px) {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+
+  .news-detail {
+    padding: 2rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+
+    &__container {
+      :global(h2) {
+        font-size: 1.3rem;
+        margin: 1.5rem 0 0.8rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 1.8rem;
+          margin: 2rem 0 1rem;
+        }
+      }
+
+      :global(h3) {
+        font-size: 1.1rem;
+        margin: 1rem 0 0.6rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 1.3rem;
+          margin: 1.5rem 0 0.8rem;
+        }
+      }
+
+      :global(p) {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+          font-size: 1rem;
+        }
+      }
+
+      :global(ul),
+      :global(ol) {
+        margin: 0 0 1rem 1.2rem;
+        color: #666;
+
+        @media (min-width: 768px) {
+          margin: 0 0 1.5rem 1.5rem;
+        }
+
+        :global(li) {
+          margin-bottom: 0.6rem;
+          line-height: 1.6;
+          font-size: 0.9rem;
+
+          @media (min-width: 768px) {
+            margin-bottom: 0.8rem;
+          }
+        }
+      }
+
+      :global(code) {
+        background: #f5f5f5;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        color: #d63384;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.85rem;
+
+        @media (min-width: 768px) {
+          font-size: 0.9rem;
+        }
+      }
+
+      :global(pre) {
+        background: #f5f5f5;
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+
+        @media (min-width: 768px) {
+          padding: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        :global(code) {
+          background: none;
+          padding: 0;
+          color: #333;
+        }
+      }
+
+      :global(blockquote) {
+        border-left: 4px solid #0066cc;
+        padding-left: 1rem;
+        margin: 1rem 0;
+        color: #666;
+        font-style: italic;
+        font-size: 0.9rem;
+
+        @media (min-width: 768px) {
+          padding-left: 1.5rem;
+          margin: 1.5rem 0;
+          font-size: 1rem;
+        }
+      }
+
+      :global(a) {
+        color: #0066cc;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      :global(table) {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.85rem;
+
+        @media (min-width: 768px) {
+          margin: 1.5rem 0;
+          font-size: 1rem;
+        }
+
+        :global(th),
+        :global(td) {
+          border: 1px solid #ddd;
+          padding: 0.5rem;
+          text-align: left;
+
+          @media (min-width: 768px) {
+            padding: 0.75rem;
+          }
+        }
+
+        :global(th) {
+          background: #f5f5f5;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+</style>
