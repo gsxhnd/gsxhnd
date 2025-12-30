@@ -1,0 +1,228 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="企业品牌 | CName Inc.">
+  <section class="work-detail">
+    <div class="work-detail__container">
+      <article class="work-article">
+        <header class="work-article__header">
+          <h1>企业品牌</h1>
+          <div class="work-meta">
+            <span class="work-meta__tag">UI/UX设计</span>
+            <span class="work-meta__category">科技初创公司</span>
+          </div>
+        </header>
+
+        <div class="work-article__content">
+          <h2>プロジェクト概要</h2>
+          <p>
+            急成長する科技初创公司の包括的なブランドリニューアルを行いました。企業の新しい方向性と价值观を反映した、統一されたビジュアルアイデンティティシステムを構築しました。
+          </p>
+
+          <h2>実施内容</h2>
+          <ul>
+            <li>ロゴデザイン（新規制作）</li>
+            <li>カラーパレット定義</li>
+            <li>タイポグラフィシステム</li>
+            <li>ブランドガイドライン制作</li>
+            <li>Webサイトリデザイン</li>
+            <li>マーケティング資料デザイン</li>
+            <li>オフィス環境デザイン</li>
+          </ul>
+
+          <h2>アプローチ</h2>
+          <p>
+            単なるビジュアルデザインにとどまらず、以下のプロセスを通じて、会社全体のブランド価値を高めました：
+          </p>
+          <ul>
+            <li>経営層とのブランド戦略ワークショップ</li>
+            <li>従業員・顧客へのヒアリング調査</li>
+            <li>競合他社分析</li>
+            <li>ブランドポジショニング定義</li>
+            <li>全社スタッフへの研修実施</li>
+          </ul>
+
+          <h2>成果</h2>
+          <ul>
+            <li>ブランド認知度 150% 向上</li>
+            <li>採用応募者数 2倍増加</li>
+            <li>顧客満足度スコア 35 ポイント向上</li>
+            <li>プレスリリース掲載数 5倍増加</li>
+          </ul>
+        </div>
+
+        <div class="work-article__footer">
+          <a href="/works/" class="work-back-link">← 制作成就一覧に戻る</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .work-detail {
+    padding: 2rem 1.5rem;
+    background: #f9f9f9;
+
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+
+    &__container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+
+  .work-article {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    @media (min-width: 768px) {
+      padding: 3rem;
+    }
+
+    &__header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+
+      @media (min-width: 768px) {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    &__content {
+      color: #666;
+      line-height: 1.8;
+
+      p {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+          font-size: 1rem;
+        }
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.8rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 1.5rem;
+          margin: 2rem 0 1rem;
+        }
+      }
+
+      ul {
+        margin-bottom: 1rem;
+        margin-left: 1.2rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+          margin-left: 1.5rem;
+        }
+
+        li {
+          margin-bottom: 0.4rem;
+          font-size: 0.9rem;
+
+          @media (min-width: 768px) {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      strong {
+        color: #333;
+        font-weight: 600;
+      }
+    }
+
+    &__footer {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+
+      @media (min-width: 768px) {
+        margin-top: 2rem;
+        padding-top: 2rem;
+      }
+    }
+  }
+
+  .work-meta {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+
+    @media (min-width: 768px) {
+      gap: 1rem;
+    }
+  }
+
+  .work-meta__tag {
+    display: inline-block;
+    background: #e8f0ff;
+    color: #0066cc;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    @media (min-width: 768px) {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .work-meta__category {
+    display: inline-block;
+    background: #fff;
+    color: #666;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    border: 1px solid #ddd;
+
+    @media (min-width: 768px) {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .work-back-link {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    font-size: 0.9rem;
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+
+    &:hover {
+      color: #0052a3;
+    }
+  }
+</style>

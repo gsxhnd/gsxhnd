@@ -1,0 +1,244 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="SaaS仪表板平台 | CName Inc.">
+  <section class="work-detail">
+    <div class="work-detail__container">
+      <article class="work-article">
+        <header class="work-article__header">
+          <h1>SaaS仪表板平台</h1>
+          <div class="work-meta">
+            <span class="work-meta__tag">数字策略</span>
+            <span class="work-meta__category">企业级公司</span>
+          </div>
+        </header>
+
+        <div class="work-article__content">
+          <h2>プロジェクト概要</h2>
+          <p>
+            エンタープライズクライアント向けの高度な分析ダッシュボードプラットフォームを構築しました。複雑なビジネスロジックと大規模データセットの処理を、直感的なUI
+            で実現しています。
+          </p>
+
+          <h2>主な機能</h2>
+          <ul>
+            <li>リアルタイムデータ可視化</li>
+            <li>カスタムレポート生成</li>
+            <li>高度なフィルタリング・検索機能</li>
+            <li>データエクスポート機能</li>
+            <li>スケジュール設定レポート配信</li>
+            <li>多言語対応</li>
+            <li>ロールベースアクセス制御</li>
+          </ul>
+
+          <h2>技術スタック</h2>
+          <ul>
+            <li>フロントエンド：React + TypeScript</li>
+            <li>バックエンド：Node.js / Python</li>
+            <li>データベース：PostgreSQL + Redis</li>
+            <li>インフラ：AWS (ECS, RDS, S3)</li>
+            <li>データ処理：Apache Spark</li>
+          </ul>
+
+          <h2>パフォーマンス最適化</h2>
+          <ul>
+            <li>100万件以上のレコード処理を5秒以内で実現</li>
+            <li>リアルタイムデータ更新（1秒単位）</li>
+            <li>複雑なクエリの最適化</li>
+            <li>キャッシング戦略の実装</li>
+            <li>CDN活用による配信速度向上</li>
+          </ul>
+
+          <h2>セキュリティ・コンプライアンス</h2>
+          <ul>
+            <li>エンタープライズレベルの認証・認可</li>
+            <li>データ暗号化（保存時・通信時）</li>
+            <li>監査ログ記録</li>
+            <li>SOC2 Type II認証取得</li>
+            <li>GDPR対応</li>
+          </ul>
+
+          <h2>成果</h2>
+          <ul>
+            <li>客户企业の意思決定スピード 3倍高速化</li>
+            <li>オペレーショナルコスト 40% 削減</li>
+            <li>データ精度向上により売上 20% 増加</li>
+            <li>ユーザー採用率 90%</li>
+          </ul>
+        </div>
+
+        <div class="work-article__footer">
+          <a href="/works/" class="work-back-link">← 制作成就一覧に戻る</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .work-detail {
+    padding: 2rem 1.5rem;
+    background: #f9f9f9;
+
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+
+    &__container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+
+  .work-article {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    @media (min-width: 768px) {
+      padding: 3rem;
+    }
+
+    &__header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+
+      @media (min-width: 768px) {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    &__content {
+      color: #666;
+      line-height: 1.8;
+
+      p {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+          font-size: 1rem;
+        }
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.8rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 1.5rem;
+          margin: 2rem 0 1rem;
+        }
+      }
+
+      ul {
+        margin-bottom: 1rem;
+        margin-left: 1.2rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+          margin-left: 1.5rem;
+        }
+
+        li {
+          margin-bottom: 0.4rem;
+          font-size: 0.9rem;
+
+          @media (min-width: 768px) {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      strong {
+        color: #333;
+        font-weight: 600;
+      }
+    }
+
+    &__footer {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+
+      @media (min-width: 768px) {
+        margin-top: 2rem;
+        padding-top: 2rem;
+      }
+    }
+  }
+
+  .work-meta {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+
+    @media (min-width: 768px) {
+      gap: 1rem;
+    }
+  }
+
+  .work-meta__tag {
+    display: inline-block;
+    background: #e8f0ff;
+    color: #0066cc;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    @media (min-width: 768px) {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .work-meta__category {
+    display: inline-block;
+    background: #fff;
+    color: #666;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    border: 1px solid #ddd;
+
+    @media (min-width: 768px) {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .work-back-link {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    font-size: 0.9rem;
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+
+    &:hover {
+      color: #0052a3;
+    }
+  }
+</style>

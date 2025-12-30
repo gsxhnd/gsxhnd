@@ -1,0 +1,206 @@
+---
+import Layout from "../layouts/Layout.astro";
+// import { type  } from "astro:content";
+import type {
+  GetStaticPathsOptions,
+  GetStaticPaths,
+  PaginateFunction,
+} from "astro";
+import { type CollectionEntry, getCollection } from "astro:content";
+
+// 动态加载所有新闻文件
+// const allNews = await Astro.glob("../content/news/*.md");
+
+// 按日期排序（最新的在前）
+// const sortedNews = allNews
+//   .map((post) => ({
+//     url: post.url,
+//     title: post.frontmatter.title,
+//     date: new Date(post.frontmatter.date),
+//     dateString: post.frontmatter.date,
+//     type: post.frontmatter.type,
+//     description: post.frontmatter.description,
+//   }))
+//   .sort((a, b) => b.date.getTime() - a.date.getTime());
+const allNews = await getCollection("news", ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+console.log("==========================");
+// console.log(allNews);
+
+export async function getStaticPaths({ paginate }) {
+  console.log("==========================");
+  const allNews = await getCollection("news", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
+  const astronautPages = [
+    { astronaut: "Neil Armstrong" },
+    { astronaut: "Buzz Aldrin" },
+    { astronaut: "Sally Ride" },
+    { astronaut: "John Glenn" },
+  ];
+
+  // 根据宇航员数组生成页面，每页2项
+  console.log("paginate", paginate(astronautPages, { pageSize: 2 }));
+  return paginate(astronautPages, { pageSize: 2 });
+}
+const { page } = Astro.props;
+---
+
+<Layout title="新闻 | CName Inc.">
+  <section class="news-hero">
+    <div class="news-hero__container">
+      <h1>News</h1>
+      <p>新闻</p>
+    </div>
+  </section>
+
+  <section class="news-list">
+    <h1>Page {page}</h1>
+    <div class="news-list__container">
+      <!-- {
+        sortedNews.map((post) => (
+          <article class="news-post flex gap-2">
+            <time class="news-post__date">
+              {post.dateString.split("T")[0].split("-").join(".")}
+            </time>
+            <span class="news-post__type">{post.type}</span>
+            <h2>
+              <a href={post.url}>{post.title}</a>
+            </h2>
+            {/* <p>{post.description}</p> */}
+          </article>
+        ))
+      } -->
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .news-hero {
+    // background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    // color: white;
+    // padding: 3rem 1.5rem;
+    // text-align: center;
+
+    // @media (min-width: 768px) {
+    //   padding: 4rem 2rem;
+    // }
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      h1 {
+        font-size: 2rem;
+        margin: 0 0 0.5rem 0;
+
+        @media (min-width: 768px) {
+          font-size: 3rem;
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        margin: 0;
+        opacity: 0.95;
+
+        @media (min-width: 768px) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  .news-list {
+    // padding: 2.5rem 1.5rem;
+    max-width: 900px;
+    // margin: 0 auto;
+
+    @media (min-width: 768px) {
+      // padding: 4rem 2rem;
+    }
+
+    &__container {
+      // display: grid;
+      gap: 1.5rem;
+      margin: 0 auto;
+
+      @media (min-width: 768px) {
+        // gap: 2rem;
+      }
+    }
+  }
+
+  .news-post {
+    background: #f9f9f9;
+    transition: box-shadow 0.3s;
+    // margin: 0 auto;
+
+    @media (min-width: 768px) {
+      // padding: 2rem;
+    }
+
+    &:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    &__date {
+      display: block;
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 0.5rem;
+
+      @media (min-width: 768px) {
+        font-size: 0.9rem;
+      }
+    }
+
+    &__type {
+      display: inline-block;
+      background: #e8f0ff;
+      color: #0066cc;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      margin-bottom: 0.8rem;
+
+      @media (min-width: 768px) {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    h2 {
+      margin: 0.5rem 0 0.8rem 0;
+      font-size: 1.1rem;
+
+      @media (min-width: 768px) {
+        margin: 0.5rem 0 1rem 0;
+        font-size: 1.3rem;
+      }
+
+      a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #0066cc;
+        }
+      }
+    }
+
+    p {
+      margin: 0;
+      color: #666;
+      line-height: 1.6;
+      font-size: 0.9rem;
+
+      @media (min-width: 768px) {
+        font-size: 0.95rem;
+      }
+    }
+  }
+</style>

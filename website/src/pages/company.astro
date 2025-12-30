@@ -1,0 +1,193 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="公司概览 | CName Inc.">
+  <section class="page-header">
+    <div class="page-header__container">
+      <h1>公司概览</h1>
+    </div>
+  </section>
+
+  <section class="page-content">
+    <div class="page-content__container">
+      <div class="company-overview">
+        <div class="company-info__item">
+          <h3>公司名称</h3>
+          <p>CName Inc.</p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>成立</h3>
+          <p>2019年4月1日</p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>总部地点</h3>
+          <p>123123<br />123123</p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>电话号码</h3>
+          <p><a href="tel:+81-3-xxxx-xxxx">+81-3-XXXX-XXXX</a></p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>电子邮件地址</h3>
+          <p><a href="mailto:info@CName.jp">xxx@xxx</a></p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>营业时间</h3>
+          <p>周一至周五 9:00 - 18:00（周末和假日休息）</p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>代表董事</h3>
+          <p>123</p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>员工数</h3>
+          <p>35名（截至2024年12月末）</p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>资本</h3>
+          <p>1万</p>
+        </div>
+
+        <div class="company-info__item">
+          <h3>主要业务内容</h3>
+          <ul>
+            <li>Web网站・Web应用开发</li>
+            <li>移动应用开发</li>
+            <li>UI/UX设计</li>
+            <li>品牌咨询</li>
+            <li>数字营销支持</li>
+          </ul>
+        </div>
+
+        <div class="company-info__item">
+          <h3>获得资格和认证</h3>
+          <ul>
+            <li>信息安全管理系统认证 (ISO 27001)</li>
+            <li>Google Partner</li>
+            <li>AWS Partner</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      h1 {
+        font-size: 2rem;
+        margin: 0;
+
+        @media (min-width: 768px) {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+
+  .page-content {
+    padding: 2rem 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+
+    &__container {
+      a {
+        color: #0066cc;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .company-overview {
+    display: grid;
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+      gap: 2rem;
+    }
+  }
+
+  .company-info__item {
+    padding: 1.2rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    border-left: 4px solid #0066cc;
+
+    @media (min-width: 768px) {
+      padding: 1.5rem;
+    }
+
+    h3 {
+      margin: 0 0 0.6rem 0;
+      font-size: 1rem;
+      color: #333;
+
+      @media (min-width: 768px) {
+        margin: 0 0 0.8rem 0;
+        font-size: 1.1rem;
+      }
+    }
+
+    p {
+      margin: 0;
+      color: #666;
+      line-height: 1.6;
+      font-size: 0.9rem;
+
+      @media (min-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      list-style: disc;
+
+      @media (min-width: 768px) {
+        padding-left: 1.5rem;
+      }
+
+      li {
+        color: #666;
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 0.5rem;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+</style>

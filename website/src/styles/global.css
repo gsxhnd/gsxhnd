@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* Responsive Design System */
+:root {
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Container widths */
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-2xl: 1320px;
+
+  /* Spacing scale */
+  --spacing-unit: 0.25rem;
+  --spacing-xs: calc(var(--spacing-unit) * 2);
+  --spacing-sm: calc(var(--spacing-unit) * 4);
+  --spacing-md: calc(var(--spacing-unit) * 6);
+  --spacing-lg: calc(var(--spacing-unit) * 8);
+  --spacing-xl: calc(var(--spacing-unit) * 12);
+  --spacing-2xl: calc(var(--spacing-unit) * 16);
+  --spacing-3xl: calc(var(--spacing-unit) * 20);
+  --spacing-4xl: calc(var(--spacing-unit) * 24);
+  --spacing-5xl: calc(var(--spacing-unit) * 32);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: #333;
+  background: #fff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* Responsive Text Utilities */
+.text-responsive {
+  font-size: clamp(1rem, 5vw, 3.5rem);
+}
+
+.text-responsive-lg {
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+}
+
+.text-responsive-md {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+}
+
+/* Container utilities */
+.container-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    max-width: 1200px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

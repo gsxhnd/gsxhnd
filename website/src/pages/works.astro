@@ -1,0 +1,191 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="制作成就 | CName Inc.">
+  <section class="works-hero">
+    <div class="works-hero__container">
+      <h1>Works</h1>
+      <p>制作成就</p>
+    </div>
+  </section>
+
+  <section class="works-list">
+    <div class="works-list__container">
+      <div class="work-detail">
+        <h2>EC平台重新设计</h2>
+        <div class="work-detail__meta">
+          <span class="work-detail__tag">Web网站・应用开发</span>
+          <span class="work-detail__category">时尚品牌</span>
+        </div>
+        <p class="work-detail__description">
+          大手ファッションリテーラーのオンラインストアを全面刷新しました。既存の複雑なUIを整理し、ユーザーの購買体験を大幅に改善。A/Bテストを重ねながら、コンバージョン率40%の向上を実現しました。
+        </p>
+      </div>
+
+      <div class="work-detail">
+        <h2>企业品牌</h2>
+        <div class="work-detail__meta">
+          <span class="work-detail__tag">UI/UX设计</span>
+          <span class="work-detail__category">科技初创公司</span>
+        </div>
+        <p class="work-detail__description">
+          急成長する科技初创公司の包括的なブランドリニューアルを行いました。ロゴデザイン、カラーパレット、タイポグラフィから始まる統一されたビジュアルシステムを構築。スタイルガイド、Webサイト、マーケティング資料まで、全タッチポイントでブランドの一貫性を実現しました。
+        </p>
+      </div>
+
+      <div class="work-detail">
+        <h2>移动银行应用</h2>
+        <div class="work-detail__meta">
+          <span class="work-detail__tag">移动应用开发</span>
+          <span class="work-detail__category">金融机构</span>
+        </div>
+        <p class="work-detail__description">
+          10万人以上のアクティブユーザーを持つ金融机构向けのモバイルバンキングアプリを開発しました。セキュリティを最優先としながらも、直感的で使いやすいUIを実現。高速な取引処理とシームレスな体験により、顧客満足度を大幅に向上させました。
+        </p>
+      </div>
+
+      <div class="work-detail">
+        <h2>SaaS仪表板平台</h2>
+        <div class="work-detail__meta">
+          <span class="work-detail__tag">数字策略</span>
+          <span class="work-detail__category">企业级公司</span>
+        </div>
+        <p class="work-detail__description">
+          エンタープライズクライアント向けの高度な分析ダッシュボードプラットフォームを構築しました。リアルタイムのデータ可視化、カスタムレポート生成機能、高度なフィルタリング機能など、複雑な要件を満たすソリューションを実現。大規模データセットの処理にも対応しています。
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .works-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 1.5rem;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      padding: 4rem 2rem;
+    }
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      h1 {
+        font-size: 2rem;
+        margin: 0 0 0.5rem 0;
+
+        @media (min-width: 768px) {
+          font-size: 3rem;
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        margin: 0;
+        opacity: 0.95;
+
+        @media (min-width: 768px) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  .works-list {
+    padding: 2.5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      padding: 4rem 2rem;
+    }
+
+    &__container {
+      display: grid;
+      gap: 2rem;
+
+      @media (min-width: 768px) {
+        gap: 3rem;
+      }
+    }
+  }
+
+  .work-detail {
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border-left: 4px solid #0066cc;
+
+    @media (min-width: 768px) {
+      padding: 2rem;
+    }
+
+    h2 {
+      margin: 0 0 0.8rem 0;
+      font-size: 1.2rem;
+      color: #333;
+
+      @media (min-width: 768px) {
+        font-size: 1.5rem;
+        margin: 0 0 1rem 0;
+      }
+    }
+
+    &__meta {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+
+      @media (min-width: 768px) {
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    &__tag {
+      display: inline-block;
+      background: #e8f0ff;
+      color: #0066cc;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+
+      @media (min-width: 768px) {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    &__category {
+      display: inline-block;
+      background: #fff;
+      color: #666;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      border: 1px solid #ddd;
+
+      @media (min-width: 768px) {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    &__description {
+      margin: 0;
+      color: #666;
+      line-height: 1.8;
+      font-size: 0.9rem;
+
+      @media (min-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  }
+</style>

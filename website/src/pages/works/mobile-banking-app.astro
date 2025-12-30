@@ -1,0 +1,234 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="移动银行应用 | CName Inc.">
+  <section class="work-detail">
+    <div class="work-detail__container">
+      <article class="work-article">
+        <header class="work-article__header">
+          <h1>移动银行应用</h1>
+          <div class="work-meta">
+            <span class="work-meta__tag">移动应用开发</span>
+            <span class="work-meta__category">金融机构</span>
+          </div>
+        </header>
+
+        <div class="work-article__content">
+          <h2>プロジェクト概要</h2>
+          <p>
+            大手金融机构向けのモバイルバンキングアプリを開発しました。現在10万人以上のアクティブユーザーに利用されている、セキュアで使いやすいバンキングソリューションです。
+          </p>
+
+          <h2>開発スペック</h2>
+          <ul>
+            <li>プラットフォーム：iOS / Android（ネイティブ開発）</li>
+            <li>セキュリティ：銀行レベルの暗号化・認証</li>
+            <li>バックエンド：マイクロサービスアーキテクチャ</li>
+            <li>決済処理：リアルタイム処理対応</li>
+          </ul>
+
+          <h2>主な機能</h2>
+          <ul>
+            <li>口座照会・残高確認</li>
+            <li>送金・振込機能</li>
+            <li>定期送金設定</li>
+            <li>取引履歴検索</li>
+            <li>FaceID/Touch ID認証</li>
+            <li>ビオメトリック認証</li>
+            <li>プッシュ通知アラート</li>
+          </ul>
+
+          <h2>セキュリティ対策</h2>
+          <ul>
+            <li>エンドツーエンド暗号化</li>
+            <li>多要素認証（MFA）</li>
+            <li>不正検知システム</li>
+            <li>定期的なセキュリティ監査</li>
+            <li>PCI-DSS コンプライアンス対応</li>
+          </ul>
+
+          <h2>成果</h2>
+          <ul>
+            <li>ダウンロード数：100,000+</li>
+            <li>アクティブユーザー数：100,000+</li>
+            <li>アプリレーティング：4.8 / 5.0 星</li>
+            <li>セキュリティインシデント：0件</li>
+            <li>月間取扱量：1,000億円以上</li>
+          </ul>
+        </div>
+
+        <div class="work-article__footer">
+          <a href="/works/" class="work-back-link">← 制作成就一覧に戻る</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .work-detail {
+    padding: 2rem 1.5rem;
+    background: #f9f9f9;
+
+    @media (min-width: 768px) {
+      padding: 3rem 2rem;
+    }
+
+    &__container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+
+  .work-article {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    @media (min-width: 768px) {
+      padding: 3rem;
+    }
+
+    &__header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+
+      @media (min-width: 768px) {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    &__content {
+      color: #666;
+      line-height: 1.8;
+
+      p {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+          font-size: 1rem;
+        }
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.8rem;
+        color: #333;
+
+        @media (min-width: 768px) {
+          font-size: 1.5rem;
+          margin: 2rem 0 1rem;
+        }
+      }
+
+      ul {
+        margin-bottom: 1rem;
+        margin-left: 1.2rem;
+
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+          margin-left: 1.5rem;
+        }
+
+        li {
+          margin-bottom: 0.4rem;
+          font-size: 0.9rem;
+
+          @media (min-width: 768px) {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      strong {
+        color: #333;
+        font-weight: 600;
+      }
+    }
+
+    &__footer {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+
+      @media (min-width: 768px) {
+        margin-top: 2rem;
+        padding-top: 2rem;
+      }
+    }
+  }
+
+  .work-meta {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+
+    @media (min-width: 768px) {
+      gap: 1rem;
+    }
+  }
+
+  .work-meta__tag {
+    display: inline-block;
+    background: #e8f0ff;
+    color: #0066cc;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    @media (min-width: 768px) {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .work-meta__category {
+    display: inline-block;
+    background: #fff;
+    color: #666;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    border: 1px solid #ddd;
+
+    @media (min-width: 768px) {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .work-back-link {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    font-size: 0.9rem;
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+
+    &:hover {
+      color: #0052a3;
+    }
+  }
+</style>
