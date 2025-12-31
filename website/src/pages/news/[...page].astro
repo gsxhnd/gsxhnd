@@ -1,24 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { defineCollection } from "astro:content";
-import { glob, file } from "astro/loaders";
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
+import type { PaginateFunction } from "astro";
 
-// export async function getStaticPaths() {
-//   const allNews = await Astro.glob("../../content/news/*.md");
-
-//   return allNews.map((post: any) => {
-//     // 从 file 属性提取 slug
-//     const filename = post.file.split("/").pop()?.replace(".md", "") || "";
-
-//     return {
-//       params: { slug: filename },
-//       props: { post },
-//     };
-//   });
-// }
-
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction;
+}) {
   console.log("==========================");
   const allNews = await getCollection("news", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
