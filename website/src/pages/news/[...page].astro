@@ -8,24 +8,16 @@ export async function getStaticPaths({
 }: {
   paginate: PaginateFunction;
 }) {
-  console.log("==========================");
   const allNews = await getCollection("news", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
-  const astronautPages = [
-    { astronaut: "Neil Armstrong" },
-    { astronaut: "Buzz Aldrin" },
-    { astronaut: "Sally Ride" },
-    { astronaut: "John Glenn" },
-  ];
 
-  // 根据宇航员数组生成页面，每页2项
-  console.log("paginate", paginate(astronautPages, { pageSize: 2 }));
-  return paginate(astronautPages, { pageSize: 2 });
+  return paginate(allNews, { pageSize: 2 });
 }
 
-const { params } = Astro.params;
 const { page } = Astro.props;
+// console.log(Astro.props);
+console.log(page);
 ---
 
 <Layout title={`123 | CName Inc.`}>
@@ -35,8 +27,17 @@ const { page } = Astro.props;
 
   <article class="news-detail">
     <div class="news-detail__container">
-      <!-- <Content /> -->
       {page.currentPage}
+
+      <ul>
+        {
+          page.data.map(({ data, slug }) => (
+            <li>
+              <a href={slug}>{data.title}</a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </article>
 </Layout>

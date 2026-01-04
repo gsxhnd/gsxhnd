@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-// import { getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const allNews = await getCollection("news", ({ data }) => {
@@ -9,9 +8,7 @@ export async function getStaticPaths() {
   });
 
   return allNews.map((entry) => ({
-    params: {
-      // slug: post.,
-    },
+    params: { id: entry.id, slug: entry.slug },
     props: {
       entry,
     },
@@ -19,7 +16,10 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-// const { Content, headings } = await entry.render();
+const { slug } = Astro.params;
+console.log(entry);
+// console.log(params);
+const { Content } = await render(entry);
 ---
 
 <Layout title={`123 | CName Inc.`}>
@@ -27,7 +27,9 @@ const { entry } = Astro.props;
     <div class="page-header__container"></div>
   </section>
 
-  <!-- <Content /> -->
+  <p>{slug}</p>
+
+  <Content />
 
   <article class="news-detail">
     <div class="news-detail__container"></div>

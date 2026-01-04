@@ -3,14 +3,14 @@
 ---
 
 <!-- Contact Section -->
-<section class="contact" id="contact">
-  <div class="contact__container">
+<section class="contact flex bg-gray-700" id="contact">
+  <div class="contact__container mx-auto w-full">
     <h2 class="section-title">联系我们</h2>
-    <p class="contact__subtitle">联系我们</p>
+    <!-- <p class="contact__subtitle">联系我们</p> -->
     <p class="contact__description">
       如有任何疑问、咨询或报价需求，请随时与我们联系。
     </p>
-    <ul class="contact__list">
+    <ul class="contact__list grid">
       <li>・想委托进行网站和应用程序设计制作</li>
       <li>・正在考虑现有服务的重新设计</li>
       <li>・想咨询项目进行方式和费用感受</li>
@@ -23,9 +23,10 @@
 
 <style lang="scss">
   .contact {
-    padding: 3rem 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    // padding: 3rem 1.5rem;
+    &__container {
+      max-width: 1200px;
+    }
 
     @media (min-width: 768px) {
       padding: 5rem 2rem;
