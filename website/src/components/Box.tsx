@@ -1,0 +1,26 @@
+// import { motion } from "motion/react";
+import * as motion from "motion/react-client";
+
+export function Box() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.4,
+        scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+      }}
+      style={ball}
+    />
+  );
+}
+
+const ball = {
+  width: 100,
+  height: 100,
+  backgroundColor: "#dd00ee",
+  borderRadius: "50%",
+};
+
+// import { Box } from "./Box";
+// <Box client:only="react" />

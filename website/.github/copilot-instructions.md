@@ -2,92 +2,118 @@
 
 ## Project Overview
 
-Astro 5.x static site with strict TypeScript, file-based routing, and **Tailwind CSS + SCSS** styling. Zero JavaScript by default; all `.astro` components render to static HTML at build time.
+This is a corporate portfolio website built with Astro 5.x + React + TailwindCSS + SASS. The site showcases services, portfolio works, blog/news with pagination and dynamic routing, using Astro Content Collections for CMS-like content management.
+
+**Languages**: Chinese (primary), English metadata present. **Tech Stack**: Astro, React, TypeScript, TailwindCSS 4, SASS, MDX.
 
 ## Architecture & File Structure
 
-- **`src/pages/`** - File-based routing (e.g., `pages/about.astro` → `/about`)
-- **`src/components/`** - Reusable `.astro` components; always scoped CSS/SCSS
-- **`src/layouts/`** - Base layouts wrapping page content via `<slot />`
-- **`src/assets/`** - Static images/media; import with named imports (e.g., `import logo from '../assets/logo.svg'`) then use `{logo.src}`
-- **`src/styles/global.css`** - Global Tailwind directives and CSS
-- **`public/`** - Directly served static files (favicon.svg, etc.)
+- **`src/pages/`** - File-based routing (`.astro` files become routes)
+  - **`news/[...page].astro`** - Pagination for news/blog listing (paginated by 2 items)
+  - **`news/[...slug].astro`** - Dynamic individual news/blog post pages with MDX rendering
+  - **`works/[name].astro`** - Static portfolio projects (no dynamic routing needed)
+- **`src/components/`** - Reusable `.astro` components (no client JavaScript)
+- **`src/layouts/Layout.astro`** - Main layout with Header/Footer/slot pattern
+- **`src/content/news/`** - Markdown/MDX blog posts with frontmatter metadata (title, date, draft flag)
+- **`src/styles/global.css`** - TailwindCSS + global SCSS utilities; component styles use scoped `<style lang="scss">`
+- **`src/content.config.ts`** - Astro Content Collections schema definition (enforces title, date, type, description, draft)
 
-## Styling System
+## Key Patterns & Conventions
 
-**Tailwind CSS 4** configured via Vite plugin in `astro.config.mjs`:
+### Content Collections (Astro Content Layer)
 
-```javascript
-import tailwindcss from "@tailwindcss/vite";
-export default defineConfig({
-  vite: { plugins: [tailwindcss()] },
+Use `getCollection()` with optional filtering for draft posts:
+
+```astro
+// In src/pages/news/[...slug].astro
+const allNews = await getCollection("news", ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true; // Hide drafts in production
 });
 ```
 
-**SCSS/Sass** installed (`sass@^1.97.1`). Use in components:
+Schema defined in `src/content.config.ts`; all content must match Zod schema (title, date required).
 
-```astro
-<style lang="scss">
-  $color: #333;
-  h1 { color: $color; }
-</style>
-```
+### Dynamic Routing
 
-**Global styles** in `src/styles/global.css` imported in `Layout.astro`.
+- **Pagination**: `[...page].astro` uses `paginate()` from `getStaticPaths()` → `Astro.props.page` contains `currentPage`, `data`, `lastPage`
+- **Dynamic slugs**: `[...slug].astro` uses `getStaticPaths()` → `Astro.params.slug` + `Astro.props.entry` for content entry
+- Both patterns use `export async function getStaticPaths()` for static generation
 
-## Key Patterns
+### Component Structure & Scoped Styling
 
-### Component Frontmatter (Server-Side Only)
+Astro components use scoped SCSS (`.astro` files have `<style lang="scss">` blocks):
 
 ```astro
 ---
-import OtherComponent from './OtherComponent.astro';
-const greeting = 'Hello';
+// Server-side TypeScript only
 ---
-<h1>{greeting}</h1>
-<OtherComponent />
+<!-- Rendered HTML -->
 <style lang="scss">
-  h1 { color: blue; }
+  /* Auto-scoped to component; use BEM naming: .block__element--modifier */
+  .contact {
+    &__container { /* nesting */ }
+  }
 </style>
 ```
 
-### Asset Usage
+### Styling Architecture
 
-Always destructure `.src` from imported assets:
+- **`src/styles/global.css`** - TailwindCSS imports + global resets
+- **Component styles** - Scoped SCSS in `<style lang="scss">` within `.astro` files
+- **Class naming** - BEM convention (e.g., `.service-card__number`) consistent across codebase
+- **Responsive patterns** - Use `@media (min-width: 768px)` in SCSS for breakpoints
+
+## Development Workflow
+
+### Commands
+
+- `npm run dev` - Start local dev server at `localhost:4321` (hot reload enabled)
+- `npm run build` - Build to `./dist/` for production
+- `npm run preview` - Locally preview the production build
+- `npm run astro ...` - Run Astro CLI commands (e.g., `npm run astro add react`)
+
+### Build & Deployment
+
+- Static generation: All pages built at build time (no SSR)
+- Production env: `import.meta.env.PROD` is `true` during build; used to filter draft posts
+- Sitemap: Auto-generated via `@astrojs/sitemap` integration
+
+### Integrations Currently Active
+
+- **`@astrojs/mdx`** - MDX support for `.mdx` content
+- **`@astrojs/react`** - React 19 available but not used in pages (zero interactive JS by default)
+- **`@astrojs/sitemap`** - Auto-sitemap generation
+- **TailwindCSS 4** - Via `@tailwindcss/vite` plugin
+
+## Adding Features
+
+### New Blog Posts
+
+1. Create `.md` or `.mdx` file in `src/content/news/` with filename pattern `YYYY-MM-DD-slug.{md,mdx}`
+2. Add frontmatter: `title`, `date` (YAML date format), optional `type`, `description`, `draft`
+3. Auto-routed via dynamic `[...slug].astro` pattern
+
+### New Portfolio Projects
+
+Create `.astro` file in `src/pages/works/` and link from `src/pages/works.astro`
+
+### Adding Client Interactivity
+
+Use `client:` directives sparingly:
 
 ```astro
-import banner from '../assets/hero.svg';
-<img src={banner.src} alt="Hero" />  <!-- ✓ Correct -->
-<!-- NOT: <img src={banner} alt="Hero" /> -->
+import ReactComponent from '../components/Reactive.jsx';
+<ReactComponent client:load />  <!-- only if needed -->
 ```
 
-## Development & Build
+## Common Pitfalls
 
-| Command                   | Purpose                                    |
-| ------------------------- | ------------------------------------------ |
-| `npm run dev`             | Dev server at `localhost:4321`, hot reload |
-| `npm run build`           | Build to `./dist/`                         |
-| `npm run preview`         | Preview production build locally           |
-| `npm run astro add <pkg>` | Add Astro integrations (React, etc.)       |
+- **Draft posts in production**: Always check `import.meta.env.PROD` when filtering content
+- **Asset paths**: Import images with named imports; don't use string paths
+- **Scoped CSS isolation**: Component styles are auto-scoped; no class name collision risk
+- **No JSX in `.astro`**: Use HTML syntax in templates; React components are for client interactivity only
+- **Content schema violations**: All news entries must match schema (add missing required fields to existing posts if errors occur)
 
-**Config**: `astro.config.mjs` minimal; Astro auto-compiles TypeScript and `.astro` files.
+## Documentation
 
-## Type Safety
-
-- Extends `astro/tsconfigs/strict`
-- Auto-generated types at `.astro/types.d.ts`
-- Use TypeScript freely in frontmatter; prefer interfaces for props
-
-## When Adding Features
-
-- **New page?** Create `.astro` file in `src/pages/` (auto-routed)
-- **Reusable UI?** Build as `.astro` component in `src/components/`
-- **Heavy interactivity?** Consider framework integration (`npm run astro add react`)—static-first is the default
-- **Styling?** Use Tailwind utility classes + scoped SCSS in components
-
-## Common Gotchas
-
-- Don't use bare string paths for assets—always import and use `.src`
-- CSS in `.astro` components is **automatically scoped**, no naming conventions needed
-- Astro generates **zero JS** unless you explicitly add client interactivity (framework components or `<script>` tags)
-- SCSS variables don't cross component boundaries (scoped CSS limitation)
+Refer to [Astro docs](https://docs.astro.build) for detailed guidance. The project structure matches the "Basics" template exactly.

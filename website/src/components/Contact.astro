@@ -3,9 +3,10 @@
 ---
 
 <!-- Contact Section -->
-<section class="contact flex bg-gray-700" id="contact">
-  <div class="contact__container mx-auto w-full">
+<section class="contact bg-gray-700" id="contact">
+  <div class="contact__container">
     <h2 class="section-title">联系我们</h2>
+
     <!-- <p class="contact__subtitle">联系我们</p> -->
     <p class="contact__description">
       如有任何疑问、咨询或报价需求，请随时与我们联系。
@@ -22,10 +23,18 @@
 </section>
 
 <style lang="scss">
+  .box {
+    width: 100px;
+    height: 100px;
+    background-color: #9911ff;
+    border-radius: 10px;
+  }
   .contact {
-    // padding: 3rem 1.5rem;
+    display: flex;
     &__container {
       max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     @media (min-width: 768px) {
