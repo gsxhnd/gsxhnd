@@ -61,9 +61,14 @@
 
 <style lang="scss">
   .footer {
-    background: #1a1a1a;
-    color: #fff;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
     padding: 3rem 2rem;
+    border-top: 1px solid var(--color-border);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease;
     // margin-top: 5rem;
 
     &__container {
@@ -85,6 +90,7 @@
       h3 {
         margin: 0 0 1rem 0;
         font-size: 0.95rem;
+        color: var(--color-text-primary);
       }
 
       ul {
@@ -96,13 +102,13 @@
           margin-bottom: 0.5rem;
 
           a {
-            color: #ccc;
+            color: var(--color-text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s;
 
             &:hover {
-              color: #fff;
+              color: var(--color-accent);
             }
           }
         }
@@ -114,30 +120,30 @@
       gap: 1.5rem;
 
       a {
-        color: #ccc;
+        color: var(--color-text-secondary);
         text-decoration: none;
         font-size: 0.9rem;
         transition: color 0.3s;
 
         &:hover {
-          color: #fff;
+          color: var(--color-accent);
         }
       }
     }
 
     &__bottom {
-      border-top: 1px solid #333;
+      border-top: 1px solid var(--color-border);
       padding-top: 1.5rem;
       text-align: center;
       font-size: 0.85rem;
-      color: #999;
+      color: var(--color-text-tertiary);
 
       a {
-        color: #ccc;
+        color: var(--color-text-secondary);
         text-decoration: none;
 
         &:hover {
-          color: #fff;
+          color: var(--color-accent);
         }
       }
     }

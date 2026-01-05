@@ -22,6 +22,7 @@ const { title = "CName 公司 | 设计体验，创造未来" } = Astro.props;
       name="description"
       content="通过设计和技术的力量，挖掘品牌本质，创造新的价值"
     />
+    <script is:inline src="/theme.js"></script>
   </head>
   <body>
     <Header />
@@ -44,8 +45,12 @@ const { title = "CName 公司 | 设计体验，创造未来" } = Astro.props;
         -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
         "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
         sans-serif;
-      color: #333;
+      color: var(--color-text-primary);
+      background: var(--color-bg-primary);
       line-height: 1.6;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
     }
   }
 
