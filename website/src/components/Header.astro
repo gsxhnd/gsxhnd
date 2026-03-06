@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "./ThemeToggle.astro";
 import logoImage from "../assets/astro.svg";
 import "../styles/global.css";
 ---
@@ -30,12 +30,12 @@ import "../styles/global.css";
           <a href="/contact" class="header__nav-cta">联系我们</a>
         </li>
         <li>
-          <ThemeToggle client:only="react" />
+          <ThemeToggle />
         </li>
       </ul>
     </nav>
     <div class="header__mobile-actions">
-      <ThemeToggle client:only="react" />
+      <ThemeToggle />
       <button class="header__mobile-toggle" aria-label="Toggle navigation">
         <span></span>
         <span></span>
