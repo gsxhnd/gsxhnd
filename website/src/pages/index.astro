@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import Contact from "../components/Contact.astro";
+import WorkCard from "../components/WorkCard.astro";
+import NewsCard from "../components/NewsCard.astro";
 import Hero from "./home/hero.astro";
 import Partners from "./home/partners.astro";
 import Service from "./home/service.astro";
@@ -18,58 +20,34 @@ import Service from "./home/service.astro";
       <h2 class="section-title">作品集</h2>
       <p class="works__subtitle">作品集</p>
       <div class="works__grid">
-        <div class="work-item">
-          <div class="work-item__header">
-            <span class="work-item__tag">网站与应用开发</span>
-            <h3>电商平台重新设计</h3>
-          </div>
-          <p class="work-item__category">时尚品牌</p>
-          <p class="work-item__description">
-            对大型时尚零售商的在线商店进行全面改版。通过优化UI/UX，转化率提高40%。
-          </p>
-          <a href="/works/ec-platform-redesign" class="work-item__link"
-            >查看详情</a
-          >
-        </div>
-        <div class="work-item">
-          <div class="work-item__header">
-            <span class="work-item__tag">UI/UX设计</span>
-            <h3>企业品牌建设</h3>
-          </div>
-          <p class="work-item__category">科技初创公司</p>
-          <p class="work-item__description">
-            对科技初创公司进行全面品牌更新。进行了标志设计、风格指南和营销资料的制作。
-          </p>
-          <a href="/works/corporate-branding" class="work-item__link"
-            >查看详情</a
-          >
-        </div>
-        <div class="work-item">
-          <div class="work-item__header">
-            <span class="work-item__tag">移动应用开发</span>
-            <h3>移动银行应用</h3>
-          </div>
-          <p class="work-item__category">金融机构</p>
-          <p class="work-item__description">
-            拥有10万多活跃用户的安全直观的移动银行应用。提供无缝的交易体验。
-          </p>
-          <a href="/works/mobile-banking-app" class="work-item__link"
-            >查看详情</a
-          >
-        </div>
-        <div class="work-item">
-          <div class="work-item__header">
-            <span class="work-item__tag">数字战略</span>
-            <h3>SaaS仪表板平台</h3>
-          </div>
-          <p class="work-item__category">企业</p>
-          <p class="work-item__description">
-            面向企业客户的高级分析仪表板。实现了实时数据可视化和自定义报告功能。
-          </p>
-          <a href="/works/saas-dashboard-platform" class="work-item__link"
-            >查看详情</a
-          >
-        </div>
+        <WorkCard
+          tag="网站与应用开发"
+          title="电商平台重新设计"
+          category="时尚品牌"
+          description="对大型时尚零售商的在线商店进行全面改版。通过优化UI/UX，转化率提高40%。"
+          link="/works/ec-platform-redesign"
+        />
+        <WorkCard
+          tag="UI/UX设计"
+          title="企业品牌建设"
+          category="科技初创公司"
+          description="对科技初创公司进行全面品牌更新。进行了标志设计、风格指南和营销资料的制作。"
+          link="/works/corporate-branding"
+        />
+        <WorkCard
+          tag="移动应用开发"
+          title="移动银行应用"
+          category="金融机构"
+          description="拥有10万多活跃用户的安全直观的移动银行应用。提供无缝的交易体验。"
+          link="/works/mobile-banking-app"
+        />
+        <WorkCard
+          tag="数字战略"
+          title="SaaS仪表板平台"
+          category="企业"
+          description="面向企业客户的高级分析仪表板。实现了实时数据可视化和自定义报告功能。"
+          link="/works/saas-dashboard-platform"
+        />
       </div>
       <a href="/works/" class="works__link">查看全部作品</a>
     </div>
@@ -95,33 +73,24 @@ import Service from "./home/service.astro";
       <h2 class="section-title">新闻</h2>
       <p class="news__subtitle">新闻</p>
       <div class="news__grid">
-        <article class="news-item">
-          <time class="news-item__date">2025.1.15</time>
-          <span class="news-item__type">新闻</span>
-          <h3>
-            <a href="/news/2025-01-15-markdown-guide"
-              >Markdown 样式指南 - 所有显示元素的示例</a
-            >
-          </h3>
-        </article>
-        <article class="news-item">
-          <time class="news-item__date">2024.12.15</time>
-          <span class="news-item__type">新闻稿</span>
-          <h3>
-            <a href="/news/2024-12-15-ai-platform-release"
-              >发布面向企业的 AI 驱动分析平台</a
-            >
-          </h3>
-        </article>
-        <article class="news-item">
-          <time class="news-item__date">2024.11.28</time>
-          <span class="news-item__type">新闻</span>
-          <h3>
-            <a href="/news/2024-11-28-team-expansion"
-              >五名资深开发者加入团队以加强技术实力</a
-            >
-          </h3>
-        </article>
+        <NewsCard
+          date="2025.1.15"
+          type="新闻"
+          title="Markdown 样式指南 - 所有显示元素的示例"
+          link="/news/2025-01-15-markdown-guide"
+        />
+        <NewsCard
+          date="2024.12.15"
+          type="新闻稿"
+          title="发布面向企业的 AI 驱动分析平台"
+          link="/news/2024-12-15-ai-platform-release"
+        />
+        <NewsCard
+          date="2024.11.28"
+          type="新闻"
+          title="五名资深开发者加入团队以加强技术实力"
+          link="/news/2024-11-28-team-expansion"
+        />
       </div>
       <a href="/news/" class="news__link">查看全部新闻</a>
     </div>
@@ -175,86 +144,6 @@ import Service from "./home/service.astro";
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s;
-
-      &:hover {
-        color: #0052a3;
-      }
-    }
-  }
-
-  .work-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    transition: box-shadow 0.3s;
-
-    @media (min-width: 768px) {
-      padding: 2rem;
-    }
-
-    &:hover {
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    &__header {
-      margin-bottom: 1rem;
-    }
-
-    &__tag {
-      display: inline-block;
-      background: #e8f0ff;
-      color: #0066cc;
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      margin-bottom: 0.5rem;
-
-      @media (min-width: 768px) {
-        font-size: 0.8rem;
-      }
-    }
-
-    h3 {
-      margin: 0.5rem 0 0 0;
-      font-size: 1rem;
-      color: #333;
-
-      @media (min-width: 768px) {
-        font-size: 1.2rem;
-      }
-    }
-
-    &__category {
-      color: #666;
-      font-size: 0.85rem;
-      margin: 0.5rem 0;
-
-      @media (min-width: 768px) {
-        font-size: 0.9rem;
-      }
-    }
-
-    &__description {
-      color: #666;
-      font-size: 0.9rem;
-      margin: 1rem 0;
-      line-height: 1.6;
-
-      @media (min-width: 768px) {
-        font-size: 0.95rem;
-      }
-    }
-
-    &__link {
-      color: #0066cc;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-      font-size: 0.9rem;
-
-      @media (min-width: 768px) {
-        font-size: 1rem;
-      }
 
       &:hover {
         color: #0052a3;
@@ -370,65 +259,6 @@ import Service from "./home/service.astro";
 
       &:hover {
         color: #0052a3;
-      }
-    }
-  }
-
-  .news-item {
-    background: white;
-    padding: 1.2rem;
-    border-radius: 8px;
-    transition: box-shadow 0.3s;
-
-    @media (min-width: 768px) {
-      padding: 1.5rem;
-    }
-
-    &:hover {
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    &__date {
-      display: block;
-      font-size: 0.8rem;
-      color: #999;
-      margin-bottom: 0.5rem;
-
-      @media (min-width: 768px) {
-        font-size: 0.85rem;
-      }
-    }
-
-    &__type {
-      display: inline-block;
-      background: #e8f0ff;
-      color: #0066cc;
-      padding: 0.2rem 0.6rem;
-      border-radius: 3px;
-      font-size: 0.7rem;
-      margin-bottom: 0.5rem;
-
-      @media (min-width: 768px) {
-        font-size: 0.75rem;
-      }
-    }
-
-    h3 {
-      margin: 0.5rem 0 0 0;
-      font-size: 0.95rem;
-
-      @media (min-width: 768px) {
-        font-size: 1rem;
-      }
-
-      a {
-        color: #333;
-        text-decoration: none;
-        transition: color 0.3s;
-
-        &:hover {
-          color: #0066cc;
-        }
       }
     }
   }

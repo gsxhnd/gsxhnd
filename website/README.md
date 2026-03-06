@@ -18,3 +18,5 @@ src/
   styles/
     └── global.css (全局样式)
 ```
+
+<https://astro.build/themes/details/nagi-corporate-website-template/>
