@@ -1,3 +1,3 @@
 # Reka UI Demo
 
-Vue 3 + TypeScript + Vite
+一个 shadcn ui netural 风格的 demo
