@@ -146,8 +146,10 @@
     --shadow-opacity: 0.3;
     --shadow-sm: 0 1px 2px 0 hsl(var(--shadow-color) / var(--shadow-opacity));
     --shadow-md: 0 4px 6px -1px hsl(var(--shadow-color) / var(--shadow-opacity));
-    --shadow-lg: 0 10px 15px -3px hsl(var(--shadow-color) / var(--shadow-opacity));
-    --shadow-xl: 0 20px 25px -5px hsl(var(--shadow-color) / var(--shadow-opacity));
+    --shadow-lg: 0 10px 15px -3px
+      hsl(var(--shadow-color) / var(--shadow-opacity));
+    --shadow-xl: 0 20px 25px -5px
+      hsl(var(--shadow-color) / var(--shadow-opacity));
 
     // ===== Overlay/Modal =====
     --overlay-background: hsl(0 0% 0% / 0.7);
@@ -317,8 +319,10 @@
     --shadow-opacity: 0.1;
     --shadow-sm: 0 1px 2px 0 hsl(var(--shadow-color) / var(--shadow-opacity));
     --shadow-md: 0 4px 6px -1px hsl(var(--shadow-color) / var(--shadow-opacity));
-    --shadow-lg: 0 10px 15px -3px hsl(var(--shadow-color) / var(--shadow-opacity));
-    --shadow-xl: 0 20px 25px -5px hsl(var(--shadow-color) / var(--shadow-opacity));
+    --shadow-lg: 0 10px 15px -3px
+      hsl(var(--shadow-color) / var(--shadow-opacity));
+    --shadow-xl: 0 20px 25px -5px
+      hsl(var(--shadow-color) / var(--shadow-opacity));
 
     // ===== Overlay/Modal =====
     --overlay-background: hsl(0 0% 0% / 0.5);
