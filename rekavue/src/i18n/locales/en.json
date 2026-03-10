@@ -1,0 +1,105 @@
+{
+  "app": {
+    "title": "Owl - Rclone UI",
+    "subtitle": "Cloud Storage Manager"
+  },
+  "nav": {
+    "remotes": "Remotes",
+    "sync": "Sync",
+    "mount": "Mount",
+    "history": "History",
+    "settings": "Settings"
+  },
+  "sidebar": {
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar"
+  },
+  "common": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "minimize": "Minimize",
+    "maximize": "Maximize",
+    "restore": "Restore",
+    "name": "Name",
+    "type": "Type",
+    "status": "Status",
+    "action": "Action",
+    "error": "Error",
+    "success": "Success",
+    "loading": "Loading..."
+  },
+  "remotes": {
+    "title": "Add Remote Cloud Service",
+    "addNew": "Add New Remote Service",
+    "provider": "Cloud Provider",
+    "config": "Configuration",
+    "empty": "No remote services added yet",
+    "selectProvider": "Please select a cloud provider",
+    "deleteConfirm": "Are you sure to delete this remote service?"
+  },
+  "sync": {
+    "title": "Sync Service",
+    "createTask": "Create Sync Task",
+    "source": "Source",
+    "destination": "Destination",
+    "status.idle": "Idle",
+    "status.running": "Running",
+    "status.paused": "Paused",
+    "status.completed": "Completed",
+    "status.error": "Error",
+    "progress": "Progress",
+    "files": "Files",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "speed": "Speed",
+    "empty": "No sync tasks created yet"
+  },
+  "mount": {
+    "title": "Mount Cloud Storage",
+    "createMount": "Create New Mount",
+    "mountPath": "Local Mount Path",
+    "readOnly": "Read Only",
+    "active": "Active",
+    "empty": "No mounts created yet"
+  },
+  "history": {
+    "title": "Sync History and Logs",
+    "duration": "Duration",
+    "size": "Data Size",
+    "empty": "No sync history"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "transfer": "Transfer",
+    "syncSettings": "Sync",
+    "notifications": "Notifications",
+    "advanced": "Advanced",
+    "language": "Language",
+    "theme": "Theme",
+    "startOnBoot": "Start on Boot",
+    "minimizeToTray": "Minimize to Tray on Close",
+    "checkUpdates": "Check Updates on Startup",
+    "concurrency": "Concurrency",
+    "bandwidthLimit": "Bandwidth Limit (KB/s)",
+    "compression": "Enable Compression",
+    "autoSync": "Auto Sync",
+    "autoSyncInterval": "Auto Sync Interval (minutes)",
+    "enableNotifications": "Enable Notifications",
+    "notificationSound": "Notification Sound",
+    "rclonePath": "Rclone Installation Path",
+    "rcloneConfigPath": "Rclone Config File Path",
+    "logLevel": "Log Level",
+    "cacheDir": "Cache Directory",
+    "tempDir": "Temp Directory"
+  },
+  "tray": {
+    "show": "Open Window",
+    "quit": "Exit Application"
+  }
+}

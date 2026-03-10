@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import { onBeforeMount } from "vue";
+
+onBeforeMount(async () => {
+  const doc = document.documentElement;
+  console.log(doc.dataset);
+  console.log(doc.dataset.theme);
+  doc.dataset.theme = "neutral";
+  doc.dataset.colorSchema = "dark";
+});
 </script>
 
 <template>

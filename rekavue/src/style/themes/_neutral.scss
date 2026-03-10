@@ -1,0 +1,37 @@
+:root[data-theme="neutral"] {
+  &[data-color-schema="dark"] {
+    // ===== Background Colors =====
+    --background: hsl(0 0% 3.9%);
+    --background-secondary: hsl(0 0% 7%);
+    --background-tertiary: hsl(0 0% 10%);
+    --background-muted: hsl(0 0% 14.9%);
+    --background-inverse: hsl(0 0% 98%);
+    --background-hover: hsl(0 0% 10%);
+
+    // ===== Primary Colors =====
+    --primary: hsl(0 0% 98%);
+    --primary-foreground: hsl(0 0% 9%);
+    --primary-hover: hsl(0 0% 90%);
+    --primary-active: hsl(0 0% 80%);
+    --primary-muted: hsl(0 0% 30%);
+    --primary-light: hsl(0 0% 15%);
+  }
+
+  &[data-color-schema="light"] {
+    // ===== Background Colors =====
+    --background: hsl(0 0% 100%);
+    --background-secondary: hsl(0 0% 98%);
+    --background-tertiary: hsl(0 0% 96%);
+    --background-muted: hsl(0 0% 96.1%);
+    --background-inverse: hsl(0 0% 9%);
+    --background-hover: hsl(0 0% 96.1%);
+
+    // ===== Primary Colors =====
+    --primary: hsl(0 0% 9%);
+    --primary-foreground: hsl(0 0% 98%);
+    --primary-hover: hsl(0 0% 15%);
+    --primary-active: hsl(0 0% 20%);
+    --primary-muted: hsl(0 0% 80%);
+    --primary-light: hsl(0 0% 90%);
+  }
+}
