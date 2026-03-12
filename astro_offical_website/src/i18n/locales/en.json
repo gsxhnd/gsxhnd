@@ -1,0 +1,51 @@
+{
+  "site": {
+    "title": "Stargazers Club - Digital Innovation Solutions",
+    "description": "Unlocking brand essence and creating new value through the power of design and technology"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "works": "Works",
+    "about": "About",
+    "company": "Company",
+    "news": "News",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Digital Innovation Solutions",
+    "subtitle": "Unlocking brand essence and creating new value through the power of design and technology",
+    "cta": "Learn More"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Services",
+    "viewAll": "View All Services"
+  },
+  "works": {
+    "title": "Works",
+    "subtitle": "Works",
+    "viewAll": "View All Works"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "About Us",
+    "description": "We unlock brand essence and create new value through the power of design and technology. With strategic thinking and meticulous craftsmanship, we design experiences that touch users' hearts and provide digital solutions that accelerate business growth. We approach every project with sincerity and envision the future together with our clients. This is our style.",
+    "viewMore": "Learn More"
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "News",
+    "viewAll": "View All News"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Contact Us",
+    "description": "Have a project idea or question? Feel free to reach out to us.",
+    "cta": "Send Message"
+  },
+  "footer": {
+    "copyright": "© 2024 Stargazers Club. All rights reserved.",
+    "privacy": "Privacy Policy"
+  }
+}

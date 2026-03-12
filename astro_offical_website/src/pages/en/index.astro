@@ -1,13 +1,13 @@
 ---
-import "../styles/global.css";
-import Layout from "../layouts/Layout.astro";
-import Contact from "../components/Contact.astro";
-import WorkCard from "../components/WorkCard.astro";
-import NewsCard from "../components/NewsCard.astro";
-import Hero from "./home/hero.astro";
-import Partners from "./home/partners.astro";
-import Service from "./home/service.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
+import Contact from "../../components/Contact.astro";
+import WorkCard from "../../components/WorkCard.astro";
+import NewsCard from "../../components/NewsCard.astro";
+import Hero from "../home/hero.astro";
+import Partners from "../home/partners.astro";
+import Service from "../home/service.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -25,35 +25,35 @@ const t = useTranslations(lang);
       <p class="works__subtitle">{t('works.subtitle')}</p>
       <div class="works__grid">
         <WorkCard
-          tag="网站与应用开发"
-          title="电商平台重新设计"
-          category="时尚品牌"
-          description="对大型时尚零售商的在线商店进行全面改版。通过优化UI/UX，转化率提高40%。"
-          link="/works/ec-platform-redesign"
+          tag="Website & App Development"
+          title="E-commerce Platform Redesign"
+          category="Fashion Brand"
+          description="Complete overhaul of an online store for a major fashion retailer. Improved conversion rates by 40% through optimized UI/UX."
+          link="/en/works/ec-platform-redesign"
         />
         <WorkCard
-          tag="UI/UX设计"
-          title="企业品牌建设"
-          category="科技初创公司"
-          description="对科技初创公司进行全面品牌更新。进行了标志设计、风格指南和营销资料的制作。"
-          link="/works/corporate-branding"
+          tag="UI/UX Design"
+          title="Corporate Branding"
+          category="Tech Startup"
+          description="Comprehensive brand refresh for a tech startup. Created logo design, style guide, and marketing materials."
+          link="/en/works/corporate-branding"
         />
         <WorkCard
-          tag="移动应用开发"
-          title="移动银行应用"
-          category="金融机构"
-          description="拥有10万多活跃用户的安全直观的移动银行应用。提供无缝的交易体验。"
-          link="/works/mobile-banking-app"
+          tag="Mobile App Development"
+          title="Mobile Banking App"
+          category="Financial Institution"
+          description="Secure and intuitive mobile banking app with over 100,000 active users. Provides seamless transaction experience."
+          link="/en/works/mobile-banking-app"
         />
         <WorkCard
-          tag="数字战略"
-          title="SaaS仪表板平台"
-          category="企业"
-          description="面向企业客户的高级分析仪表板。实现了实时数据可视化和自定义报告功能。"
-          link="/works/saas-dashboard-platform"
+          tag="Digital Strategy"
+          title="SaaS Dashboard Platform"
+          category="Enterprise"
+          description="Advanced analytics dashboard for enterprise clients. Implemented real-time data visualization and custom reporting features."
+          link="/en/works/saas-dashboard-platform"
         />
       </div>
-      <a href="/works/" class="works__link">{t('works.viewAll')}</a>
+      <a href="/en/works/" class="works__link">{t('works.viewAll')}</a>
     </div>
   </section>
 
@@ -67,7 +67,7 @@ const t = useTranslations(lang);
           {t('about.description')}
         </p>
       </div>
-      <a href="/about/" class="about__link">{t('about.viewMore')}</a>
+      <a href="/en/about/" class="about__link">{t('about.viewMore')}</a>
     </div>
   </section>
 
@@ -79,24 +79,24 @@ const t = useTranslations(lang);
       <div class="news__grid">
         <NewsCard
           date="2025.1.15"
-          type="新闻"
-          title="Markdown 样式指南 - 所有显示元素的示例"
-          link="/news/2025-01-15-markdown-guide"
+          type="News"
+          title="Markdown Style Guide - Examples of All Display Elements"
+          link="/en/news/2025-01-15-markdown-guide"
         />
         <NewsCard
           date="2024.12.15"
-          type="新闻稿"
-          title="发布面向企业的 AI 驱动分析平台"
-          link="/news/2024-12-15-ai-platform-release"
+          type="Press Release"
+          title="Launch of AI-Powered Analytics Platform for Enterprise"
+          link="/en/news/2024-12-15-ai-platform-release"
         />
         <NewsCard
           date="2024.11.28"
-          type="新闻"
-          title="五名资深开发者加入团队以加强技术实力"
-          link="/news/2024-11-28-team-expansion"
+          type="News"
+          title="Five Senior Developers Join Team to Strengthen Technical Capabilities"
+          link="/en/news/2024-11-28-team-expansion"
         />
       </div>
-      <a href="/news/" class="news__link">{t('news.viewAll')}</a>
+      <a href="/en/news/" class="news__link">{t('news.viewAll')}</a>
     </div>
   </section>
 

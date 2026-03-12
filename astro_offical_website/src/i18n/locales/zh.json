@@ -1,0 +1,51 @@
+{
+  "site": {
+    "title": "星际俱乐部 - 数字创新解决方案",
+    "description": "通过设计和技术的力量，挖掘品牌本质，创造新的价值"
+  },
+  "nav": {
+    "home": "首页",
+    "services": "服务",
+    "works": "作品集",
+    "about": "关于我们",
+    "company": "公司",
+    "news": "新闻",
+    "contact": "联系我们"
+  },
+  "hero": {
+    "title": "数字创新解决方案",
+    "subtitle": "通过设计和技术的力量，挖掘品牌本质，创造新的价值",
+    "cta": "了解更多"
+  },
+  "services": {
+    "title": "服务",
+    "subtitle": "服务",
+    "viewAll": "查看全部服务"
+  },
+  "works": {
+    "title": "作品集",
+    "subtitle": "作品集",
+    "viewAll": "查看全部作品"
+  },
+  "about": {
+    "title": "关于我们",
+    "subtitle": "关于我们",
+    "description": "我们通过设计和技术的力量，挖掘品牌本质，创造新的价值。以战略思维和精细的工艺，设计能打动用户心灵的体验，提供加速业务增长的数字解决方案。我们真诚对待每一个项目，与客户一起描绘未来。这就是我们的风格。",
+    "viewMore": "了解更多"
+  },
+  "news": {
+    "title": "新闻",
+    "subtitle": "新闻",
+    "viewAll": "查看全部新闻"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "联系我们",
+    "description": "有项目想法或疑问？请随时联系我们。",
+    "cta": "发送消息"
+  },
+  "footer": {
+    "copyright": "© 2024 星际俱乐部. 保留所有权利.",
+    "privacy": "隐私政策"
+  }
+}

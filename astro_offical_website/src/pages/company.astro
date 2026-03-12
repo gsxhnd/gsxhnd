@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { SITE_CONFIG } from "../config/site";
 ---
 
-<Layout title="公司概览 | CName Inc.">
+<Layout title={`公司概览 | ${SITE_CONFIG.company.name}`}>
   <section class="page-header">
     <div class="page-header__container">
       <h1>公司概览</h1>
@@ -14,58 +15,56 @@ import Layout from "../layouts/Layout.astro";
       <div class="company-overview">
         <div class="company-info__item">
           <div class="info-label">公司名称</div>
-          <div class="info-value">CName Inc.</div>
+          <div class="info-value">{SITE_CONFIG.company.name}</div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">成立</div>
-          <div class="info-value">2019年4月1日</div>
+          <div class="info-value">{SITE_CONFIG.company.established}</div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">总部地点</div>
-          <div class="info-value">123123<br />123123</div>
+          <div class="info-value" set:html={SITE_CONFIG.company.address.replace(/\n/g, '<br />')} />
         </div>
 
         <div class="company-info__item">
           <div class="info-label">电话号码</div>
-          <div class="info-value"><a href="tel:+81-3-xxxx-xxxx">+81-3-XXXX-XXXX</a></div>
+          <div class="info-value"><a href={`tel:${SITE_CONFIG.company.phone}`}>{SITE_CONFIG.company.phoneDisplay}</a></div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">电子邮件地址</div>
-          <div class="info-value"><a href="mailto:info@CName.jp">xxx@xxx</a></div>
+          <div class="info-value"><a href={`mailto:${SITE_CONFIG.company.email}`}>{SITE_CONFIG.company.emailDisplay}</a></div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">营业时间</div>
-          <div class="info-value">周一至周五 9:00 - 18:00（周末和假日休息）</div>
+          <div class="info-value">{SITE_CONFIG.company.businessHoursFull}</div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">代表董事</div>
-          <div class="info-value">123</div>
+          <div class="info-value">{SITE_CONFIG.company.ceo}</div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">员工数</div>
-          <div class="info-value">35名（截至2024年12月末）</div>
+          <div class="info-value">{SITE_CONFIG.company.employees}</div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">资本</div>
-          <div class="info-value">1万</div>
+          <div class="info-value">{SITE_CONFIG.company.capital}</div>
         </div>
 
         <div class="company-info__item">
           <div class="info-label">主要业务内容</div>
           <div class="info-value">
             <ul>
-              <li>Web网站・Web应用开发</li>
-              <li>移动应用开发</li>
-              <li>UI/UX设计</li>
-              <li>品牌咨询</li>
-              <li>数字营销支持</li>
+              {SITE_CONFIG.businessContent.map((item) => (
+                <li>{item}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -74,9 +73,9 @@ import Layout from "../layouts/Layout.astro";
           <div class="info-label">获得资格和认证</div>
           <div class="info-value">
             <ul>
-              <li>信息安全管理系统认证 (ISO 27001)</li>
-              <li>Google Partner</li>
-              <li>AWS Partner</li>
+              {SITE_CONFIG.certifications.map((item) => (
+                <li>{item}</li>
+              ))}
             </ul>
           </div>
         </div>

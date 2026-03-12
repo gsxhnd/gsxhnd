@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import type { PaginateFunction } from "astro";
+import { SITE_CONFIG } from "../../config/site";
 
 export async function getStaticPaths({
   paginate,
@@ -12,7 +13,7 @@ export async function getStaticPaths({
     return import.meta.env.PROD ? data.draft !== true : true;
   });
 
-  return paginate(allNews, { pageSize: 2 });
+  return paginate(allNews, { pageSize: SITE_CONFIG.pagination.newsPageSize });
 }
 
 const { page } = Astro.props;
@@ -20,7 +21,7 @@ const { page } = Astro.props;
 console.log(page);
 ---
 
-<Layout title={`123 | CName Inc.`}>
+<Layout title={`新闻动态 | ${SITE_CONFIG.company.name}`}>
   <section class="page-header">
     <div class="page-header__container"></div>
   </section>

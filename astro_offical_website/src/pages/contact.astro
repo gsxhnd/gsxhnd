@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { SITE_CONFIG } from "../config/site";
 ---
 
-<Layout title="联系我们 | CName Inc.">
+<Layout title={`联系我们 | ${SITE_CONFIG.company.name}`}>
   <section class="contact-hero">
     <div class="contact-hero__container">
       <h1>Contact</h1>
@@ -61,8 +62,26 @@ import Layout from "../layouts/Layout.astro";
         <div class="company-info">
           <div class="company-info__item">
             <h3>公司名称</h3>
-            <p>CName Inc.</p>
+            <p>{SITE_CONFIG.company.name}</p>
           </div>
+          <div class="company-info__item">
+            <h3>所在地</h3>
+            <p set:html={SITE_CONFIG.company.address.replace(/\n/g, '<br />')} />
+          </div>
+          <div class="company-info__item">
+            <h3>电话</h3>
+            <p><a href={`tel:${SITE_CONFIG.company.phone}`}>{SITE_CONFIG.company.phoneDisplay}</a></p>
+          </div>
+          <div class="company-info__item">
+            <h3>邮件</h3>
+            <p><a href={`mailto:${SITE_CONFIG.company.email}`}>{SITE_CONFIG.company.emailDisplay}</a></p>
+          </div>
+          <div class="company-info__item">
+            <h3>营业时间</h3>
+            <p>{SITE_CONFIG.company.businessHoursFull}</p>
+          </div>
+        </div>
+      </div>
           <div class="company-info__item">
             <h3>所在地</h3>
             <p>123</p>

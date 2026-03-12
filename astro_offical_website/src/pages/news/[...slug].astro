@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import { SITE_CONFIG } from "../../config/site";
 
 export async function getStaticPaths() {
   const allNews = await getCollection("news", ({ data }) => {
@@ -22,7 +23,7 @@ console.log(entry);
 const { Content } = await render(entry);
 ---
 
-<Layout title={`123 | CName Inc.`}>
+<Layout title={`${entry.data.title} | ${SITE_CONFIG.company.name}`}>
   <section class="page-header">
     <div class="page-header__container"></div>
   </section>

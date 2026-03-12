@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { SITE_CONFIG } from "../config/site";
 ---
 
-<Layout title="制作成就 | CName Inc.">
+<Layout title={`制作成就 | ${SITE_CONFIG.company.name}`}>
   <section class="works-hero">
     <div class="works-hero__container">
       <h1>Works</h1>

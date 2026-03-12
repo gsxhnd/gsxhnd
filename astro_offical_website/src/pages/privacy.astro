@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { SITE_CONFIG } from "../config/site";
 ---
 
-<Layout title="个人信息保护方针 | CName Inc.">
+<Layout title={`个人信息保护方针 | ${SITE_CONFIG.company.name}`}>
   <section class="page-header">
     <div class="page-header__container">
       <h1>个人信息保护方针</h1>
@@ -13,7 +14,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="page-content__container">
       <h2>个人信息保护政策</h2>
       <p>
-        CName Inc.遵守《个人信息保护法》及相关法律、指南，妥善处理个人信息。
+        {SITE_CONFIG.company.name}遵守《个人信息保护法》及相关法律、指南，妥善处理个人信息。
       </p>
 
       <h2>个人信息的定义</h2>

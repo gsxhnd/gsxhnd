@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { SITE_CONFIG } from "../config/site";
 ---
 
-<Layout title="关于我们 | CName Inc.">
+<Layout title={`关于我们 | ${SITE_CONFIG.company.name}`}>
   <section class="about-hero">
     <div class="about-hero__container">
       <h1>About</h1>
