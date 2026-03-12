@@ -7,13 +7,13 @@
 这是一个使用 **Astro 5** 构建的企业展示网站，展示服务、作品集和新闻动态。
 
 **技术栈**：
+
 - Astro 5.18.0（静态站点生成器）
 - TypeScript（严格模式）
-- React 19（用于交互组件）
 - SASS（样式预处理器）
 - MDX（内容管理）
 
-**站点 URL**：https://stargazers.club
+**站点 URL**：<https://stargazers.club>
 **主要语言**：中文
 
 ## 项目结构
@@ -78,6 +78,7 @@ import "../styles/global.css";
   - 内容文件：`YYYY-MM-DD-slug.{md,mdx}`（如 `2024-01-15-news-title.md`）
 
 - **CSS 类名**：使用 BEM 命名规范
+
   ```scss
   .page-header { }
   .page-header__container { }
@@ -130,10 +131,12 @@ const data = await fetchData();
 - **优先使用 scoped styles**：所有组件样式默认作用域隔离
 - **全局样式**：仅在 `global.css` 或使用 `:global` 包裹
 - **CSS 变量**：使用语义化命名
+
   ```css
   var(--color-text-primary)
   var(--color-bg-primary)
   ```
+
 - **响应式设计**：移动优先，使用媒体查询
 
 ### Content Collections 模式
@@ -151,6 +154,7 @@ const allNews = await getCollection("news");
 ```
 
 **Schema 验证**（`src/content.config.ts`）：
+
 - `title`: string（必需）
 - `date`: Date（必需）
 - `draft`: boolean（可选，默认 false）
