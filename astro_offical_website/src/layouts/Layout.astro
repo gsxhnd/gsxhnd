@@ -11,20 +11,23 @@ const { title = "CName 公司 | 设计体验，创造未来" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="zh">
+<html lang="zh" style="--headerHeight: 74px; --headerHeightMobile: 60px;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#222828" />
     <title>{title}</title>
     <meta
       name="description"
       content="通过设计和技术的力量，挖掘品牌本质，创造新的价值"
     />
-    <script is:inline src="/theme.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body>
+  <body style="--headerHeight: 74px; --headerHeightMobile: 60px;">
     <Header />
     <main class="main">
       <slot />
@@ -33,24 +36,14 @@ const { title = "CName 公司 | 设计体验，创造未来" } = Astro.props;
   </body>
 </html>
 
-<style lang="scss">
-  :global {
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
-      color: var(--color-text-primary);
-      background: var(--color-bg-primary);
-      line-height: 1.6;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
+<style>
+  html {
+    scroll-padding-top: var(--headerHeightMobile);
+  }
+
+  @media (min-width: 900px) {
+    html {
+      scroll-padding-top: var(--headerHeight);
     }
   }
 

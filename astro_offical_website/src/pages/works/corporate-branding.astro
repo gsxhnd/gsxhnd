@@ -61,7 +61,7 @@ import Layout from "../../layouts/Layout.astro";
 <style lang="scss">
   .work-detail {
     padding: 2rem 1.5rem;
-    background: #f9f9f9;
+    background: var(--c-bg-secondary);
 
     @media (min-width: 768px) {
       padding: 3rem 2rem;
@@ -86,7 +86,7 @@ import Layout from "../../layouts/Layout.astro";
     &__header {
       margin-bottom: 1.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--c-border-light);
 
       @media (min-width: 768px) {
         margin-bottom: 2rem;
@@ -96,7 +96,7 @@ import Layout from "../../layouts/Layout.astro";
       h1 {
         font-size: 1.5rem;
         margin-bottom: 0.8rem;
-        color: #333;
+        color: var(--c-text);
 
         @media (min-width: 768px) {
           font-size: 2rem;
@@ -106,7 +106,7 @@ import Layout from "../../layouts/Layout.astro";
     }
 
     &__content {
-      color: #666;
+      color: var(--c-text-sub);
       line-height: 1.8;
 
       p {
@@ -122,7 +122,7 @@ import Layout from "../../layouts/Layout.astro";
       h2 {
         font-size: 1.2rem;
         margin: 1.5rem 0 0.8rem;
-        color: #333;
+        color: var(--c-text);
 
         @media (min-width: 768px) {
           font-size: 1.5rem;
@@ -151,7 +151,7 @@ import Layout from "../../layouts/Layout.astro";
       }
 
       strong {
-        color: #333;
+        color: var(--c-text);
         font-weight: 600;
       }
     }
@@ -159,7 +159,7 @@ import Layout from "../../layouts/Layout.astro";
     &__footer {
       margin-top: 1.5rem;
       padding-top: 1.5rem;
-      border-top: 1px solid #eee;
+      border-top: 1px solid var(--c-border-light);
 
       @media (min-width: 768px) {
         margin-top: 2rem;
@@ -181,7 +181,7 @@ import Layout from "../../layouts/Layout.astro";
   .work-meta__tag {
     display: inline-block;
     background: #e8f0ff;
-    color: #0066cc;
+    color: var(--c-primary);
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
     font-size: 0.75rem;
@@ -195,12 +195,12 @@ import Layout from "../../layouts/Layout.astro";
 
   .work-meta__category {
     display: inline-block;
-    background: #fff;
-    color: #666;
+    background: var(--c-bg);
+    color: var(--c-text-sub);
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
     font-size: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--c-border);
 
     @media (min-width: 768px) {
       padding: 0.4rem 1rem;
@@ -209,7 +209,7 @@ import Layout from "../../layouts/Layout.astro";
   }
 
   .work-back-link {
-    color: #0066cc;
+    color: var(--c-primary);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s;
@@ -220,7 +220,7 @@ import Layout from "../../layouts/Layout.astro";
     }
 
     &:hover {
-      color: #0052a3;
+      color: var(--c-primary-light);
     }
   }
 </style>

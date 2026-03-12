@@ -86,7 +86,7 @@ import Layout from "../layouts/Layout.astro";
       h2 {
         font-size: 1.2rem;
         margin: 1.5rem 0 0.8rem;
-        color: #333;
+        color: var(--c-text);
 
         @media (min-width: 768px) {
           font-size: 1.5rem;
@@ -95,7 +95,7 @@ import Layout from "../layouts/Layout.astro";
       }
 
       p {
-        color: #666;
+        color: var(--c-text-sub);
         line-height: 1.8;
         margin-bottom: 1rem;
         font-size: 0.9rem;
@@ -115,7 +115,7 @@ import Layout from "../layouts/Layout.astro";
         }
 
         li {
-          color: #666;
+          color: var(--c-text-sub);
           margin-bottom: 0.4rem;
           line-height: 1.6;
           font-size: 0.9rem;
@@ -128,7 +128,7 @@ import Layout from "../layouts/Layout.astro";
       }
 
       a {
-        color: #0066cc;
+        color: var(--c-primary);
         text-decoration: none;
 
         &:hover {

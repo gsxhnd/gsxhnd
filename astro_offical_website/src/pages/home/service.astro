@@ -55,7 +55,7 @@
     &__link {
       display: block;
       text-align: center;
-      color: #0066cc;
+      color: var(--c-primary);
       text-decoration: none;
       font-weight: 600;
       margin-top: 1.5rem;
@@ -66,14 +66,14 @@
       }
 
       &:hover {
-        color: #0052a3;
+        color: var(--c-primary-light);
       }
     }
   }
 
   .service-card {
     padding: 1.5rem;
-    background: #f5f5f5;
+    background: var(--c-bg-secondary);
     border-radius: 8px;
     transition:
       transform 0.3s,
@@ -91,7 +91,7 @@
     &__number {
       //   font-size: 2rem;
       font-weight: 700;
-      //   color: #0066cc;
+      //   color: var(--c-primary);
       margin-bottom: 1rem;
 
       @media (min-width: 768px) {
@@ -102,7 +102,7 @@
     h3 {
       font-size: 1.1rem;
       margin: 0 0 1rem 0;
-      color: #333;
+      color: var(--c-text);
 
       @media (min-width: 768px) {
         font-size: 1.3rem;
@@ -111,7 +111,7 @@
 
     p {
       margin: 0;
-      color: #666;
+      color: var(--c-text-sub);
       font-size: 0.9rem;
       line-height: 1.6;
 

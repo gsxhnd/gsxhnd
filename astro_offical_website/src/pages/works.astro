@@ -116,9 +116,9 @@ import Layout from "../layouts/Layout.astro";
 
   .work-detail {
     padding: 1.5rem;
-    background: #f9f9f9;
+    background: var(--c-bg-secondary);
     border-radius: 8px;
-    border-left: 4px solid #0066cc;
+    border-left: 4px solid var(--c-primary);
 
     @media (min-width: 768px) {
       padding: 2rem;
@@ -127,7 +127,7 @@ import Layout from "../layouts/Layout.astro";
     h2 {
       margin: 0 0 0.8rem 0;
       font-size: 1.2rem;
-      color: #333;
+      color: var(--c-text);
 
       @media (min-width: 768px) {
         font-size: 1.5rem;
@@ -150,7 +150,7 @@ import Layout from "../layouts/Layout.astro";
     &__tag {
       display: inline-block;
       background: #e8f0ff;
-      color: #0066cc;
+      color: var(--c-primary);
       padding: 0.3rem 0.8rem;
       border-radius: 4px;
       font-size: 0.75rem;
@@ -164,12 +164,12 @@ import Layout from "../layouts/Layout.astro";
 
     &__category {
       display: inline-block;
-      background: #fff;
-      color: #666;
+      background: var(--c-bg);
+      color: var(--c-text-sub);
       padding: 0.3rem 0.8rem;
       border-radius: 4px;
       font-size: 0.75rem;
-      border: 1px solid #ddd;
+      border: 1px solid var(--c-border);
 
       @media (min-width: 768px) {
         padding: 0.4rem 1rem;
@@ -179,7 +179,7 @@ import Layout from "../layouts/Layout.astro";
 
     &__description {
       margin: 0;
-      color: #666;
+      color: var(--c-text-sub);
       line-height: 1.8;
       font-size: 0.9rem;
 

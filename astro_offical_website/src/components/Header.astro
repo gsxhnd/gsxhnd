@@ -1,220 +1,389 @@
 ---
-import { Image } from "astro:assets";
-import ThemeToggle from "./ThemeToggle.astro";
-import logoImage from "../assets/astro.svg";
-import "../styles/global.css";
+import Container from './Container.astro';
+import Logo from './Logo.astro';
+import Button from './Button.astro';
 ---
 
-<header class="header">
-  <div class="header__container">
-    <div class="header__logo">
-      <a href="/">
-        <Image src={logoImage} alt="CName" />
-      </a>
-    </div>
-    <nav class="header__nav">
-      <ul class="header__nav-list">
-        <li>
-          <a href="/services">服务</a>
-        </li>
-        <li>
-          <a href="/works">作品</a>
-        </li>
-        <li>
-          <a href="/news">新闻</a>
-        </li>
-        <li>
-          <a href="/about">关于</a>
-        </li>
-        <li>
-          <a href="/contact" class="header__nav-cta">联系我们</a>
-        </li>
-        <li>
-          <ThemeToggle />
-        </li>
-      </ul>
-    </nav>
-    <div class="header__mobile-actions">
-      <ThemeToggle />
-      <button class="header__mobile-toggle" aria-label="Toggle navigation">
+<header class="header" id="header">
+  <Container size="large">
+    <div class="header-inner">
+      <Logo class="header-logo" />
+      
+      <button class="menu-button" aria-label="メニューを開く">
         <span></span>
         <span></span>
         <span></span>
       </button>
+
+      <div class="menu">
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-list-item">
+              <a href="/about" class="nav-list-link">关于我们</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="/company" class="nav-list-link">公司概况</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="/services" class="nav-list-link">服务</a>
+              <ul class="sub-menu">
+                <li class="sub-menu-item">
+                  <a href="/services#web-development" class="sub-menu-link">
+                    网站与应用开发
+                  </a>
+                </li>
+                <li class="sub-menu-item">
+                  <a href="/services#mobile-apps" class="sub-menu-link">
+                    移动应用开发
+                  </a>
+                </li>
+                <li class="sub-menu-item">
+                  <a href="/services#uiux-design" class="sub-menu-link">
+                    UI/UX设计
+                  </a>
+                </li>
+                <li class="sub-menu-item">
+                  <a href="/services#digital-strategy" class="sub-menu-link">
+                    数字战略
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-list-item">
+              <a href="/works" class="nav-list-link">作品案例</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="/news" class="nav-list-link">新闻动态</a>
+            </li>
+          </ul>
+          <Button href="/contact" variant="solid" size="medium" class="menu-contact">
+            联系我们
+          </Button>
+        </nav>
+      </div>
     </div>
-  </div>
+  </Container>
 </header>
 
-<style lang="scss">
+<style>
   .header {
-    background: var(--color-bg-primary);
-    border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
-    z-index: 100;
-    transition:
-      background-color 0.3s ease,
-      border-color 0.3s ease;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    z-index: var(--z-sticky);
+    height: var(--headerHeightMobile);
+    background-color: var(--c-bg);
+    transition: transform var(--transition-slower) var(--ease-out-quart);
+  }
 
-    &__container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      justify-content: space-between;
-
-      @media (min-width: 768px) {
-        padding: 1rem 2rem;
-      }
-    }
-
-    &__logo {
-      font-size: 1.2rem;
-      font-weight: 700;
-      flex-shrink: 0;
-
-      @media (min-width: 768px) {
-        font-size: 1.5rem;
-      }
-
-      a {
-        text-decoration: none;
-        color: var(--color-text-primary);
-        transition: opacity 0.3s;
-        display: flex;
-        align-items: center;
-
-        &:hover {
-          opacity: 0.7;
-        }
-      }
-    }
-
-    &__nav {
-      flex: 1;
-      display: none;
-
-      @media (min-width: 768px) {
-        display: block;
-      }
-    }
-
-    &__nav-list {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-      justify-content: flex-end;
-      align-items: center;
-      flex-wrap: wrap;
-
-      @media (min-width: 1024px) {
-        gap: 2rem;
-      }
-
-      a {
-        text-decoration: none;
-        color: var(--color-text-primary);
-        font-size: 0.85rem;
-        transition: color 0.3s;
-        white-space: nowrap;
-
-        @media (min-width: 768px) {
-          font-size: 0.95rem;
-        }
-
-        &:hover {
-          color: var(--color-accent);
-        }
-      }
-    }
-
-    &__nav-cta {
-      background: var(--color-accent) !important;
-      color: #fff !important;
-      padding: 0.4rem 1rem !important;
-      border-radius: 4px;
-      font-size: 0.85rem !important;
-      transition: background 0.3s;
-
-      @media (min-width: 768px) {
-        padding: 0.5rem 1.5rem !important;
-      }
-
-      &:hover {
-        background: var(--color-accent-hover) !important;
-      }
-    }
-
-    &__mobile-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      @media (min-width: 768px) {
-        display: none;
-      }
-    }
-
-    &__mobile-toggle {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      margin-right: -0.5rem;
-
-      @media (min-width: 768px) {
-        display: none;
-      }
-
-      span {
-        width: 1.5rem;
-        height: 2px;
-        background: var(--color-text-primary);
-        transition: all 0.3s ease;
-        display: block;
-      }
-
-      &:hover span {
-        background: var(--color-accent);
-      }
+  @media (min-width: 900px) {
+    .header {
+      height: var(--headerHeight);
     }
   }
 
-  /* Theme Toggle Button Styles */
-  :global(.theme-toggle) {
+  .header.is-hidden {
+    transform: translateY(-100%);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .header-logo {
+    flex-shrink: 0;
+    z-index: var(--z-fixed);
+  }
+
+  /* Mobile Menu Button */
+  .menu-button {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-right: calc(var(--sp-sm) * -1);
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-primary);
-    transition:
-      color 0.3s ease,
-      transform 0.3s ease;
-    border-radius: 4px;
+    padding: 0;
+    z-index: var(--z-fixed);
+  }
 
-    &:hover {
-      color: var(--color-accent);
-      transform: scale(1.1);
-    }
-
-    &:active {
-      transform: scale(0.95);
+  @media (min-width: 900px) {
+    .menu-button {
+      display: none;
     }
   }
 
-  :global(.theme-toggle__icon) {
-    width: 1.2rem;
-    height: 1.2rem;
-    stroke: currentColor;
+  .menu-button span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--c-text);
+    transition: all var(--transition-base);
+    position: absolute;
+  }
+
+  .menu-button span:nth-child(1) {
+    transform: translateY(-6px);
+  }
+
+  .menu-button span:nth-child(3) {
+    transform: translateY(6px);
+  }
+
+  .menu-button.is-open span:nth-child(1) {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  .menu-button.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-button.is-open span:nth-child(3) {
+    transform: translateY(0) rotate(-45deg);
+  }
+
+  /* Menu */
+  .menu {
+    position: fixed;
+    top: var(--headerHeightMobile);
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: calc(100dvh - var(--headerHeightMobile));
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+    padding: var(--sp-xl) var(--sp-xl);
+    background-color: var(--c-bg-alt);
+    opacity: 0;
+    overflow-y: hidden;
+    visibility: hidden;
+    transition-property: transform, opacity, background-color, visibility;
+    transition-duration: var(--transition-slow);
+    transition-timing-function: ease;
+    will-change: transform, opacity, background-color, visibility;
+  }
+
+  @media (min-width: 900px) {
+    .menu {
+      position: static;
+      height: auto;
+      padding: 0;
+      opacity: 1;
+      visibility: visible;
+      overflow-y: visible;
+      background-color: transparent;
+      display: block;
+    }
+  }
+
+  .menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity var(--transition-slower) var(--ease-out-quart),
+                transform var(--transition-slower) var(--ease-out-quart),
+                visibility var(--transition-slower);
+  }
+
+  @media (min-width: 900px) {
+    .nav {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--sp-xl);
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  .menu.is-open .nav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-sm);
+    list-style: none;
+  }
+
+  @media (min-width: 900px) {
+    .nav-list {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--sp-xl);
+    }
+  }
+
+  .nav-list-item {
+    position: relative;
+  }
+
+  .nav-list-link {
+    display: block;
+    padding: var(--sp-sm) 0;
+    color: var(--c-text);
+    font-size: var(--fs-lg);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  @media (min-width: 900px) {
+    .nav-list-link {
+      padding: var(--sp-xs) 0;
+      font-size: var(--fs-sm);
+    }
+  }
+
+  .nav-list-link:hover {
+    color: var(--c-primary);
+  }
+
+  /* Sub Menu */
+  .sub-menu {
+    display: none;
+    list-style: none;
+    padding-left: var(--sp-lg);
+    margin-top: var(--sp-sm);
+    margin-bottom: var(--sp-sm);
+  }
+
+  @media (min-width: 900px) {
+    .nav-list-item:hover .sub-menu {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--c-bg);
+      border: 1px solid var(--c-border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-sm);
+      min-width: 200px;
+      box-shadow: var(--shadow-lg);
+      margin-top: var(--sp-xs);
+    }
+  }
+
+  .sub-menu-item {
+    margin: 0;
+  }
+
+  .sub-menu-link {
+    display: block;
+    padding: var(--sp-sm);
+    color: var(--c-text-sub);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+    transition: color var(--transition-base);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 900px) {
+    .sub-menu-link {
+      font-size: var(--fs-xs);
+    }
+  }
+
+  .sub-menu-link:hover {
+    color: var(--c-primary);
+  }
+
+  /* Contact Button */
+  .menu-contact {
+    --buttonWidth: 100%;
+  }
+
+  @media (min-width: 900px) {
+    .menu-contact {
+      --buttonWidth: auto;
+    }
   }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const menuButton = document.querySelector('.menu-button');
+    const menu = document.querySelector('.menu');
+    const menuLinks = document.querySelectorAll('.menu a');
+    let isOpen = false;
+
+    // Reset state
+    menu?.classList.remove('is-open');
+    menuButton?.classList.remove('is-open');
+    document.body.style.overflow = '';
+
+    const toggleMenu = (e: Event) => {
+      e.stopPropagation();
+      menu?.classList.toggle('is-open');
+      menuButton?.classList.toggle('is-open');
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+      isOpen = !isOpen;
+    };
+
+    menuButton?.addEventListener('click', (e) => toggleMenu(e));
+    
+    menuLinks?.forEach((link) => {
+      link.addEventListener('click', (e) => toggleMenu(e));
+    });
+  });
+</script>
+
+<script>
+  // Header hide on scroll
+  const header = document.getElementById('header');
+  let lastScroll = 0;
+  let ticking = false;
+
+  const updateHeader = () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll <= 0) {
+      header?.classList.remove('is-hidden');
+      lastScroll = currentScroll;
+      ticking = false;
+      return;
+    }
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      header?.classList.add('is-hidden');
+    } else if (currentScroll < lastScroll) {
+      header?.classList.remove('is-hidden');
+    }
+
+    lastScroll = currentScroll;
+    ticking = false;
+  };
+
+  const requestTick = () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+</script>

@@ -27,7 +27,7 @@ const { tag, title, category, description, link } = Astro.props;
     background: white;
     padding: 1.5rem;
     border-radius: 8px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--c-border);
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -50,7 +50,7 @@ const { tag, title, category, description, link } = Astro.props;
     &__tag {
       display: inline-block;
       background: #e8f0ff;
-      color: #0066cc;
+      color: var(--c-primary);
       padding: 0.3rem 0.8rem;
       border-radius: 4px;
       font-size: 0.75rem;
@@ -65,7 +65,7 @@ const { tag, title, category, description, link } = Astro.props;
     h3 {
       margin: 0.5rem 0 0 0;
       font-size: 1rem;
-      color: #333;
+      color: var(--c-text);
 
       @media (min-width: 768px) {
         font-size: 1.2rem;
@@ -73,7 +73,7 @@ const { tag, title, category, description, link } = Astro.props;
     }
 
     &__category {
-      color: #666;
+      color: var(--c-text-sub);
       font-size: 0.85rem;
       margin: 0.5rem 0;
 
@@ -83,7 +83,7 @@ const { tag, title, category, description, link } = Astro.props;
     }
 
     &__description {
-      color: #666;
+      color: var(--c-text-sub);
       font-size: 0.9rem;
       line-height: 1.6;
       margin: 0.5rem 0 1rem;
@@ -95,7 +95,7 @@ const { tag, title, category, description, link } = Astro.props;
     }
 
     &__link {
-      color: #0066cc;
+      color: var(--c-primary);
       text-decoration: none;
       font-weight: 500;
       font-size: 0.9rem;

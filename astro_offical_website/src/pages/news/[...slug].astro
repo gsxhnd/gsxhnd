@@ -105,7 +105,7 @@ const { Content } = await render(entry);
       :global(h2) {
         font-size: 1.3rem;
         margin: 1.5rem 0 0.8rem;
-        color: #333;
+        color: var(--c-text);
 
         @media (min-width: 768px) {
           font-size: 1.8rem;
@@ -116,7 +116,7 @@ const { Content } = await render(entry);
       :global(h3) {
         font-size: 1.1rem;
         margin: 1rem 0 0.6rem;
-        color: #333;
+        color: var(--c-text);
 
         @media (min-width: 768px) {
           font-size: 1.3rem;
@@ -125,7 +125,7 @@ const { Content } = await render(entry);
       }
 
       :global(p) {
-        color: #666;
+        color: var(--c-text-sub);
         line-height: 1.8;
         margin-bottom: 1rem;
         font-size: 0.9rem;
@@ -139,7 +139,7 @@ const { Content } = await render(entry);
       :global(ul),
       :global(ol) {
         margin: 0 0 1rem 1.2rem;
-        color: #666;
+        color: var(--c-text-sub);
 
         @media (min-width: 768px) {
           margin: 0 0 1.5rem 1.5rem;
@@ -157,7 +157,7 @@ const { Content } = await render(entry);
       }
 
       :global(code) {
-        background: #f5f5f5;
+        background: var(--c-bg-secondary);
         padding: 0.2rem 0.5rem;
         border-radius: 3px;
         color: #d63384;
@@ -170,7 +170,7 @@ const { Content } = await render(entry);
       }
 
       :global(pre) {
-        background: #f5f5f5;
+        background: var(--c-bg-secondary);
         padding: 1rem;
         border-radius: 8px;
         overflow-x: auto;
@@ -184,15 +184,15 @@ const { Content } = await render(entry);
         :global(code) {
           background: none;
           padding: 0;
-          color: #333;
+          color: var(--c-text);
         }
       }
 
       :global(blockquote) {
-        border-left: 4px solid #0066cc;
+        border-left: 4px solid var(--c-primary);
         padding-left: 1rem;
         margin: 1rem 0;
-        color: #666;
+        color: var(--c-text-sub);
         font-style: italic;
         font-size: 0.9rem;
 
@@ -204,7 +204,7 @@ const { Content } = await render(entry);
       }
 
       :global(a) {
-        color: #0066cc;
+        color: var(--c-primary);
         text-decoration: none;
 
         &:hover {
@@ -225,7 +225,7 @@ const { Content } = await render(entry);
 
         :global(th),
         :global(td) {
-          border: 1px solid #ddd;
+          border: 1px solid var(--c-border);
           padding: 0.5rem;
           text-align: left;
 
@@ -235,7 +235,7 @@ const { Content } = await render(entry);
         }
 
         :global(th) {
-          background: #f5f5f5;
+          background: var(--c-bg-secondary);
           font-weight: bold;
         }
       }

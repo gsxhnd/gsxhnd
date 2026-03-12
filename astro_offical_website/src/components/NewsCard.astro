@@ -24,7 +24,7 @@ const { date, type, title, link } = Astro.props;
     padding: 1.5rem;
     background: white;
     border-radius: 8px;
-    border-left: 4px solid #0066cc;
+    border-left: 4px solid var(--c-primary);
     transition: all 0.3s ease;
 
     @media (min-width: 768px) {
@@ -40,7 +40,7 @@ const { date, type, title, link } = Astro.props;
     &__date {
       display: block;
       font-size: 0.85rem;
-      color: #666;
+      color: var(--c-text-sub);
       margin-bottom: 0.5rem;
       font-weight: 500;
 
@@ -52,7 +52,7 @@ const { date, type, title, link } = Astro.props;
     &__type {
       display: inline-block;
       background: #eff2ff;
-      color: #0066cc;
+      color: var(--c-primary);
       padding: 0.25rem 0.6rem;
       border-radius: 3px;
       font-size: 0.75rem;
@@ -74,12 +74,12 @@ const { date, type, title, link } = Astro.props;
       }
 
       a {
-        color: #333;
+        color: var(--c-text);
         text-decoration: none;
         transition: color 0.3s ease;
 
         &:hover {
-          color: #0066cc;
+          color: var(--c-primary);
           text-decoration: underline;
         }
       }
