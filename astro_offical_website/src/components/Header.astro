@@ -1,10 +1,10 @@
 ---
-import Container from './Container.astro';
-import Logo from './Logo.astro';
-import Button from './Button.astro';
-import LanguageSwitcher from './LanguageSwitcher.astro';
-import { SITE_CONFIG } from '../config/site';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Container from "./Container.astro";
+import Logo from "./Logo.astro";
+import Button from "./Button.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { SITE_CONFIG } from "../config/site";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -14,7 +14,7 @@ const t = useTranslations(lang);
   <Container size="large">
     <div class="header-inner">
       <Logo class="header-logo" />
-      
+
       <button class="menu-button" aria-label="メニューを開く">
         <span></span>
         <span></span>
@@ -24,27 +24,36 @@ const t = useTranslations(lang);
       <div class="menu">
         <nav class="nav">
           <ul class="nav-list">
-            {SITE_CONFIG.navigation.map((item) => (
-              <li class="nav-list-item">
-                <a href={item.href} class="nav-list-link">{item.label}</a>
-                {item.submenu && (
-                  <ul class="sub-menu">
-                    {item.submenu.map((subItem) => (
-                      <li class="sub-menu-item">
-                        <a href={subItem.href} class="sub-menu-link">
-                          {subItem.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
+            {
+              SITE_CONFIG.navigation.map((item) => (
+                <li class="nav-list-item">
+                  <a href={item.href} class="nav-list-link">
+                    {item.label}
+                  </a>
+                  {item.submenu && (
+                    <ul class="sub-menu">
+                      {item.submenu.map((subItem) => (
+                        <li class="sub-menu-item">
+                          <a href={subItem.href} class="sub-menu-link">
+                            {subItem.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))
+            }
           </ul>
           <div class="menu-actions">
             <LanguageSwitcher />
-            <Button href="/contact" variant="solid" size="medium" class="menu-contact">
-              {t('nav.contact')}
+            <Button
+              href="/contact"
+              variant="solid"
+              size="medium"
+              class="menu-contact"
+            >
+              {t("nav.contact")}
             </Button>
           </div>
         </nav>
@@ -186,9 +195,10 @@ const t = useTranslations(lang);
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: opacity var(--transition-slower) var(--ease-out-quart),
-                transform var(--transition-slower) var(--ease-out-quart),
-                visibility var(--transition-slower);
+    transition:
+      opacity var(--transition-slower) var(--ease-out-quart),
+      transform var(--transition-slower) var(--ease-out-quart),
+      visibility var(--transition-slower);
   }
 
   @media (min-width: 900px) {
@@ -328,36 +338,36 @@ const t = useTranslations(lang);
 </style>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const menuButton = document.querySelector('.menu-button');
-    const menu = document.querySelector('.menu');
-    const menuLinks = document.querySelectorAll('.menu a');
+  document.addEventListener("astro:page-load", () => {
+    const menuButton = document.querySelector(".menu-button");
+    const menu = document.querySelector(".menu");
+    const menuLinks = document.querySelectorAll(".menu a");
     let isOpen = false;
 
     // Reset state
-    menu?.classList.remove('is-open');
-    menuButton?.classList.remove('is-open');
-    document.body.style.overflow = '';
+    menu?.classList.remove("is-open");
+    menuButton?.classList.remove("is-open");
+    document.body.style.overflow = "";
 
     const toggleMenu = (e: Event) => {
       e.stopPropagation();
-      menu?.classList.toggle('is-open');
-      menuButton?.classList.toggle('is-open');
-      document.body.style.overflow = isOpen ? '' : 'hidden';
+      menu?.classList.toggle("is-open");
+      menuButton?.classList.toggle("is-open");
+      document.body.style.overflow = isOpen ? "" : "hidden";
       isOpen = !isOpen;
     };
 
-    menuButton?.addEventListener('click', (e) => toggleMenu(e));
-    
+    menuButton?.addEventListener("click", (e) => toggleMenu(e));
+
     menuLinks?.forEach((link) => {
-      link.addEventListener('click', (e) => toggleMenu(e));
+      link.addEventListener("click", (e) => toggleMenu(e));
     });
   });
 </script>
 
 <script>
   // Header hide on scroll
-  const header = document.getElementById('header');
+  const header = document.getElementById("header");
   let lastScroll = 0;
   let ticking = false;
 
@@ -365,16 +375,16 @@ const t = useTranslations(lang);
     const currentScroll = window.scrollY;
 
     if (currentScroll <= 0) {
-      header?.classList.remove('is-hidden');
+      header?.classList.remove("is-hidden");
       lastScroll = currentScroll;
       ticking = false;
       return;
     }
 
     if (currentScroll > lastScroll && currentScroll > 100) {
-      header?.classList.add('is-hidden');
+      header?.classList.add("is-hidden");
     } else if (currentScroll < lastScroll) {
-      header?.classList.remove('is-hidden');
+      header?.classList.remove("is-hidden");
     }
 
     lastScroll = currentScroll;
@@ -388,5 +398,5 @@ const t = useTranslations(lang);
     }
   };
 
-  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener("scroll", requestTick, { passive: true });
 </script>

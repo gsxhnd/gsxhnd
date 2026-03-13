@@ -1,0 +1,88 @@
+---
+
+---
+
+<section class="partners">
+  <div class="partners__container">
+    <h2 class="partners__title">与来自各行业的客户建立了合作关系</h2>
+    <div class="slider-container">
+      <div class="slider-tracker">
+        <div class="partner-item">Partner 1</div>
+        <div class="partner-item">Partner 2</div>
+        <div class="partner-item">Partner 3</div>
+        <div class="partner-item">Partner 4</div>
+        <div class="partner-item">Partner 5</div>
+        <div class="partner-item">Partner 6</div>
+        <div class="partner-item">Partner 7</div>
+        <div class="partner-item">Partner 8</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .partners {
+    padding: 3rem 1.5rem;
+    background: var(--c-bg-secondary);
+    width: 100%;
+
+    @media (min-width: 768px) {
+      padding: 4rem 2rem;
+    }
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    &__title {
+      text-align: center;
+      font-size: 1.3rem;
+      margin: 0 0 2rem 0;
+      color: var(--c-text);
+
+      @media (min-width: 768px) {
+        font-size: 1.8rem;
+        margin: 0 0 3rem 0;
+      }
+    }
+
+    .slider-container {
+      width: 100%;
+      .slider-tracker {
+        display: flex;
+        //   grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        animation: scroll 2s linear infinite;
+        width: fit-content;
+        mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 10%,
+          black 90%,
+          transparent
+        );
+        @keyframes scroll {
+          0% {
+            transform: translate(20%);
+          }
+
+          to {
+            transform: translate(0%);
+          }
+        }
+      }
+    }
+  }
+
+  .partner-item {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 8px;
+    font-weight: 500;
+    color: var(--c-text-sub);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+</style>

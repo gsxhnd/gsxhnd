@@ -3,6 +3,17 @@
  * 集中管理网站的固定信息和配置项
  */
 
+export interface NavigationItem {
+  label: string;
+  href: string;
+  submenu?: NavigationSubItem[];
+}
+
+export interface NavigationSubItem {
+  label: string;
+  href: string;
+}
+
 export const SITE_CONFIG = {
   // 基本信息
   name: "CName 公司",
@@ -45,61 +56,98 @@ export const SITE_CONFIG = {
   navigation: [
     {
       label: "关于我们",
-      href: "/about",
+      href: "./about",
     },
     {
       label: "公司概况",
-      href: "/company",
+      href: "./company",
     },
     {
       label: "服务",
-      href: "/services",
+      href: "./services",
       submenu: [
         {
           label: "网站与应用开发",
-          href: "/services#web-development",
+          href: "./services#web-development",
         },
         {
           label: "移动应用开发",
-          href: "/services#mobile-apps",
+          href: "./services#mobile-apps",
         },
         {
-          label: "UI/UX设计",
-          href: "/services#uiux-design",
+          label: "UI/UX 设计",
+          href: "./services#uiux-design",
         },
         {
           label: "数字战略",
-          href: "/services#digital-strategy",
+          href: "./services#digital-strategy",
         },
       ],
     },
     {
       label: "作品案例",
-      href: "/works",
+      href: "./works",
     },
     {
       label: "新闻动态",
-      href: "/news",
+      href: "./news",
+    },
+  ] as NavigationItem[],
+    {
+      label: "关于我们",
+      href: "./about",
+    },
+    {
+      label: "公司概况",
+      href: "./company",
+    },
+    {
+      label: "服务",
+      href: "./services",
+      submenu: [
+        {
+          label: "网站与应用开发",
+          href: "./services#web-development",
+        },
+        {
+          label: "移动应用开发",
+          href: "./services#mobile-apps",
+        },
+        {
+          label: "UI/UX设计",
+          href: "./services#uiux-design",
+        },
+        {
+          label: "数字战略",
+          href: "./services#digital-strategy",
+        },
+      ],
+    },
+    {
+      label: "作品案例",
+      href: "./works",
+    },
+    {
+      label: "新闻动态",
+      href: "./news",
     },
   ],
 
   // Footer 导航
   footerNavigation: {
     services: [
-      { label: "服务", href: "/services" },
-      { label: "作品案例", href: "/works" },
+      { label: "服务", href: "./services" },
+      { label: "作品案例", href: "./works" },
     ],
     resources: [
-      { label: "新闻动态", href: "/news" },
-      { label: "关于我们", href: "/about" },
+      { label: "新闻动态", href: "./news" },
+      { label: "关于我们", href: "./about" },
     ],
     company: [
-      { label: "公司概况", href: "/company" },
-      { label: "联系我们", href: "/contact" },
+      { label: "公司概况", href: "./company" },
+      { label: "联系我们", href: "./contact" },
     ],
-    legal: [
-      { label: "隐私政策", href: "/privacy" },
-    ],
+    legal: [{ label: "隐私政策", href: "./privacy" }],
   },
 
   // 业务内容
@@ -131,3 +179,4 @@ export const SITE_CONFIG = {
 } as const;
 
 export type SiteConfig = typeof SITE_CONFIG;
+export type { NavigationItem, NavigationSubItem };
