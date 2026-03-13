@@ -1,27 +1,16 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import ComponentsShowcase from "./components/ComponentsShowcase.vue";
 import { onBeforeMount } from "vue";
 
 onBeforeMount(async () => {
   const doc = document.documentElement;
-  console.log(doc.dataset);
-  console.log(doc.dataset.theme);
   doc.dataset.theme = "neutral";
   doc.dataset.colorSchema = "dark";
 });
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-    <button class="btn btn-primary">123</button>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <ComponentsShowcase />
 </template>
 
 <style scoped>
