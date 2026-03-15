@@ -1,48 +1,64 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import Card from "@/components/Card.vue";
-import Label from "@/components/Label.vue";
-import Input from "@/components/Input.vue";
 import Separator from "@/components/Separator.vue";
+
+interface Props {
+  selectedComponent?: string;
+}
+
+defineProps<Props>();
 
 const { t } = useI18n();
 </script>
 
 <template>
-  <div class="showcase-section">
-    <h2 class="section-title">{{ t("showcase.sections.layout") }}</h2>
-    <div class="section-grid">
-      <!-- Card -->
-      <Card class="component-card full-width">
+  <div class="component-demo">
+    <!-- Card -->
+    <div
+      v-if="!selectedComponent || selectedComponent === 'card'"
+      class="demo-container"
+    >
+      <Card class="component-card">
         <template #header>
           <h3>{{ t("showcase.components.card") }}</h3>
         </template>
-        <p>
-          This is a card component. It provides a container for grouping related
-          content.
-        </p>
-      </Card>
-
-      <!-- Label -->
-      <Card class="component-card">
-        <template #header>
-          <h3>{{ t("showcase.components.label") }}</h3>
-        </template>
-        <div class="demo-label">
-          <Label for="demo">Form Label:</Label>
-          <Input id="demo" placeholder="Associated input" />
+        <div class="demo-content">
+          <Card class="nested-card">
+            <template #header>
+              <h4>Nested Card Example</h4>
+            </template>
+            <p>
+              This is a card component. It provides a container for grouping
+              related content.
+            </p>
+          </Card>
+          <p class="demo-description">
+            Card component for grouping and containing content with headers and
+            styling
+          </p>
         </div>
       </Card>
+    </div>
 
-      <!-- Separator -->
-      <Card class="component-card full-width">
+    <!-- Separator -->
+    <div
+      v-if="!selectedComponent || selectedComponent === 'separator'"
+      class="demo-container"
+    >
+      <Card class="component-card">
         <template #header>
           <h3>{{ t("showcase.components.separator") }}</h3>
         </template>
-        <div class="demo-separator">
-          <p>Content before separator</p>
-          <Separator />
-          <p>Content after separator</p>
+        <div class="demo-content">
+          <div class="demo-separator">
+            <p>Content before separator</p>
+            <Separator />
+            <p>Content after separator</p>
+          </div>
+          <p class="demo-description">
+            Separator component for visual division between content sections
+          </p>
         </div>
       </Card>
     </div>
@@ -50,36 +66,51 @@ const { t } = useI18n();
 </template>
 
 <style scoped lang="scss">
-.showcase-section {
-  margin-bottom: 3rem;
+.component-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--foreground);
-    margin: 0 0 2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary);
-    display: inline-block;
-  }
-
-  .section-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-
+  .demo-container {
     .component-card {
-      height: 100%;
+      height: auto;
 
-      &.full-width {
-        grid-column: 1 / -1;
+      :deep(.card-header) {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--background-tertiary);
+
+        h3 {
+          margin: 0;
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--foreground);
+        }
+      }
+
+      .demo-content {
+        padding: 2rem;
+
+        .demo-description {
+          margin-top: 1.5rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--background-tertiary);
+          font-size: 0.875rem;
+          color: var(--foreground-secondary);
+        }
       }
     }
   }
 }
 
-.demo-label,
+.nested-card {
+  margin: 0 0 1.5rem 0;
+
+  h4 {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
 .demo-separator {
   display: flex;
   flex-direction: column;

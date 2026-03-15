@@ -9,6 +9,12 @@ import DataTable from "@/components/DataTable.vue";
 import type { CommandItem } from "@/components/Command.vue";
 import type { Column } from "@/components/DataTable.vue";
 
+interface Props {
+  selectedComponent?: string;
+}
+
+defineProps<Props>();
+
 const { t } = useI18n();
 
 const commandOpen = ref(false);
@@ -51,66 +57,101 @@ const tableColumns: Column[] = [
 </script>
 
 <template>
-  <div class="showcase-section">
-    <h2 class="section-title">{{ t("showcase.sections.advanced") }}</h2>
-    <div class="section-grid">
-      <!-- Command -->
+  <div class="component-demo">
+    <!-- Command -->
+    <div
+      v-if="!selectedComponent || selectedComponent === 'command'"
+      class="demo-container"
+    >
       <Card class="component-card">
         <template #header>
           <h3>{{ t("showcase.components.command") }}</h3>
         </template>
-        <Button @click="commandOpen = !commandOpen">Open Command</Button>
-        <Command
-          v-if="commandOpen"
-          :items="commandItems"
-          placeholder="Search commands..."
-        />
+        <div class="demo-content">
+          <Button @click="commandOpen = !commandOpen">Open Command</Button>
+          <Command
+            v-if="commandOpen"
+            :items="commandItems"
+            placeholder="Search commands..."
+          />
+          <p class="demo-description">
+            Command component for command palette and keyboard shortcuts
+          </p>
+        </div>
       </Card>
+    </div>
 
-      <!-- Calendar -->
+    <!-- Calendar -->
+    <div
+      v-if="!selectedComponent || selectedComponent === 'calendar'"
+      class="demo-container"
+    >
       <Card class="component-card">
         <template #header>
           <h3>{{ t("showcase.components.calendar") }}</h3>
         </template>
-        <Calendar v-model="selectedDate" />
+        <div class="demo-content">
+          <Calendar v-model="selectedDate" />
+          <p class="demo-description">
+            Calendar component for date selection and display
+          </p>
+        </div>
       </Card>
+    </div>
 
-      <!-- Data Table -->
-      <Card class="component-card full-width">
+    <!-- Data Table -->
+    <div
+      v-if="!selectedComponent || selectedComponent === 'dataTable'"
+      class="demo-container"
+    >
+      <Card class="component-card">
         <template #header>
           <h3>{{ t("showcase.components.dataTable") }}</h3>
         </template>
-        <DataTable :columns="tableColumns" :data="tableData" />
+        <div class="demo-content">
+          <DataTable :columns="tableColumns" :data="tableData" />
+          <p class="demo-description">
+            DataTable component for displaying structured data with sorting and
+            filtering
+          </p>
+        </div>
       </Card>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.showcase-section {
-  margin-bottom: 3rem;
+.component-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--foreground);
-    margin: 0 0 2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary);
-    display: inline-block;
-  }
-
-  .section-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-
+  .demo-container {
     .component-card {
-      height: 100%;
+      height: auto;
 
-      &.full-width {
-        grid-column: 1 / -1;
+      :deep(.card-header) {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--background-tertiary);
+
+        h3 {
+          margin: 0;
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--foreground);
+        }
+      }
+
+      .demo-content {
+        padding: 2rem;
+
+        .demo-description {
+          margin-top: 1.5rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--background-tertiary);
+          font-size: 0.875rem;
+          color: var(--foreground-secondary);
+        }
       }
     }
   }
