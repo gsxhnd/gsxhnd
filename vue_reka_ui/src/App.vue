@@ -1,29 +1,37 @@
 <script setup lang="ts">
-import ComponentsShowcase from "./components/ComponentsShowcase.vue";
-import { onBeforeMount } from "vue";
+import { ref, onBeforeMount } from "vue";
 
-onBeforeMount(async () => {
+type Theme = "dark" | "light";
+
+const currentTheme = ref<Theme>("dark");
+
+const setTheme = (theme: Theme) => {
+  currentTheme.value = theme;
   const doc = document.documentElement;
   doc.dataset.theme = "neutral";
-  doc.dataset.colorSchema = "dark";
+  doc.dataset.colorSchema = theme;
+  localStorage.setItem("theme", theme);
+};
+
+onBeforeMount(() => {
+  const savedTheme = localStorage.getItem("theme") as Theme | null;
+  const theme = savedTheme || "dark";
+  setTheme(theme);
 });
+
+// 提供全局主题切换函数
+const toggleTheme = () => {
+  setTheme(currentTheme.value === "dark" ? "light" : "dark");
+};
+
+// 暴露给全局
+(window as any).__theme = {
+  current: currentTheme,
+  set: setTheme,
+  toggle: toggleTheme,
+};
 </script>
 
 <template>
-  <ComponentsShowcase />
+  <router-view />
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

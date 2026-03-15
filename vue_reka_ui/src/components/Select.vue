@@ -230,17 +230,23 @@ const triggerClass = computed(() => {
   cursor: pointer;
   transition: background-color 0.15s ease;
   outline: none;
+  background-color: transparent;
+
+  &[data-highlighted] {
+    background-color: var(--background-secondary);
+  }
 
   &:hover:not(.select-item--disabled) {
-    background-color: var(--background-hover);
+    background-color: var(--background-secondary);
   }
 
   &:focus-visible {
-    background-color: var(--background-hover);
+    background-color: var(--background-secondary);
   }
 
   &[data-state="checked"] {
-    background-color: var(--primary-light);
+    background-color: var(--background-hover);
+    color: var(--foreground);
   }
 
   &--disabled {

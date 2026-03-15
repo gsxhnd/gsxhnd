@@ -98,6 +98,44 @@
     "cacheDir": "Cache Directory",
     "tempDir": "Temp Directory"
   },
+  "showcase": {
+    "title": "Reka UI Component Showcase",
+    "subtitle": "Explore all available components and themes",
+    "theme": "Theme",
+    "language": "Language",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "sections": {
+      "form": "Form Components",
+      "feedback": "Feedback Components",
+      "layout": "Layout Components",
+      "overlay": "Overlay Components",
+      "advanced": "Advanced Components"
+    },
+    "components": {
+      "button": "Button",
+      "input": "Input",
+      "label": "Label",
+      "checkbox": "Checkbox",
+      "radio": "Radio Button",
+      "radioGroup": "Radio Group",
+      "select": "Select",
+      "combobox": "Combobox",
+      "card": "Card",
+      "badge": "Badge",
+      "alert": "Alert",
+      "progress": "Progress",
+      "separator": "Separator",
+      "tabs": "Tabs",
+      "dialog": "Dialog",
+      "popover": "Popover",
+      "dropdown": "Dropdown",
+      "sheet": "Sheet",
+      "command": "Command",
+      "calendar": "Calendar",
+      "dataTable": "Data Table"
+    }
+  },
   "tray": {
     "show": "Open Window",
     "quit": "Exit Application"

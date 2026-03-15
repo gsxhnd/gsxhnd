@@ -4,7 +4,11 @@ import type { RouteRecordRaw } from "vue-router";
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    redirect: "/remotes",
+    redirect: "/showcase",
+  },
+  {
+    path: "/showcase",
+    component: () => import("@/pages/Showcase.vue"),
   },
 ];
 

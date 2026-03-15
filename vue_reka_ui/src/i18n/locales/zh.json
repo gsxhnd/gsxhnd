@@ -101,5 +101,43 @@
   "tray": {
     "show": "打开窗口",
     "quit": "退出应用"
+  },
+  "showcase": {
+    "title": "Reka UI 组件展示",
+    "subtitle": "探索所有可用的组件和主题",
+    "theme": "主题",
+    "language": "语言",
+    "darkMode": "深色模式",
+    "lightMode": "浅色模式",
+    "sections": {
+      "form": "表单组件",
+      "feedback": "反馈组件",
+      "layout": "布局组件",
+      "overlay": "浮层组件",
+      "advanced": "高级组件"
+    },
+    "components": {
+      "button": "按钮",
+      "input": "输入框",
+      "label": "标签",
+      "checkbox": "复选框",
+      "radio": "单选按钮",
+      "radioGroup": "单选组",
+      "select": "下拉选择",
+      "combobox": "组合框",
+      "card": "卡片",
+      "badge": "徽章",
+      "alert": "警告框",
+      "progress": "进度条",
+      "separator": "分隔符",
+      "tabs": "标签页",
+      "dialog": "对话框",
+      "popover": "气泡提示",
+      "dropdown": "下拉菜单",
+      "sheet": "抽屉",
+      "command": "命令栏",
+      "calendar": "日历",
+      "dataTable": "数据表格"
+    }
   }
 }
