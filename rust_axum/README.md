@@ -1,3 +1,11 @@
 # Rust Axum
 
-Rust + tokio + axum + seaorm
+## Framwork
+
+- Tokio
+- Axum
+
+## Dataabse
+
+- postgresql
+- redis
