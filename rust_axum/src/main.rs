@@ -1,29 +1,34 @@
 use rust_axum::{AppState, Config, create_router};
+use sea_orm::Database;
 use tracing::info;
 
 #[tokio::main]
 async fn main() {
-    // 初始化日志
     tracing_subscriber::fmt::init();
     info!("Starting Rust Axum server...");
 
-    // 加载配置 (优先级：toml > env > default)
     let config = Config::load();
     info!("Server configuration: {}", config.address());
-    if config.database_url().is_some() {
-        info!("Database configured");
-    }
+
+    let db = match config.database_url() {
+        Some(url) => {
+            info!("Connecting to database...");
+            Database::connect(&url)
+                .await
+                .expect("Failed to connect to database")
+        }
+        None => {
+            panic!("Database URL not configured");
+        }
+    };
+
     if config.redis_url().is_some() {
         info!("Redis configured");
     }
 
-    // 创建应用状态
-    let app_state = AppState::new();
-
-    // 创建路由
+    let app_state = AppState::new(db);
     let app = create_router(app_state);
 
-    // 启动服务器
     let listener = tokio::net::TcpListener::bind(&config.address())
         .await
         .expect(&format!("Failed to bind port {}", config.port));

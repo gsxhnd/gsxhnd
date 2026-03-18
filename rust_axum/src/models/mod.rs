@@ -1,3 +1,3 @@
 pub mod user;
 
-pub use user::{CreateUserRequest, User};
+pub use user::{ActiveModel, CreateUserRequest, Entity as User, Relation};
