@@ -32,7 +32,11 @@ impl Default for Config {
 
 impl Config {
     pub fn load() -> Self {
-        Self::load_from_path("config.toml")
+        let env = std::env::var("APP_ENV").unwrap_or_else(|_| "development".to_string());
+        let config_path =
+            std::env::var("CONFIG_PATH").unwrap_or_else(|_| format!("config/{}.toml", env));
+
+        Self::load_from_path(&config_path)
     }
 
     pub fn load_from_path(path: &str) -> Self {
@@ -48,6 +52,8 @@ impl Config {
                     tracing::error!("Failed to parse config file: {}", e);
                 }
             }
+        } else {
+            tracing::warn!("Config file not found: {}, using defaults", path);
         }
 
         config.host = std::env::var("HOST").unwrap_or(config.host);

@@ -10,11 +10,11 @@ async fn main() {
     // 加载配置 (优先级：toml > env > default)
     let config = Config::load();
     info!("Server configuration: {}", config.address());
-    if let Some(db_url) = config.database_url() {
-        info!("Database URL: {}", db_url);
+    if config.database_url().is_some() {
+        info!("Database configured");
     }
-    if let Some(redis_url) = config.redis_url() {
-        info!("Redis URL: {}", redis_url);
+    if config.redis_url().is_some() {
+        info!("Redis configured");
     }
 
     // 创建应用状态
