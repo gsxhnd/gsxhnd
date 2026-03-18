@@ -1,24 +1,78 @@
+use serde::Deserialize;
+use tracing::info;
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct DatabaseConfig {
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct RedisConfig {
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Deserialize)]
 pub struct Config {
     pub host: String,
     pub port: u16,
+    pub database: Option<DatabaseConfig>,
+    pub redis: Option<RedisConfig>,
 }
 
-impl Config {
-    pub fn new() -> Self {
+impl Default for Config {
+    fn default() -> Self {
         Self {
             host: "127.0.0.1".to_string(),
             port: 3000,
+            database: None,
+            redis: None,
         }
     }
+}
 
-    pub fn from_env() -> Self {
-        let host = std::env::var("HOST").unwrap_or_else(|_| "127.0.0.1".to_string());
-        let port = std::env::var("PORT")
+impl Config {
+    pub fn load() -> Self {
+        Self::load_from_path("config.toml")
+    }
+
+    pub fn load_from_path(path: &str) -> Self {
+        let mut config = Config::default();
+
+        if let Ok(config_str) = std::fs::read_to_string(path) {
+            match toml::from_str::<Config>(&config_str) {
+                Ok(parsed) => {
+                    info!("Loaded configuration from {}", path);
+                    config = parsed;
+                }
+                Err(e) => {
+                    tracing::error!("Failed to parse config file: {}", e);
+                }
+            }
+        }
+
+        config.host = std::env::var("HOST").unwrap_or(config.host);
+        config.port = std::env::var("PORT")
             .ok()
             .and_then(|p| p.parse().ok())
-            .unwrap_or(3000);
+            .unwrap_or(config.port);
 
-        Self { host, port }
+        if let Ok(url) = std::env::var("DATABASE_URL") {
+            config.database = Some(DatabaseConfig { url });
+        }
+
+        if let Ok(url) = std::env::var("REDIS_URL") {
+            config.redis = Some(RedisConfig { url });
+        }
+
+        config
+    }
+
+    pub fn database_url(&self) -> Option<String> {
+        self.database.as_ref().map(|db| db.url.clone())
+    }
+
+    pub fn redis_url(&self) -> Option<String> {
+        self.redis.as_ref().map(|r| r.url.clone())
     }
 
     pub fn address(&self) -> String {
