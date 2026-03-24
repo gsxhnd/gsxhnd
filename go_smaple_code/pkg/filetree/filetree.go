@@ -14,6 +14,11 @@ type FileNode struct {
 	Children []*FileNode `json:"children"`
 }
 
+type FileEntry struct {
+	Path   string `json:"path"`
+	FileID uint64 `json:"file_id"`
+}
+
 // Serialize converts the N-ary tree to a JSON string
 func (f *FileNode) Serialize() (string, error) {
 	data, err := json.Marshal(f)
@@ -152,22 +157,13 @@ func (f *FileNode) GetFileID(path string) (uint64, error) {
 }
 
 // GetAllFiles gets all file paths and FileIDs
-func (f *FileNode) GetAllFiles() []struct {
-	Path   string
-	FileID uint64
-} {
-	var files []struct {
-		Path   string
-		FileID uint64
-	}
+func (f *FileNode) GetAllFiles() []FileEntry {
+	var files []FileEntry
 	var traverse func(node *FileNode, path string)
 
 	traverse = func(node *FileNode, path string) {
 		if !node.IsDir {
-			files = append(files, struct {
-				Path   string
-				FileID uint64
-			}{Path: path, FileID: node.FileID})
+			files = append(files, FileEntry{Path: path, FileID: node.FileID})
 			return
 		}
 

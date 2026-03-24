@@ -9,7 +9,8 @@ go_sample_code/
 ├── cmd/
 │   └── server/         # Fiber Web 服务
 ├── internal/
-│   ├── handler/        # HTTP 处理器
+│   ├── handler/        # HTTP 处理器（按模块拆分）
+│   ├── service/        # 业务服务层
 │   └── middleware/     # 中间件
 ├── pkg/
 │   ├── filetree/       # 文件树 N 叉树实现
@@ -54,15 +55,15 @@ curl http://localhost:8080/api/health
 ### 文件树操作
 
 ```bash
-# 添加目录
-curl -X POST http://localhost:8080/api/filetree/dir \
+# 添加节点（目录）
+curl -X POST http://localhost:8080/api/filetree/node \
   -H "Content-Type: application/json" \
-  -d '{"parent_path": "/", "dir_name": "docs"}'
+  -d '{"parent_path": "/", "name": "docs", "is_dir": true}'
 
-# 添加文件
-curl -X POST http://localhost:8080/api/filetree/file \
+# 添加节点（文件）
+curl -X POST http://localhost:8080/api/filetree/node \
   -H "Content-Type: application/json" \
-  -d '{"dir_path": "/docs", "file_name": "readme.md", "file_id": 1001}'
+  -d '{"parent_path": "/docs", "name": "readme.md", "is_dir": false, "file_id": 1001}'
 
 # 获取完整树结构
 curl http://localhost:8080/api/filetree/tree

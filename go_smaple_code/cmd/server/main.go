@@ -5,8 +5,10 @@ import (
 	"flag"
 	"time"
 
-	"go_sample_code/internal/handler"
+	filetreehandler "go_sample_code/internal/handler/filetreehandler"
+	healthhandler "go_sample_code/internal/handler/health"
 	"go_sample_code/internal/middleware"
+	filetreeservice "go_sample_code/internal/service/filetree"
 	"go_sample_code/pkg/logger"
 
 	"github.com/gofiber/fiber/v2"
@@ -27,7 +29,9 @@ func main() {
 		fx.Provide(
 			NewLogger,
 			NewFiberApp,
-			handler.NewFileTreeHandler,
+			filetreeservice.NewService,
+			healthhandler.NewHandler,
+			filetreehandler.NewHandler,
 		),
 		fx.Invoke(RegisterHooks),
 	).Run()
@@ -50,18 +54,18 @@ func RegisterHooks(
 	lifecycle fx.Lifecycle,
 	app *fiber.App,
 	log logger.Logger,
-	fileTreeHandler *handler.FileTreeHandler,
+	healthHandler healthhandler.Handler,
+	fileTreeHandler filetreehandler.Handler,
 ) {
 	lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			app.Use(middleware.Recovery(log))
 			app.Use(middleware.Logger(log))
 
-			app.Get("/api/health", handler.HealthCheck)
+			app.Get("/api/health", healthHandler.Check)
 
 			api := app.Group("/api/filetree")
-			api.Post("/file", fileTreeHandler.AddFile)
-			api.Post("/dir", fileTreeHandler.AddDir)
+			api.Post("/node", fileTreeHandler.AddNode)
 			api.Delete("/node", fileTreeHandler.RemoveNode)
 			api.Put("/rename", fileTreeHandler.RenameNode)
 			api.Get("/files", fileTreeHandler.GetAllFiles)
