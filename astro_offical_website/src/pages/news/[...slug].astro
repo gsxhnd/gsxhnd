@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Contact from "../../components/Contact.astro";
 import { getCollection, render } from "astro:content";
 import { SITE_CONFIG } from "../../config/site";
 
@@ -9,86 +10,117 @@ export async function getStaticPaths() {
   });
 
   return allNews.map((entry) => ({
-    params: { id: entry.id, slug: entry.slug },
-    props: {
-      entry,
-    },
+    params: { slug: entry.id },
+    props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { slug } = Astro.params;
-console.log(entry);
-// console.log(params);
 const { Content } = await render(entry);
 ---
 
-<Layout title={`${entry.data.title} | ${SITE_CONFIG.company.name}`}>
+<Layout title={`${entry.data.title} | ${SITE_CONFIG.name}`}>
   <section class="page-header">
-    <div class="page-header__container"></div>
+    <div class="page-header__container">
+      <div class="page-header__breadcrumb">
+        <a href="/news/" class="page-header__back">News</a>
+        <span class="page-header__separator">/</span>
+        <span class="page-header__current">記事</span>
+      </div>
+      <div class="page-header__meta">
+        <time class="page-header__date">
+          {entry.data.date.toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, ".")}
+        </time>
+        {entry.data.type && <span class="page-header__type">{entry.data.type}</span>}
+      </div>
+      <h1 class="page-header__title">{entry.data.title}</h1>
+    </div>
   </section>
 
-  <p>{slug}</p>
-
-  <Content />
-
   <article class="news-detail">
-    <div class="news-detail__container"></div>
+    <div class="news-detail__container">
+      <Content />
+    </div>
   </article>
+
+  <div class="news-back">
+    <a href="/news/" class="news-back__link">← お知らせ一覧に戻る</a>
+  </div>
+
+  <Contact />
 </Layout>
 
 <style lang="scss">
   .page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 2rem 1.5rem;
-    text-align: center;
+    padding: 3rem 1.5rem 2rem;
 
     @media (min-width: 768px) {
-      padding: 3rem 2rem;
+      padding: 4rem 2rem 3rem;
     }
 
     &__container {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 0 auto;
+    }
 
-      h1 {
-        font-size: 1.8rem;
-        margin: 0 0 1rem 0;
+    &__breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--c-text-sub);
+    }
 
-        @media (min-width: 768px) {
-          font-size: 2.5rem;
-        }
+    &__back {
+      color: var(--c-text-sub);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--c-text);
       }
+    }
 
-      .meta {
-        font-size: 0.9rem;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        align-items: center;
-        flex-wrap: wrap;
+    &__separator {
+      color: var(--c-text-lightest, #ccc);
+    }
 
-        @media (min-width: 768px) {
-          font-size: 1rem;
-        }
+    &__current {
+      color: var(--c-text-light);
+    }
 
-        time {
-          opacity: 0.9;
-        }
+    &__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
 
-        .type {
-          background: rgba(255, 255, 255, 0.2);
-          padding: 0.25rem 0.6rem;
-          border-radius: 3px;
-          font-size: 0.8rem;
+    &__date {
+      font-size: 0.85rem;
+      color: var(--c-text-light);
+      font-weight: 500;
+    }
 
-          @media (min-width: 768px) {
-            padding: 0.3rem 0.8rem;
-            font-size: 0.9rem;
-          }
-        }
+    &__type {
+      font-size: 0.7rem;
+      color: var(--c-text-sub);
+      background: var(--c-bg-secondary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin: 0;
+      line-height: 1.4;
+
+      @media (min-width: 768px) {
+        font-size: 2rem;
       }
     }
   }
@@ -107,9 +139,10 @@ const { Content } = await render(entry);
         font-size: 1.3rem;
         margin: 1.5rem 0 0.8rem;
         color: var(--c-text);
+        font-weight: 600;
 
         @media (min-width: 768px) {
-          font-size: 1.8rem;
+          font-size: 1.5rem;
           margin: 2rem 0 1rem;
         }
       }
@@ -118,9 +151,10 @@ const { Content } = await render(entry);
         font-size: 1.1rem;
         margin: 1rem 0 0.6rem;
         color: var(--c-text);
+        font-weight: 600;
 
         @media (min-width: 768px) {
-          font-size: 1.3rem;
+          font-size: 1.2rem;
           margin: 1.5rem 0 0.8rem;
         }
       }
@@ -133,7 +167,7 @@ const { Content } = await render(entry);
 
         @media (min-width: 768px) {
           margin-bottom: 1.5rem;
-          font-size: 1rem;
+          font-size: 0.95rem;
         }
       }
 
@@ -141,18 +175,19 @@ const { Content } = await render(entry);
       :global(ol) {
         margin: 0 0 1rem 1.2rem;
         color: var(--c-text-sub);
+        list-style: disc;
 
         @media (min-width: 768px) {
           margin: 0 0 1.5rem 1.5rem;
         }
 
         :global(li) {
-          margin-bottom: 0.6rem;
+          margin-bottom: 0.5rem;
           line-height: 1.6;
           font-size: 0.9rem;
 
           @media (min-width: 768px) {
-            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
           }
         }
       }
@@ -161,13 +196,8 @@ const { Content } = await render(entry);
         background: var(--c-bg-secondary);
         padding: 0.2rem 0.5rem;
         border-radius: 3px;
-        color: #d63384;
         font-family: "Courier New", Courier, monospace;
         font-size: 0.85rem;
-
-        @media (min-width: 768px) {
-          font-size: 0.9rem;
-        }
       }
 
       :global(pre) {
@@ -190,26 +220,25 @@ const { Content } = await render(entry);
       }
 
       :global(blockquote) {
-        border-left: 4px solid var(--c-primary);
+        border-left: 3px solid var(--c-border);
         padding-left: 1rem;
         margin: 1rem 0;
         color: var(--c-text-sub);
-        font-style: italic;
         font-size: 0.9rem;
 
         @media (min-width: 768px) {
           padding-left: 1.5rem;
           margin: 1.5rem 0;
-          font-size: 1rem;
         }
       }
 
       :global(a) {
-        color: var(--c-primary);
-        text-decoration: none;
+        color: var(--c-text);
+        text-decoration: underline;
+        transition: opacity 0.2s ease;
 
         &:hover {
-          text-decoration: underline;
+          opacity: 0.7;
         }
       }
 
@@ -221,12 +250,12 @@ const { Content } = await render(entry);
 
         @media (min-width: 768px) {
           margin: 1.5rem 0;
-          font-size: 1rem;
+          font-size: 0.95rem;
         }
 
         :global(th),
         :global(td) {
-          border: 1px solid var(--c-border);
+          border: 1px solid var(--c-border-light);
           padding: 0.5rem;
           text-align: left;
 
@@ -237,8 +266,29 @@ const { Content } = await render(entry);
 
         :global(th) {
           background: var(--c-bg-secondary);
-          font-weight: bold;
+          font-weight: 600;
         }
+      }
+    }
+  }
+
+  .news-back {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+
+    @media (min-width: 768px) {
+      padding: 0 2rem 6rem;
+    }
+
+    &__link {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--c-text);
       }
     }
   }

@@ -3,305 +3,339 @@ import Layout from "../layouts/Layout.astro";
 import { SITE_CONFIG } from "../config/site";
 ---
 
-<Layout title={`联系我们 | ${SITE_CONFIG.company.name}`}>
-  <section class="contact-hero">
-    <div class="contact-hero__container">
-      <h1>Contact</h1>
-      <p>联系我们</p>
+<Layout title={`Contact | ${SITE_CONFIG.name}`}>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="page-header__container">
+      <h1 class="page-header__title">Contact</h1>
+      <p class="page-header__subtitle">お問い合わせ</p>
     </div>
   </section>
 
-  <section class="contact-content">
-    <div class="contact-content__container">
-      <div class="contact-info">
-        <h2>关于联系我们</h2>
-        <p>
-          对于任何困难、咨询、报价请求等，请随时联系我们。以下情况欢迎使用：
-        </p>
-        <ul class="contact-list">
-          <li>想委托设计和制作网站・应用</li>
-          <li>正在考虑重新设计现有服务</li>
-          <li>想咨询项目进行方式和费用</li>
-          <li>想咨询技术选择和架构</li>
-          <li>想建立长期的伙伴关系等</li>
-        </ul>
-      </div>
+  <!-- Contact Form Section -->
+  <section class="contact-form-section">
+    <div class="contact-form-section__container">
+      <p class="contact-form-section__intro">
+        サービスに関するご相談やお見積もりのご依頼、ご質問などお気軽にお問い合わせください。
+      </p>
 
-      <form class="contact-form">
+      <form class="contact-form" action="#" method="POST">
+        <!-- Inquiry Type -->
         <div class="form-group">
-          <label for="name">公司名・姓名 <span class="required">*</span></label>
-          <input type="text" id="name" name="name" required />
+          <label class="form-label">
+            お問い合わせの種類
+            <span class="form-required">必須</span>
+          </label>
+          <div class="form-radio-group">
+            <label class="form-radio">
+              <input type="radio" name="inquiry_type" value="project" required />
+              <span class="form-radio__label">案件のご依頼やご相談</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiry_type" value="estimate" />
+              <span class="form-radio__label">お見積もりのご依頼</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiry_type" value="partnership" />
+              <span class="form-radio__label">協業のご提案やお問い合わせ</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiry_type" value="other" />
+              <span class="form-radio__label">その他のお問い合わせ</span>
+            </label>
+          </div>
         </div>
 
+        <!-- Inquiry Content -->
         <div class="form-group">
-          <label for="email">电子邮件地址 <span class="required">*</span></label
-          >
-          <input type="email" id="email" name="email" required />
+          <label class="form-label" for="message">
+            お問い合わせ内容
+            <span class="form-required">必須</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="8"
+            required
+            placeholder="案件の詳細、ご予算やご希望の納期など具体的にご記入いただきますと、よりスムーズなご提案が可能です。"
+          ></textarea>
         </div>
 
+        <!-- Name -->
         <div class="form-group">
-          <label for="phone">电话号码</label>
-          <input type="tel" id="phone" name="phone" />
+          <label class="form-label" for="name">
+            お名前
+            <span class="form-required">必須</span>
+          </label>
+          <input type="text" id="name" name="name" required placeholder="山田 太郎" />
         </div>
 
+        <!-- Furigana -->
         <div class="form-group">
-          <label for="subject">主题 <span class="required">*</span></label>
-          <input type="text" id="subject" name="subject" required />
+          <label class="form-label" for="furigana">
+            フリガナ
+            <span class="form-required">必須</span>
+          </label>
+          <input type="text" id="furigana" name="furigana" required placeholder="ヤマダ タロウ" />
         </div>
 
+        <!-- Company -->
         <div class="form-group">
-          <label for="message">消息 <span class="required">*</span></label>
-          <textarea id="message" name="message" rows="6" required></textarea>
+          <label class="form-label" for="company">
+            会社名
+            <span class="form-required">必須</span>
+          </label>
+          <input type="text" id="company" name="company" required placeholder="株式会社サンプル" />
         </div>
 
-        <button type="submit" class="form-submit">发送</button>
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="email">
+            メールアドレス
+            <span class="form-required">必須</span>
+          </label>
+          <input type="email" id="email" name="email" required placeholder="example@company.com" />
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label class="form-label" for="phone">
+            電話番号
+            <span class="form-optional">任意</span>
+          </label>
+          <input type="tel" id="phone" name="phone" placeholder="03-1234-5678" />
+        </div>
+
+        <!-- Privacy Policy -->
+        <div class="form-group form-group--checkbox">
+          <label class="form-checkbox">
+            <input type="checkbox" name="privacy" required />
+            <span class="form-checkbox__label">
+              <a href="/privacy/" target="_blank">個人情報保護方針</a>に同意する
+            </span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group form-group--submit">
+          <button type="submit" class="form-submit">送信する</button>
+        </div>
       </form>
-
-      <div class="contact-details">
-        <h2>公司信息</h2>
-        <div class="company-info">
-          <div class="company-info__item">
-            <h3>公司名称</h3>
-            <p>{SITE_CONFIG.company.name}</p>
-          </div>
-          <div class="company-info__item">
-            <h3>所在地</h3>
-            <p set:html={SITE_CONFIG.company.address.replace(/\n/g, '<br />')} />
-          </div>
-          <div class="company-info__item">
-            <h3>电话</h3>
-            <p><a href={`tel:${SITE_CONFIG.company.phone}`}>{SITE_CONFIG.company.phoneDisplay}</a></p>
-          </div>
-          <div class="company-info__item">
-            <h3>邮件</h3>
-            <p><a href={`mailto:${SITE_CONFIG.company.email}`}>{SITE_CONFIG.company.emailDisplay}</a></p>
-          </div>
-          <div class="company-info__item">
-            <h3>营业时间</h3>
-            <p>{SITE_CONFIG.company.businessHoursFull}</p>
-          </div>
-        </div>
-      </div>
-          <div class="company-info__item">
-            <h3>所在地</h3>
-            <p>123</p>
-          </div>
-          <div class="company-info__item">
-            <h3>电话</h3>
-            <p><a href="tel:+81-3-xxxx-xxxx">+81-3-XXXX-XXXX</a></p>
-          </div>
-          <div class="company-info__item">
-            <h3>邮件</h3>
-            <p><a href="mailto:info@CName.jp">info@CName.jp</a></p>
-          </div>
-          <div class="company-info__item">
-            <h3>营业时间</h3>
-            <p>周一至周五 9:00 - 18:00 (周末和假日休息)</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 </Layout>
 
 <style lang="scss">
-  .contact-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 3rem 1.5rem;
-    text-align: center;
+  /* Page Header */
+  .page-header {
+    padding: 3rem 1.5rem 2rem;
 
     @media (min-width: 768px) {
-      padding: 4rem 2rem;
+      padding: 4rem 2rem 3rem;
     }
 
     &__container {
       max-width: 1200px;
       margin: 0 auto;
+    }
 
-      h1 {
-        font-size: 2rem;
-        margin: 0 0 0.5rem 0;
+    &__title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin: 0 0 0.25rem 0;
 
-        @media (min-width: 768px) {
-          font-size: 3rem;
-        }
+      @media (min-width: 768px) {
+        font-size: 3.5rem;
       }
+    }
 
-      p {
-        font-size: 1rem;
-        margin: 0;
-        opacity: 0.95;
-
-        @media (min-width: 768px) {
-          font-size: 1.2rem;
-        }
-      }
+    &__subtitle {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+      margin: 0;
     }
   }
 
-  .contact-content {
-    padding: 2.5rem 1.5rem;
-    max-width: 1000px;
-    margin: 0 auto;
+  /* Contact Form Section */
+  .contact-form-section {
+    padding: 3rem 1.5rem 4rem;
+    background: var(--c-bg-secondary);
 
     @media (min-width: 768px) {
-      padding: 4rem 2rem;
+      padding: 4rem 2rem 6rem;
     }
 
     &__container {
-      display: grid;
-      gap: 2rem;
-
-      @media (min-width: 768px) {
-        gap: 3rem;
-      }
-    }
-  }
-
-  .contact-info {
-    h2 {
-      font-size: 1.3rem;
-      margin: 0 0 0.8rem 0;
-      color: var(--c-text);
-
-      @media (min-width: 768px) {
-        font-size: 1.8rem;
-        margin: 0 0 1rem 0;
-      }
+      max-width: 700px;
+      margin: 0 auto;
     }
 
-    > p {
-      color: var(--c-text-sub);
-      line-height: 1.8;
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
-
-      @media (min-width: 768px) {
-        margin-bottom: 1.5rem;
-        font-size: 1rem;
-      }
-    }
-  }
-
-  .contact-list {
-    list-style: none;
-    padding: 1.5rem;
-    margin: 0;
-    background: var(--c-bg-secondary);
-    border-radius: 8px;
-
-    @media (min-width: 768px) {
-      padding: 2rem;
-    }
-
-    li {
-      color: var(--c-text-sub);
-      margin-bottom: 0.6rem;
-      line-height: 1.6;
+    &__intro {
       font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--c-text-sub);
+      margin: 0 0 2.5rem 0;
 
       @media (min-width: 768px) {
-        margin-bottom: 0.8rem;
-        font-size: 1rem;
-      }
-
-      &:before {
-        content: "・";
-        color: var(--c-primary);
-        font-weight: bold;
-        margin-right: 0.5rem;
-      }
-
-      &:last-child {
-        margin-bottom: 0;
+        font-size: 0.95rem;
+        margin: 0 0 3rem 0;
       }
     }
   }
 
   .contact-form {
-    background: var(--c-bg-secondary);
-    padding: 1.5rem;
-    border-radius: 8px;
-
-    @media (min-width: 768px) {
-      padding: 2rem;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   .form-group {
-    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-    @media (min-width: 768px) {
-      margin-bottom: 1.5rem;
+  .form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--c-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .form-required {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--c-text-inverse);
+    background: var(--c-primary);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .form-optional {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--c-text-sub);
+    background: var(--c-border);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .form-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .form-radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--c-primary);
+      cursor: pointer;
     }
 
-    &:last-child {
-      margin-bottom: 1.5rem;
-
-      @media (min-width: 768px) {
-        margin-bottom: 2rem;
-      }
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: 600;
+    &__label {
+      font-size: 0.9rem;
       color: var(--c-text);
-      font-size: 0.9rem;
-
-      @media (min-width: 768px) {
-        margin-bottom: 0.5rem;
-        font-size: 0.95rem;
-      }
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 0.6rem;
-      border: 1px solid var(--c-border);
-      border-radius: 4px;
-      font-size: 0.9rem;
-      font-family: inherit;
-      transition: border-color 0.3s;
-
-      @media (min-width: 768px) {
-        padding: 0.75rem;
-        font-size: 0.95rem;
-      }
-
-      &:focus {
-        outline: none;
-        border-color: var(--c-primary);
-      }
-    }
-
-    textarea {
-      resize: vertical;
     }
   }
 
-  .required {
-    color: #e74c3c;
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--c-text);
+    background: var(--c-bg);
+    transition: border-color var(--transition-base);
+
+    &::placeholder {
+      color: var(--c-text-light);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--c-primary);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 160px;
+  }
+
+  .form-group--checkbox {
+    margin-top: 0.5rem;
+  }
+
+  .form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--c-primary);
+      cursor: pointer;
+    }
+
+    &__label {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+
+      a {
+        color: var(--c-text);
+        text-decoration: underline;
+        transition: color var(--transition-base);
+
+        &:hover {
+          color: var(--c-primary);
+        }
+      }
+    }
+  }
+
+  .form-group--submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
   }
 
   .form-submit {
-    width: 100%;
+    display: inline-block;
+    min-width: 240px;
+    padding: 1rem 2rem;
     background: var(--c-primary);
-    color: white;
-    padding: 0.8rem;
+    color: var(--c-text-inverse);
     border: none;
     border-radius: 4px;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 500;
+    font-family: inherit;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background var(--transition-base);
+    text-align: center;
 
     @media (min-width: 768px) {
-      padding: 1rem;
-      font-size: 1rem;
+      min-width: 280px;
     }
 
     &:hover {
@@ -310,74 +344,6 @@ import { SITE_CONFIG } from "../config/site";
 
     &:active {
       transform: scale(0.98);
-    }
-  }
-
-  .contact-details {
-    h2 {
-      font-size: 1.3rem;
-      margin: 0 0 1.5rem 0;
-      color: var(--c-text);
-
-      @media (min-width: 768px) {
-        font-size: 1.8rem;
-        margin: 0 0 2rem 0;
-      }
-    }
-  }
-
-  .company-info {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-
-    @media (min-width: 640px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (min-width: 1024px) {
-      gap: 2rem;
-    }
-
-    &__item {
-      background: var(--c-bg-secondary);
-      padding: 1.2rem;
-      border-radius: 8px;
-
-      @media (min-width: 768px) {
-        padding: 1.5rem;
-      }
-
-      h3 {
-        margin: 0 0 0.5rem 0;
-        color: var(--c-text);
-        font-size: 0.95rem;
-
-        @media (min-width: 768px) {
-          font-size: 1rem;
-        }
-      }
-
-      p {
-        margin: 0;
-        color: var(--c-text-sub);
-        line-height: 1.6;
-        font-size: 0.9rem;
-
-        @media (min-width: 768px) {
-          font-size: 1rem;
-        }
-
-        a {
-          color: var(--c-primary);
-          text-decoration: none;
-          transition: color 0.3s;
-
-          &:hover {
-            color: var(--c-primary-light);
-          }
-        }
-      }
     }
   }
 </style>

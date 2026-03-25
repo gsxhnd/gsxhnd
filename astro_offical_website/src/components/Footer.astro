@@ -10,8 +10,7 @@ import { SITE_CONFIG } from '../config/site';
       <div class="footer-info">
         <Logo class="footer-logo" />
         <p class="footer-business-hours">
-          营业时间: {SITE_CONFIG.company.businessHours}
-          <span class="business-hours-note">{SITE_CONFIG.company.businessHoursNote}</span>
+          {SITE_CONFIG.company.businessHoursFull}
         </p>
         <ul class="footer-social">
           <li class="social-item">
@@ -60,7 +59,7 @@ import { SITE_CONFIG } from '../config/site';
 
       <nav class="footer-nav">
         <div class="nav-group">
-          <h3 class="nav-group-title">服务</h3>
+          <h3 class="nav-group-title">サービス</h3>
           <ul class="nav-group-list">
             {SITE_CONFIG.footerNavigation.services.map((item) => (
               <li class="nav-group-item">
@@ -70,7 +69,7 @@ import { SITE_CONFIG } from '../config/site';
           </ul>
         </div>
         <div class="nav-group">
-          <h3 class="nav-group-title">资源</h3>
+          <h3 class="nav-group-title">リソース</h3>
           <ul class="nav-group-list">
             {SITE_CONFIG.footerNavigation.resources.map((item) => (
               <li class="nav-group-item">
@@ -80,19 +79,9 @@ import { SITE_CONFIG } from '../config/site';
           </ul>
         </div>
         <div class="nav-group">
-          <h3 class="nav-group-title">公司</h3>
+          <h3 class="nav-group-title">会社情報</h3>
           <ul class="nav-group-list">
             {SITE_CONFIG.footerNavigation.company.map((item) => (
-              <li class="nav-group-item">
-                <a href={item.href} class="nav-group-link">{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="nav-group">
-          <h3 class="nav-group-title">法律</h3>
-          <ul class="nav-group-list">
-            {SITE_CONFIG.footerNavigation.legal.map((item) => (
               <li class="nav-group-item">
                 <a href={item.href} class="nav-group-link">{item.label}</a>
               </li>
@@ -104,7 +93,7 @@ import { SITE_CONFIG } from '../config/site';
 
       <div class="footer-copyright">
         <p class="copyright-text">
-          &copy; {new Date().getFullYear()} <a href="/">{SITE_CONFIG.company.name}</a> All rights reserved.
+          &copy; {new Date().getFullYear()} {SITE_CONFIG.company.name} Designed &amp; Developed by yohaku.
         </p>
       </div>
   </Container>
@@ -147,11 +136,6 @@ import { SITE_CONFIG } from '../config/site';
 
   .footer-business-hours {
     color: var(--c-text-inverse-lightest);
-    font-size: var(--fs-sm);
-  }
-
-  .business-hours-note {
-    color: var(--c-text-inverse-sub);
     font-size: var(--fs-sm);
   }
 
@@ -222,15 +206,5 @@ import { SITE_CONFIG } from '../config/site';
     color: var(--c-text-inverse-sub);
     font-size: var(--fs-sm);
     text-align: center;
-  }
-
-  .copyright-text a {
-    color: var(--c-text-inverse);
-    text-decoration: none;
-    transition: opacity var(--transition-base);
-  }
-
-  .copyright-text a:hover {
-    opacity: 0.7;
   }
 </style>

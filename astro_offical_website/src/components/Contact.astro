@@ -1,104 +1,107 @@
 ---
-
+import Button from './Button.astro';
 ---
 
 <!-- Contact Section -->
-<section class="contact bg-gray-700" id="contact">
+<section class="contact" id="contact">
   <div class="contact__container">
-    <h2 class="section-title">联系我们</h2>
-
-    <!-- <p class="contact__subtitle">联系我们</p> -->
+    <div class="contact__header">
+      <h2 class="contact__title">Contact</h2>
+      <p class="contact__subtitle">お問い合わせ</p>
+    </div>
     <p class="contact__description">
-      如有任何疑问、咨询或报价需求，请随时与我们联系。
+      お困りごとやご相談、お見積もりのご依頼など、まずはお気軽にお問い合わせください。
     </p>
-    <ul class="contact__list grid">
-      <li>・想委托进行网站和应用程序设计制作</li>
-      <li>・正在考虑现有服务的重新设计</li>
-      <li>・想咨询项目进行方式和费用感受</li>
-      <li>・想咨询技术选型和架构</li>
-      <li>・想建立长期合作关系等</li>
+    <ul class="contact__list">
+      <li>Webサイト・アプリケーションのデザイン制作を依頼したい</li>
+      <li>既存サービスのリニューアルを検討している</li>
+      <li>プロジェクトの進め方や費用感を相談したい</li>
+      <li>技術選定やアーキテクチャについて相談したい</li>
+      <li>長期的なパートナーシップを構築したいなど</li>
     </ul>
-    <a href="/contact/" class="contact__cta">联系我们</a>
+    <Button href="/contact/" variant="solid-sub" size="medium">
+      お問い合わせ
+    </Button>
   </div>
 </section>
 
 <style lang="scss">
-  .box {
-    width: 100px;
-    height: 100px;
-    background-color: #9911ff;
-    border-radius: 10px;
-  }
   .contact {
-    display: flex;
-    &__container {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    padding: 4rem 1.5rem;
+    background: var(--c-bg-inverse);
+    color: var(--c-text-inverse);
 
     @media (min-width: 768px) {
       padding: 5rem 2rem;
     }
 
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    &__header {
+      margin-bottom: 2rem;
+
+      @media (min-width: 768px) {
+        margin-bottom: 2.5rem;
+      }
+    }
+
+    &__title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem 0;
+
+      @media (min-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+
     &__subtitle {
-      text-align: center;
-      color: var(--c-text-sub);
-      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--c-text-inverse-sub);
+      margin: 0;
     }
 
     &__description {
-      text-align: center;
-      color: var(--c-text-sub);
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.6;
-      font-size: 0.95rem;
+      color: var(--c-text-inverse-lightest);
+      max-width: 700px;
+      line-height: 1.8;
+      font-size: 0.9rem;
+      margin: 0 0 1.5rem;
 
       @media (min-width: 768px) {
-        margin: 0 auto 2rem;
+        font-size: 0.95rem;
+        margin: 0 0 2rem;
       }
     }
 
     &__list {
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+      max-width: 700px;
+      margin: 0 0 2rem;
       padding: 0;
       list-style: none;
-      color: var(--c-text-sub);
-      font-size: 0.9rem;
+      color: var(--c-text-inverse-sub);
+      font-size: 0.85rem;
 
       @media (min-width: 768px) {
-        margin: 0 auto 2rem;
-        font-size: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        margin: 0 0 2.5rem;
+        font-size: 0.9rem;
       }
 
       li {
-        margin-bottom: 0.5rem;
         line-height: 1.6;
-      }
-    }
 
-    &__cta {
-      display: block;
-      width: fit-content;
-      margin: 1.5rem auto 0;
-      background: var(--c-primary);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s;
-      font-size: 0.9rem;
-
-      @media (min-width: 768px) {
-        margin: 2rem auto 0;
-        padding: 1rem 2.5rem;
-      }
-
-      &:hover {
-        background: var(--c-primary-light);
+        &::before {
+          content: "・";
+          margin-right: 0.25rem;
+        }
       }
     }
   }

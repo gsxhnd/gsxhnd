@@ -1,94 +1,196 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
 import { SITE_CONFIG } from "../config/site";
+
+const teamMembers = [
+  { name: "井上 優介", role: "Creative Director", image: "" },
+  { name: "高橋 亜紀", role: "Lead Designer", image: "" },
+  { name: "松田 真希", role: "Frontend Developer", image: "" },
+  { name: "久保 悠斗", role: "UI/UX Designer", image: "" },
+  { name: "岡田 真輝", role: "Backend Developer", image: "" },
+  { name: "Bob", role: "Chief of Security", image: "" },
+];
 ---
 
-<Layout title={`关于我们 | ${SITE_CONFIG.company.name}`}>
-  <section class="about-hero">
-    <div class="about-hero__container">
-      <h1>About</h1>
-      <p>关于我们</p>
+<Layout title={`About Us | ${SITE_CONFIG.name}`}>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="page-header__container">
+      <h1 class="page-header__title">About Us</h1>
+      <p class="page-header__subtitle">私たちについて</p>
     </div>
   </section>
 
-  <section class="about-content">
-    <div class="about-content__container">
-      <div class="about-section">
-        <h2>公司理念</h2>
-        <p>
-          我们通过设计和技术的力量，挖掘品牌本质，创造新的价值。通过战略性思维和精密的工艺制作，我们设计能打动用户心灵的体验，并提供加速业务增长的数字解决方案。
-        </p>
-      </div>
-
-      <div class="about-section">
-        <h2>公司风格</h2>
-        <p>
-          我们认真对待每一个项目，与客户共同描绘未来。这就是我们的风格。我们不仅仅是外包供应商，而是作为推动客户业务增长的合作伙伴，重视建立长期关系。
-        </p>
-      </div>
-
-      <div class="about-section">
-        <h2>团队</h2>
-        <p>
-          我们的团队由设计师、前端工程师、后端工程师、项目经理等各个专业领域的成员组成。在各自具有高度专业性的同时，我们致力于以团队整体的力量提供最优的解决方案。
-        </p>
-      </div>
-
-      <div class="about-section">
-        <h2>成就</h2>
-        <ul class="about-stats">
-          <li>
-            <span class="about-stats__number">50+</span>
-            <span class="about-stats__label">项目完成</span>
-          </li>
-          <li>
-            <span class="about-stats__number">30+</span>
-            <span class="about-stats__label">客户企业</span>
-          </li>
-          <li>
-            <span class="about-stats__number">5+</span>
-            <span class="about-stats__label">年以上的成就</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="about-section">
-        <h2>价值观</h2>
-        <ul class="about-values">
-          <li>
-            <h3>品质</h3>
-            <p>无论什么项目，我们都追求最高水准的品质。</p>
-          </li>
-          <li>
-            <h3>创意</h3>
-            <p>不被既成概念束缚，创意新的价值。</p>
-          </li>
-          <li>
-            <h3>协作</h3>
-            <p>与客户一起成长，建立长期的伙伴关系。</p>
-          </li>
-          <li>
-            <h3>透明度</h3>
-            <p>通过流程和沟通建立信任关系。</p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="about-cta">
-        <h2>让我们一起创意未来吧？</h2>
-        <p>如果您感兴趣，请随时联系我们。</p>
-        <a href="/contact/" class="about-cta__button">联系我们</a>
+  <!-- Strengths Section -->
+  <section class="strengths">
+    <div class="strengths__container">
+      <div class="strengths__item">
+        <div class="strengths__text">
+          <h2 class="strengths__heading">私たちの強み</h2>
+          <p class="strengths__description">
+            デザインとテクノロジーの融合により、ユーザー体験を最大化するデジタルプロダクトを創出します。戦略立案から設計、開発、運用まで、一貫したサポートを提供し、お客様のビジネス成長に貢献します。
+          </p>
+        </div>
+        <div class="strengths__image">
+          <div class="strengths__image-placeholder"></div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Technology Section -->
+  <section class="technology">
+    <div class="technology__container">
+      <div class="technology__image">
+        <div class="technology__image-placeholder"></div>
+      </div>
+      <div class="technology__text">
+        <h2 class="technology__heading">技術へのこだわり</h2>
+        <p class="technology__description">
+          最新のWeb技術とベストプラクティスを活用し、パフォーマンス、アクセシビリティ、SEOに優れたプロダクトを開発します。常に学び続け、技術の進歩に柔軟に対応できるチーム体制を構築しています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values">
+    <div class="values__container">
+      <div class="values__header">
+        <h2 class="values__title">Our Values</h2>
+        <p class="values__subtitle">私たちが選ばれる理由</p>
+      </div>
+      <div class="values__list">
+        <div class="values__item">
+          <h3 class="values__item-title">ユーザー中心の体験設計</h3>
+          <p class="values__item-description">
+            私たちはすべてのプロジェクトにおいて、ユーザーの視点を最も重要視しています。単に美しいデザインを作るだけでなく、実際に使いやすく、直感的な操作を実現するために、綿密なリサーチとテストを行います。すべてのプロジェクトの出発点は、ビジネスの成功を、本質的なリサーチから始めます。
+          </p>
+        </div>
+        <div class="values__item">
+          <h3 class="values__item-title">戦略とデザインの統合</h3>
+          <p class="values__item-description">
+            美しいだけのデザインでは終わりません。ビジネスゴールから逆算し、データを基に最適なUI/UXを設計します。チーム全体がブランディングからUIまで一貫して担当し、戦略設計からデザイン実装までの一つの流れとして捉え、統合的にプロジェクトを推進します。
+          </p>
+        </div>
+        <div class="values__item">
+          <h3 class="values__item-title">最新技術と品質へのこだわり</h3>
+          <p class="values__item-description">
+            最新のフレームワークやツールを積極的に導入し、プロジェクトに最適な技術を選定します。パフォーマンス、セキュリティ、保守性を重視した開発を行い、長期的に安定して運用できるプロダクトをお届けします。
+          </p>
+        </div>
+        <div class="values__item">
+          <h3 class="values__item-title">スピードと柔軟性</h3>
+          <p class="values__item-description">
+            アジャイルな開発プロセスにより、変化の激しい市場環境でも品質を両立します。フィードバックを迅速に取り入れ反映する迅速な対応と、最終的なクオリティの高さを両立させるプロフェッショナルな体制です。
+          </p>
+        </div>
+        <div class="values__item">
+          <h3 class="values__item-title">共創するパートナーシップ</h3>
+          <p class="values__item-description">
+            クライアントの単なるリソースではなく、共に未来を創るパートナーとして、プロジェクトに取り組みます。長期的な関係構築を大切にし、ビジネスの成長に寄り添ったソリューションを提供し続けます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CEO Message Section -->
+  <section class="ceo-message">
+    <div class="ceo-message__container">
+      <div class="ceo-message__header">
+        <h2 class="ceo-message__title">Message from CEO</h2>
+        <p class="ceo-message__subtitle">代表メッセージ</p>
+      </div>
+      <div class="ceo-message__content">
+        <div class="ceo-message__photo">
+          <div class="ceo-message__photo-placeholder"></div>
+        </div>
+        <div class="ceo-message__text">
+          <h3 class="ceo-message__heading">未来の当たり前を、静かに大胆に。</h3>
+          <p>
+            私たちの仕事は、企業とユーザーの間にある"体験の壁"を取り除くこと。もっと直感的で、もっと美しいデジタル体験を。
+          </p>
+          <p>
+            テクノロジーが急速に進化する中で、時代に振り回されることなく、一人ひとりの体感に寄り添った"丁寧な挑戦"をつづけていきたいと考えています。
+          </p>
+          <p>
+            クライアントと共に課題と向き合い、小さな実験を積み重ねることで確かな価値を生み出す。それこそがパートナーシップだと、私たちは考えます。
+          </p>
+          <p>
+            そんな想いを胸に、これからも価値ある未来づくりに取り組んでいきます。
+          </p>
+          <div class="ceo-message__signature">
+            <span class="ceo-message__role">{SITE_CONFIG.company.ceoTitle} {SITE_CONFIG.company.ceo}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team__container">
+      <div class="team__header">
+        <h2 class="team__title">Meet Our Team</h2>
+        <p class="team__subtitle">チームメンバー</p>
+      </div>
+      <p class="team__description">
+        私たちは東京、大阪、福岡の3拠点を軸に、デザインとテクノロジーの力で、クライアントのビジネス成長を支援しています。各メンバーがそれぞれの専門性を持ち、複雑なデジタル体験を創出することに情熱を注いでいます。お客様のビジョンを実現するために、常に学び、挑戦し続けるチームです。
+      </p>
+      <div class="team__grid">
+        {teamMembers.map((member) => (
+          <div class="team__member">
+            <div class="team__member-photo">
+              <div class="team__member-photo-placeholder"></div>
+            </div>
+            <p class="team__member-name">{member.name}</p>
+            <p class="team__member-role">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Contact />
 </Layout>
 
 <style lang="scss">
-  .about-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+  /* Page Header */
+  .page-header {
+    padding: 3rem 1.5rem 2rem;
+
+    @media (min-width: 768px) {
+      padding: 4rem 2rem 3rem;
+    }
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    &__title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin: 0 0 0.25rem 0;
+
+      @media (min-width: 768px) {
+        font-size: 3.5rem;
+      }
+    }
+
+    &__subtitle {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+      margin: 0;
+    }
+  }
+
+  /* Strengths Section */
+  .strengths {
     padding: 3rem 1.5rem;
-    text-align: center;
 
     @media (min-width: 768px) {
       padding: 4rem 2rem;
@@ -97,220 +199,396 @@ import { SITE_CONFIG } from "../config/site";
     &__container {
       max-width: 1200px;
       margin: 0 auto;
+    }
 
-      h1 {
-        font-size: 2rem;
-        margin: 0 0 0.5rem 0;
+    &__item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
 
-        @media (min-width: 768px) {
-          font-size: 3rem;
-        }
+      @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
       }
+    }
 
-      p {
-        font-size: 1rem;
-        margin: 0;
-        opacity: 0.95;
+    &__heading {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin: 0 0 1rem 0;
 
-        @media (min-width: 768px) {
-          font-size: 1.2rem;
-        }
+      @media (min-width: 768px) {
+        font-size: 1.8rem;
       }
+    }
+
+    &__description {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--c-text-sub);
+      margin: 0;
+
+      @media (min-width: 768px) {
+        font-size: 0.95rem;
+      }
+    }
+
+    &__image {
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    &__image-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--c-bg-secondary);
     }
   }
 
-  .about-content {
-    padding: 2.5rem 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
+  /* Technology Section */
+  .technology {
+    padding: 3rem 1.5rem;
+    background: var(--c-bg-secondary);
 
     @media (min-width: 768px) {
       padding: 4rem 2rem;
     }
 
     &__container {
+      max-width: 1200px;
+      margin: 0 auto;
       display: grid;
+      grid-template-columns: 1fr;
       gap: 2rem;
 
       @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
         gap: 3rem;
+        align-items: center;
       }
     }
-  }
 
-  .about-section {
-    h2 {
-      font-size: 1.3rem;
-      margin: 0 0 0.8rem 0;
+    &__image {
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    &__image-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e8e4de 0%, #d4cfc7 100%);
+    }
+
+    &__heading {
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--c-text);
+      margin: 0 0 1rem 0;
 
       @media (min-width: 768px) {
         font-size: 1.8rem;
-        margin: 0 0 1rem 0;
       }
     }
 
-    p {
-      margin: 0;
-      color: var(--c-text-sub);
+    &__description {
+      font-size: 0.9rem;
       line-height: 1.8;
-      font-size: 0.95rem;
+      color: var(--c-text-sub);
+      margin: 0;
 
       @media (min-width: 768px) {
-        font-size: 1rem;
+        font-size: 0.95rem;
       }
     }
   }
 
-  .about-stats {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  /* Values Section */
+  .values {
+    padding: 4rem 1.5rem;
 
-    @media (min-width: 640px) {
-      grid-template-columns: repeat(2, 1fr);
+    @media (min-width: 768px) {
+      padding: 6rem 2rem;
     }
 
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    &__header {
+      margin-bottom: 3rem;
+
+      @media (min-width: 768px) {
+        margin-bottom: 4rem;
+      }
+    }
+
+    &__title {
+      font-size: 2rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--c-text);
+      margin: 0 0 0.25rem 0;
+
+      @media (min-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+
+    &__subtitle {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+      margin: 0;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+
+      @media (min-width: 768px) {
+        gap: 3rem;
+        padding-left: 2rem;
+        border-left: 1px solid var(--c-border);
+      }
+    }
+
+    &__item {
+      max-width: 700px;
+    }
+
+    &__item-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--c-text);
+      margin: 0 0 0.75rem 0;
+
+      @media (min-width: 768px) {
+        font-size: 1.2rem;
+      }
+    }
+
+    &__item-description {
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: var(--c-text-sub);
+      margin: 0;
+
+      @media (min-width: 768px) {
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  /* CEO Message Section */
+  .ceo-message {
+    padding: 4rem 1.5rem;
+    background: var(--c-bg-secondary);
+
+    @media (min-width: 768px) {
+      padding: 6rem 2rem;
+    }
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    &__header {
+      margin-bottom: 2.5rem;
+
+      @media (min-width: 768px) {
+        margin-bottom: 3rem;
+      }
+    }
+
+    &__title {
+      font-size: 2rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--c-text);
+      margin: 0 0 0.25rem 0;
+
+      @media (min-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+
+    &__subtitle {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+      margin: 0;
+    }
+
+    &__content {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 2rem;
-    }
-
-    li {
-      text-align: center;
-      padding: 1.5rem;
-      background: var(--c-bg-secondary);
-      border-radius: 8px;
 
       @media (min-width: 768px) {
-        padding: 2rem;
+        grid-template-columns: 200px 1fr;
+        gap: 3rem;
       }
     }
-  }
 
-  .about-stats__number {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--c-primary);
-    margin-bottom: 0.5rem;
-
-    @media (min-width: 768px) {
-      font-size: 2.5rem;
-    }
-  }
-
-  .about-stats__label {
-    display: block;
-    color: var(--c-text-sub);
-    font-size: 0.85rem;
-
-    @media (min-width: 768px) {
-      font-size: 0.95rem;
-    }
-  }
-
-  .about-values {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    li {
-      padding: 1.2rem;
-      background: var(--c-bg-secondary);
-      border-radius: 8px;
-      border-left: 4px solid var(--c-primary);
+    &__photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
 
       @media (min-width: 768px) {
-        padding: 1.5rem;
+        width: 200px;
+        height: 200px;
       }
+    }
 
-      h3 {
-        margin: 0 0 0.5rem 0;
-        color: var(--c-text);
-        font-size: 1rem;
+    &__photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--c-border);
+    }
 
-        @media (min-width: 768px) {
-          font-size: 1.1rem;
-        }
+    &__heading {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--c-text);
+      margin: 0 0 1.5rem 0;
+
+      @media (min-width: 768px) {
+        font-size: 1.3rem;
       }
+    }
 
+    &__text {
       p {
-        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.8;
         color: var(--c-text-sub);
-        font-size: 0.9rem;
+        margin: 0 0 1rem 0;
 
         @media (min-width: 768px) {
           font-size: 0.95rem;
         }
       }
     }
+
+    &__signature {
+      margin-top: 1.5rem;
+    }
+
+    &__role {
+      font-size: 0.85rem;
+      color: var(--c-text);
+      font-weight: 500;
+    }
   }
 
-  .about-cta {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 2rem 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-    margin-top: 2rem;
+  /* Team Section */
+  .team {
+    padding: 4rem 1.5rem;
 
     @media (min-width: 768px) {
-      padding: 3rem;
-      margin-top: 3rem;
+      padding: 6rem 2rem;
     }
 
-    h2 {
-      color: white;
-      margin: 0 0 0.8rem 0;
-      font-size: 1.3rem;
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    &__header {
+      margin-bottom: 1.5rem;
 
       @media (min-width: 768px) {
-        font-size: 1.8rem;
+        margin-bottom: 2rem;
       }
     }
 
-    p {
-      color: rgba(255, 255, 255, 0.95);
-      margin: 0 0 1.5rem 0;
-      font-size: 0.95rem;
+    &__title {
+      font-size: 2rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--c-text);
+      margin: 0 0 0.25rem 0;
 
       @media (min-width: 768px) {
-        margin: 0 0 2rem 0;
-        font-size: 1rem;
+        font-size: 2.5rem;
       }
     }
 
-    &__button {
-      display: inline-block;
-      background: white;
-      color: #667eea;
-      padding: 0.7rem 1.5rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.3s;
+    &__subtitle {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+      margin: 0;
+    }
+
+    &__description {
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: var(--c-text-sub);
+      max-width: 800px;
+      margin: 0 0 3rem 0;
+
+      @media (min-width: 768px) {
+        font-size: 0.95rem;
+      }
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+
+      @media (min-width: 640px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+      }
+    }
+
+    &__member {
+      text-align: center;
+    }
+
+    &__member-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1rem;
+
+      @media (min-width: 768px) {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    &__member-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--c-bg-secondary);
+    }
+
+    &__member-name {
       font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--c-text);
+      margin: 0 0 0.25rem 0;
+    }
 
-      @media (min-width: 768px) {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
-      }
-
-      &:hover {
-        transform: translateY(-2px);
-      }
+    &__member-role {
+      font-size: 0.8rem;
+      color: var(--c-text-sub);
+      margin: 0;
     }
   }
 </style>

@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Contact from "../../components/Contact.astro";
 import { getCollection } from "astro:content";
 import type { PaginateFunction } from "astro";
 import { SITE_CONFIG } from "../../config/site";
@@ -13,236 +14,358 @@ export async function getStaticPaths({
     return import.meta.env.PROD ? data.draft !== true : true;
   });
 
-  return paginate(allNews, { pageSize: SITE_CONFIG.pagination.newsPageSize });
+  const sortedNews = allNews.sort((a, b) =>
+    b.data.date.valueOf() - a.data.date.valueOf()
+  );
+
+  return paginate(sortedNews, { pageSize: SITE_CONFIG.pagination.newsPageSize });
 }
 
 const { page } = Astro.props;
-// console.log(Astro.props);
-console.log(page);
+
+const categories = ["ALL", "お知らせ", "プレスリリース", "イベント"];
+
+// Build page URLs for pagination
+const totalPages = page.lastPage;
+const currentPage = page.currentPage;
+const getPageUrl = (pageNum: number) => {
+  if (pageNum === 1) return "/news/";
+  return `/news/${pageNum}/`;
+};
 ---
 
-<Layout title={`新闻动态 | ${SITE_CONFIG.company.name}`}>
+<Layout title={`お知らせ | ${SITE_CONFIG.name}`}>
   <section class="page-header">
-    <div class="page-header__container"></div>
+    <div class="page-header__container">
+      <h1 class="page-header__title">News</h1>
+      <p class="page-header__subtitle">お知らせ</p>
+    </div>
   </section>
 
-  <article class="news-detail">
-    <div class="news-detail__container">
-      {page.currentPage}
+  <section class="news-list">
+    <div class="news-list__container">
+      <!-- Category Filter -->
+      <div class="news-filter">
+        {categories.map((cat) => (
+          <button
+            class={`news-filter__btn ${cat === "ALL" ? "news-filter__btn--active" : ""}`}
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
 
-      <ul>
-        {
-          page.data.map(({ data, slug }) => (
-            <li>
-              <a href={slug}>{data.title}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <!-- News Items -->
+      {page.data.length > 0 ? (
+        <div class="news-list__items">
+          {page.data.map((entry) => (
+            <a href={`/news/${entry.id}`} class="news-item" data-type={entry.data.type || "お知らせ"}>
+              <time class="news-item__date">
+                {entry.data.date.toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, ".")}
+              </time>
+              <span class="news-item__type">{entry.data.type || "お知らせ"}</span>
+              <span class="news-item__title">{entry.data.title}</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="news-list__empty">お知らせはまだありません。</p>
+      )}
+
+      <!-- Pagination -->
+      {totalPages > 1 && (
+        <nav class="pagination" aria-label="ページナビゲーション">
+          {currentPage <= 1 ? (
+            <span class="pagination__btn pagination__btn--disabled">最初</span>
+          ) : (
+            <a href={getPageUrl(1)} class="pagination__btn">最初</a>
+          )}
+
+          {currentPage <= 1 ? (
+            <span class="pagination__btn pagination__btn--disabled pagination__btn--arrow">&lt;</span>
+          ) : (
+            <a href={getPageUrl(currentPage - 1)} class="pagination__btn pagination__btn--arrow">&lt;</a>
+          )}
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+            num === currentPage ? (
+              <span class="pagination__btn pagination__btn--current">{num}</span>
+            ) : (
+              <a href={getPageUrl(num)} class="pagination__btn pagination__btn--page">{num}</a>
+            )
+          ))}
+
+          {currentPage >= totalPages ? (
+            <span class="pagination__btn pagination__btn--disabled pagination__btn--arrow">&gt;</span>
+          ) : (
+            <a href={getPageUrl(currentPage + 1)} class="pagination__btn pagination__btn--arrow">&gt;</a>
+          )}
+
+          {currentPage >= totalPages ? (
+            <span class="pagination__btn pagination__btn--disabled">最後</span>
+          ) : (
+            <a href={getPageUrl(totalPages)} class="pagination__btn">最後</a>
+          )}
+        </nav>
+      )}
     </div>
-  </article>
+  </section>
+
+  <Contact />
 </Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".news-filter__btn");
+    const items = document.querySelectorAll<HTMLAnchorElement>(".news-item");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Update active state
+        buttons.forEach((b) => b.classList.remove("news-filter__btn--active"));
+        btn.classList.add("news-filter__btn--active");
+
+        const category = btn.dataset.category;
+
+        // Filter items
+        items.forEach((item) => {
+          if (category === "ALL" || item.dataset.type === category) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+</script>
+
 <style lang="scss">
   .page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 2rem 1.5rem;
-    text-align: center;
+    padding: 3rem 1.5rem 2rem;
 
     @media (min-width: 768px) {
-      padding: 3rem 2rem;
+      padding: 4rem 2rem 3rem;
     }
 
     &__container {
       max-width: 1200px;
       margin: 0 auto;
+    }
 
-      h1 {
-        font-size: 1.8rem;
-        margin: 0 0 1rem 0;
+    &__title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin: 0 0 0.25rem 0;
 
-        @media (min-width: 768px) {
-          font-size: 2.5rem;
-        }
+      @media (min-width: 768px) {
+        font-size: 3.5rem;
+      }
+    }
+
+    &__subtitle {
+      font-size: 0.85rem;
+      color: var(--c-text-sub);
+      margin: 0;
+    }
+  }
+
+  .news-list {
+    padding: 0 1.5rem 4rem;
+
+    @media (min-width: 768px) {
+      padding: 0 2rem 6rem;
+    }
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    &__items {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--c-border);
+    }
+
+    &__empty {
+      text-align: center;
+      color: var(--c-text-sub);
+      padding: 3rem 0;
+      font-size: 0.95rem;
+    }
+  }
+
+  .news-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+
+    @media (min-width: 768px) {
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    &__btn {
+      padding: 0.4rem 1.2rem;
+      border: 1px solid var(--c-border);
+      border-radius: 100px;
+      background: transparent;
+      color: var(--c-text-sub);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+
+      @media (min-width: 768px) {
+        padding: 0.45rem 1.4rem;
+        font-size: 0.85rem;
       }
 
-      .meta {
-        font-size: 0.9rem;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        align-items: center;
-        flex-wrap: wrap;
+      &:hover {
+        border-color: var(--c-text);
+        color: var(--c-text);
+      }
 
-        @media (min-width: 768px) {
-          font-size: 1rem;
-        }
+      &--active {
+        background: var(--c-text);
+        color: var(--c-bg);
+        border-color: var(--c-text);
 
-        time {
-          opacity: 0.9;
-        }
-
-        .type {
-          background: rgba(255, 255, 255, 0.2);
-          padding: 0.25rem 0.6rem;
-          border-radius: 3px;
-          font-size: 0.8rem;
-
-          @media (min-width: 768px) {
-            padding: 0.3rem 0.8rem;
-            font-size: 0.9rem;
-          }
+        &:hover {
+          color: var(--c-bg);
         }
       }
     }
   }
 
-  .news-detail {
-    padding: 2rem 1.5rem;
-    max-width: 800px;
-    margin: 0 auto;
+  .news-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--c-border-light);
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
 
     @media (min-width: 768px) {
-      padding: 3rem 2rem;
+      grid-template-columns: 110px 100px 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.5rem 0;
     }
 
-    &__container {
-      :global(h2) {
-        font-size: 1.3rem;
-        margin: 1.5rem 0 0.8rem;
-        color: var(--c-text);
+    &:hover {
+      opacity: 0.6;
+    }
 
-        @media (min-width: 768px) {
-          font-size: 1.8rem;
-          margin: 2rem 0 1rem;
-        }
-      }
+    &__date {
+      font-size: 0.8rem;
+      color: var(--c-text-light);
+      font-weight: 500;
 
-      :global(h3) {
-        font-size: 1.1rem;
-        margin: 1rem 0 0.6rem;
-        color: var(--c-text);
-
-        @media (min-width: 768px) {
-          font-size: 1.3rem;
-          margin: 1.5rem 0 0.8rem;
-        }
-      }
-
-      :global(p) {
-        color: var(--c-text-sub);
-        line-height: 1.8;
-        margin-bottom: 1rem;
-        font-size: 0.9rem;
-
-        @media (min-width: 768px) {
-          margin-bottom: 1.5rem;
-          font-size: 1rem;
-        }
-      }
-
-      :global(ul),
-      :global(ol) {
-        margin: 0 0 1rem 1.2rem;
-        color: var(--c-text-sub);
-
-        @media (min-width: 768px) {
-          margin: 0 0 1.5rem 1.5rem;
-        }
-
-        :global(li) {
-          margin-bottom: 0.6rem;
-          line-height: 1.6;
-          font-size: 0.9rem;
-
-          @media (min-width: 768px) {
-            margin-bottom: 0.8rem;
-          }
-        }
-      }
-
-      :global(code) {
-        background: var(--c-bg-secondary);
-        padding: 0.2rem 0.5rem;
-        border-radius: 3px;
-        color: #d63384;
-        font-family: "Courier New", Courier, monospace;
+      @media (min-width: 768px) {
         font-size: 0.85rem;
-
-        @media (min-width: 768px) {
-          font-size: 0.9rem;
-        }
       }
+    }
 
-      :global(pre) {
-        background: var(--c-bg-secondary);
-        padding: 1rem;
-        border-radius: 8px;
-        overflow-x: auto;
-        margin-bottom: 1rem;
+    &__type {
+      display: inline-block;
+      font-size: 0.7rem;
+      color: var(--c-text-sub);
+      background: var(--c-bg-secondary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      font-weight: 500;
+      width: fit-content;
+      white-space: nowrap;
 
-        @media (min-width: 768px) {
-          padding: 1.5rem;
-          margin-bottom: 1.5rem;
-        }
-
-        :global(code) {
-          background: none;
-          padding: 0;
-          color: var(--c-text);
-        }
+      @media (min-width: 768px) {
+        font-size: 0.75rem;
       }
+    }
 
-      :global(blockquote) {
-        border-left: 4px solid var(--c-primary);
-        padding-left: 1rem;
-        margin: 1rem 0;
-        color: var(--c-text-sub);
-        font-style: italic;
-        font-size: 0.9rem;
+    &__title {
+      font-size: 0.9rem;
+      color: var(--c-text);
+      font-weight: 400;
+      line-height: 1.5;
 
-        @media (min-width: 768px) {
-          padding-left: 1.5rem;
-          margin: 1.5rem 0;
-          font-size: 1rem;
-        }
+      @media (min-width: 768px) {
+        font-size: 0.95rem;
       }
+    }
+  }
 
-      :global(a) {
-        color: var(--c-primary);
-        text-decoration: none;
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 3rem;
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+    @media (min-width: 768px) {
+      gap: 0.5rem;
+      margin-top: 4rem;
+    }
 
-      :global(table) {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1rem 0;
+    &__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 0.6rem;
+      border: 1px solid var(--c-border);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--c-text-sub);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      white-space: nowrap;
+
+      @media (min-width: 768px) {
+        min-width: 40px;
+        height: 40px;
         font-size: 0.85rem;
+      }
+
+      &:hover:not(&--disabled):not(&--current) {
+        border-color: var(--c-text);
+        color: var(--c-text);
+      }
+
+      &--current {
+        background: var(--c-text);
+        color: var(--c-bg);
+        border-color: var(--c-text);
+      }
+
+      &--disabled {
+        color: var(--c-text-lightest, #ccc);
+        border-color: var(--c-border-light);
+        cursor: default;
+      }
+
+      &--arrow {
+        font-size: 0.85rem;
+        min-width: 36px;
 
         @media (min-width: 768px) {
-          margin: 1.5rem 0;
-          font-size: 1rem;
+          min-width: 40px;
         }
+      }
 
-        :global(th),
-        :global(td) {
-          border: 1px solid var(--c-border);
-          padding: 0.5rem;
-          text-align: left;
+      &--page {
+        min-width: 36px;
 
-          @media (min-width: 768px) {
-            padding: 0.75rem;
-          }
-        }
-
-        :global(th) {
-          background: var(--c-bg-secondary);
-          font-weight: bold;
+        @media (min-width: 768px) {
+          min-width: 40px;
         }
       }
     }
