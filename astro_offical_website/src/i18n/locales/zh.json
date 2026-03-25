@@ -149,6 +149,13 @@
     "title": "Works",
     "subtitle": "作品集",
     "backToList": "← 返回作品列表",
+    "categories": [
+      "全部",
+      "Web网站·应用开发",
+      "移动应用开发",
+      "UI/UX设计",
+      "数字策略"
+    ],
     "list": [
       {
         "slug": "ec-platform-redesign",

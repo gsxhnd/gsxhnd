@@ -149,6 +149,13 @@
     "title": "Works",
     "subtitle": "Our Portfolio",
     "backToList": "← Back to Works",
+    "categories": [
+      "ALL",
+      "Website & App Development",
+      "Mobile App Development",
+      "UI/UX Design",
+      "Digital Strategy"
+    ],
     "list": [
       {
         "slug": "ec-platform-redesign",
