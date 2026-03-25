@@ -60,11 +60,13 @@ export function getNavigation(lang: Language): NavigationItem[] {
           { label: "Web网站·应用开发", href: `${prefix}/services#web-development` },
           { label: "移动应用开发", href: `${prefix}/services#mobile-apps` },
           { label: "UI/UX设计", href: `${prefix}/services#uiux-design` },
+          { label: "数字策略·咨询", href: `${prefix}/services#digital-strategy` },
         ]
         : [
           { label: "Website & App Development", href: `${prefix}/services#web-development` },
           { label: "Mobile App Development", href: `${prefix}/services#mobile-apps` },
           { label: "UI/UX Design", href: `${prefix}/services#uiux-design` },
+          { label: "Digital Strategy & Consulting", href: `${prefix}/services#digital-strategy` },
         ],
     },
     { label: t("nav.works"), href: `${prefix}/works` },

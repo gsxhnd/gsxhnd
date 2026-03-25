@@ -68,6 +68,9 @@
   "services": {
     "title": "Services",
     "subtitle": "Our Services",
+    "intro": "We provide comprehensive digital solutions ranging from web and application development to UI/UX design and digital strategy. Whether you're a startup or an enterprise, we deliver high-quality solutions tailored to your needs across industries. From strategic planning to maintenance, we contribute to the success of your digital projects as a long-term partner.",
+    "providedServices": "Services Provided",
+    "consultButton": "Consult Us",
     "webDev": {
       "title": "Website & Application Development",
       "description": "We leverage cutting-edge technologies to build web applications with exceptional performance and scalability. Using modern frameworks like React, Vue, and Next.js, we deliver solutions that maximize user experience.",
@@ -101,6 +104,21 @@
         "Design System Development"
       ]
     },
+    "strategy": {
+      "title": "Digital Strategy & Consulting",
+      "description": "Technology-based strategic planning and consulting services to help enterprises achieve digital transformation. From the user's perspective, we formulate web and app strategies, driving improvement through data analysis to fully support your digital projects.",
+      "items": [
+        "SEO / SEM Strategy",
+        "Market Research & Competitive Analysis",
+        "Social Media Marketing & Operations",
+        "Brand Strategy & Positioning",
+        "Growth Hacking & Marketing Support",
+        "Data Analytics & KPI Design",
+        "A/B Testing & Optimization",
+        "CRM / MA Tool Implementation",
+        "Content Marketing & Creative Planning"
+      ]
+    },
     "faq": {
       "title": "Frequently Asked Questions",
       "items": [
@@ -109,16 +127,20 @@
           "answer": "It depends on the scope and complexity of the project. Small projects take weeks to months, while larger projects may take six months or more. We'll provide detailed timelines during the consultation."
         },
         {
-          "question": "Do you handle improvements and maintenance for existing products?",
-          "answer": "Yes, we do. We provide improvement, maintenance, and security support for existing websites and applications."
+          "question": "Can you tell me about your pricing structure?",
+          "answer": "Project costs are evaluated based on factors such as scope, requirements, and timeline. We provide detailed quotes after understanding your needs. Initial consultation is free, so please feel free to contact us."
         },
         {
-          "question": "Can I commission a small-scale project?",
-          "answer": "Absolutely. Regardless of project scale, we're happy to consult with you. Please feel free to reach out."
+          "question": "Can I commission design only or development only?",
+          "answer": "Absolutely. We can flexibly provide design-only or development-only services based on your needs. We also support collaboration with your existing team."
         },
         {
-          "question": "What industries do you work with?",
-          "answer": "We have experience across various industries including finance, healthcare, e-commerce, media, and education. We can also handle industry-specific requirements and regulations."
+          "question": "Is there operational support after launch?",
+          "answer": "Yes, we provide post-launch operational and maintenance support. This includes server monitoring, security updates, content updates, performance optimization, and other ongoing services."
+        },
+        {
+          "question": "Do you support responsive design?",
+          "answer": "Yes, all websites we build are responsive by default, supporting smartphones, tablets, and PCs. We can also adopt adaptive design approaches based on your specific needs."
         }
       ]
     }
