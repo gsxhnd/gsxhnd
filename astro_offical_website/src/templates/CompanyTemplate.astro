@@ -1,0 +1,158 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+import { type Language, useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const visionLead = t("company.vision.lead");
+const visionText = t("company.vision.text");
+const overviewLabels = t("company.overview.labels") as unknown as Record<string, string>;
+const businessContent = t("company.overview.businessContent") as unknown as string[];
+const historyItems = t("company.history.items") as unknown as { year: string; month: string; description: string }[];
+---
+
+<Layout title={`${t("company.title")} | ${t("site.title")}`}>
+  <section class="page-header">
+    <div class="page-header__container">
+      <h1 class="page-header__title">{t("company.title")}</h1>
+      <p class="page-header__subtitle">{t("company.subtitle")}</p>
+    </div>
+  </section>
+
+  <section class="vision">
+    <div class="vision__container">
+      <div class="vision__header">
+        <h2 class="vision__title">{t("company.vision.title")}</h2>
+        <p class="vision__subtitle">{t("company.vision.subtitle")}</p>
+      </div>
+      <div class="vision__content">
+        <p class="vision__lead" set:html={visionLead.replace(/\n/g, '<br />')} />
+        <p class="vision__text" set:html={visionText.replace(/\n/g, '<br />')} />
+      </div>
+    </div>
+  </section>
+
+  <section class="overview">
+    <div class="overview__container">
+      <div class="overview__header">
+        <h2 class="overview__title">{t("company.overview.title")}</h2>
+        <p class="overview__subtitle">{t("company.overview.subtitle")}</p>
+      </div>
+      <div class="overview__table">
+        <div class="overview__row">
+          <div class="overview__label">{overviewLabels.companyName}</div>
+          <div class="overview__value">{t("company.overview.companyName")}</div>
+        </div>
+        <div class="overview__row">
+          <div class="overview__label">{overviewLabels.business}</div>
+          <div class="overview__value">
+            {businessContent.map((item: string) => (
+              <span class="overview__value-line">{item}</span>
+            ))}
+          </div>
+        </div>
+        <div class="overview__row">
+          <div class="overview__label">{overviewLabels.address}</div>
+          <div class="overview__value" set:html={t("company.overview.address").replace(/\n/g, '<br />')} />
+        </div>
+        <div class="overview__row">
+          <div class="overview__label">{overviewLabels.representative}</div>
+          <div class="overview__value">
+            {t("company.overview.ceoTitle")} {t("company.overview.ceo")}
+            <a href={`/${lang}/about/#ceo-message`} class="overview__ceo-link">{t("company.overview.ceoMessageLink")}</a>
+          </div>
+        </div>
+        <div class="overview__row">
+          <div class="overview__label">{overviewLabels.established}</div>
+          <div class="overview__value">{t("company.overview.established")}</div>
+        </div>
+        <div class="overview__row">
+          <div class="overview__label">{overviewLabels.capital}</div>
+          <div class="overview__value">{t("company.overview.capital")}</div>
+        </div>
+        <div class="overview__row">
+          <div class="overview__label">{overviewLabels.employees}</div>
+          <div class="overview__value">{t("company.overview.employees")}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="history">
+    <div class="history__container">
+      <div class="history__header">
+        <h2 class="history__title">{t("company.history.title")}</h2>
+        <p class="history__subtitle">{t("company.history.subtitle")}</p>
+      </div>
+      <div class="history__timeline">
+        {historyItems.map((item, index) => (
+          <div class="history__item">
+            <div class="history__year">
+              <span class="history__year-number">{item.year}</span>
+              <span class="history__year-month">{item.month}</span>
+            </div>
+            <div class="history__line">
+              <div class="history__dot"></div>
+              {index < historyItems.length - 1 && <div class="history__connector"></div>}
+            </div>
+            <div class="history__description">{item.description}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+</Layout>
+
+<style lang="scss">
+  .page-header {
+    padding: 3rem 1.5rem 2rem; @media (min-width: 768px) { padding: 4rem 2rem 3rem; }
+    &__container { max-width: 1200px; margin: 0 auto; }
+    &__title { font-size: 2.5rem; font-weight: 700; color: var(--c-text); margin: 0 0 0.25rem 0; @media (min-width: 768px) { font-size: 3.5rem; } }
+    &__subtitle { font-size: 0.85rem; color: var(--c-text-sub); margin: 0; }
+  }
+  .vision {
+    padding: 4rem 1.5rem; background: var(--c-bg-inverse); color: var(--c-text-inverse); @media (min-width: 768px) { padding: 6rem 2rem; }
+    &__container { max-width: 1200px; margin: 0 auto; }
+    &__header { margin-bottom: 2.5rem; @media (min-width: 768px) { margin-bottom: 3rem; } }
+    &__title { font-size: 2rem; font-weight: 700; font-style: italic; margin: 0 0 0.25rem 0; @media (min-width: 768px) { font-size: 2.5rem; } }
+    &__subtitle { font-size: 0.85rem; color: var(--c-text-inverse-sub); margin: 0; }
+    &__lead { font-size: 1.3rem; line-height: 2; font-weight: 400; margin: 0 0 2rem 0; @media (min-width: 768px) { font-size: 1.6rem; } }
+    &__text { font-size: 0.95rem; line-height: 2; color: var(--c-text-inverse-sub); margin: 0; @media (min-width: 768px) { font-size: 1rem; } }
+  }
+  .overview {
+    padding: 4rem 1.5rem; @media (min-width: 768px) { padding: 6rem 2rem; }
+    &__container { max-width: 900px; margin: 0 auto; }
+    &__header { margin-bottom: 2.5rem; @media (min-width: 768px) { margin-bottom: 3rem; } }
+    &__title { font-size: 2rem; font-weight: 700; font-style: italic; color: var(--c-text); margin: 0 0 0.25rem 0; @media (min-width: 768px) { font-size: 2.5rem; } }
+    &__subtitle { font-size: 0.85rem; color: var(--c-text-sub); margin: 0; }
+    &__table { display: flex; flex-direction: column; }
+    &__row { display: grid; grid-template-columns: 1fr; gap: 0.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--c-border-light); @media (min-width: 600px) { grid-template-columns: 140px 1fr; gap: 2rem; } &:last-child { border-bottom: none; } }
+    &__label { font-size: 0.85rem; color: var(--c-text-light); font-weight: 500; @media (min-width: 768px) { font-size: 0.9rem; } }
+    &__value { font-size: 0.9rem; color: var(--c-text); line-height: 1.7; @media (min-width: 768px) { font-size: 0.95rem; } }
+    &__value-line { display: block; }
+    &__ceo-link { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--c-text); border: 1px solid var(--c-border); padding: 0.25rem 0.75rem; border-radius: 3px; text-decoration: none; transition: all 0.2s; &:hover { background: var(--c-bg-secondary); } }
+  }
+  .history {
+    padding: 4rem 1.5rem; background: var(--c-bg-secondary); @media (min-width: 768px) { padding: 6rem 2rem; }
+    &__container { max-width: 900px; margin: 0 auto; }
+    &__header { margin-bottom: 2.5rem; @media (min-width: 768px) { margin-bottom: 3rem; } }
+    &__title { font-size: 2rem; font-weight: 700; font-style: italic; color: var(--c-text); margin: 0 0 0.25rem 0; @media (min-width: 768px) { font-size: 2.5rem; } }
+    &__subtitle { font-size: 0.85rem; color: var(--c-text-sub); margin: 0; }
+    &__timeline { display: flex; flex-direction: column; padding-left: 1rem; @media (min-width: 768px) { padding-left: 2rem; } }
+    &__item { display: grid; grid-template-columns: 80px 24px 1fr; gap: 1rem; min-height: 80px; @media (min-width: 768px) { grid-template-columns: 120px 24px 1fr; gap: 1.5rem; } }
+    &__year { text-align: right; padding-top: 2px; }
+    &__year-number { font-size: 1.1rem; font-weight: 700; color: var(--c-text); @media (min-width: 768px) { font-size: 1.2rem; } }
+    &__year-month { font-size: 0.8rem; color: var(--c-text-sub); margin-left: 0.25rem; }
+    &__line { display: flex; flex-direction: column; align-items: center; position: relative; }
+    &__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c-primary); flex-shrink: 0; margin-top: 6px; }
+    &__connector { width: 1px; flex-grow: 1; background: var(--c-border); margin-top: 4px; }
+    &__description { font-size: 0.875rem; color: var(--c-text-sub); line-height: 1.6; padding-top: 4px; padding-bottom: 1.5rem; @media (min-width: 768px) { font-size: 0.95rem; padding-bottom: 2rem; } }
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+import NewsDetailTemplate from "../../../templates/NewsDetailTemplate.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const allNews = await getCollection("news", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
+
+  return allNews.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<NewsDetailTemplate lang="zh" entry={entry} Content={Content} />

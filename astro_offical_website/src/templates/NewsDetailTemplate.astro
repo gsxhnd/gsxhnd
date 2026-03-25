@@ -1,35 +1,30 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Contact from "../../components/Contact.astro";
-import { getCollection, render } from "astro:content";
-import { SITE_CONFIG } from "../../config/site";
+import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+import { type Language, useTranslations, dateLocales } from "../i18n/utils";
+import { SITE_CONFIG } from "../config/site";
 
-export async function getStaticPaths() {
-  const allNews = await getCollection("news", ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
-
-  return allNews.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+interface Props {
+  lang: Language;
+  entry: any;
+  Content: any;
 }
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { lang, entry, Content } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <Layout title={`${entry.data.title} | ${SITE_CONFIG.name}`}>
   <section class="page-header">
     <div class="page-header__container">
       <div class="page-header__breadcrumb">
-        <a href="/news/" class="page-header__back">News</a>
+        <a href={`/${lang}/news/`} class="page-header__back">{t("news.title")}</a>
         <span class="page-header__separator">/</span>
-        <span class="page-header__current">記事</span>
+        <span class="page-header__current">{t("news.breadcrumbArticle")}</span>
       </div>
       <div class="page-header__meta">
         <time class="page-header__date">
-          {entry.data.date.toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, ".")}
+          {entry.data.date.toLocaleDateString(dateLocales[lang], { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, ".")}
         </time>
         {entry.data.type && <span class="page-header__type">{entry.data.type}</span>}
       </div>
@@ -44,7 +39,7 @@ const { Content } = await render(entry);
   </article>
 
   <div class="news-back">
-    <a href="/news/" class="news-back__link">← お知らせ一覧に戻る</a>
+    <a href={`/${lang}/news/`} class="news-back__link">{t("news.backToList")}</a>
   </div>
 
   <Contact />

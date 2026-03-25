@@ -1,26 +1,28 @@
 ---
 import Button from './Button.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <!-- Contact Section -->
 <section class="contact" id="contact">
   <div class="contact__container">
     <div class="contact__header">
-      <h2 class="contact__title">Contact</h2>
-      <p class="contact__subtitle">お問い合わせ</p>
+      <h2 class="contact__title">{t("contact.title")}</h2>
+      <p class="contact__subtitle">{t("contact.subtitle")}</p>
     </div>
     <p class="contact__description">
-      お困りごとやご相談、お見積もりのご依頼など、まずはお気軽にお問い合わせください。
+      {t("contact.sectionDescription")}
     </p>
     <ul class="contact__list">
-      <li>Webサイト・アプリケーションのデザイン制作を依頼したい</li>
-      <li>既存サービスのリニューアルを検討している</li>
-      <li>プロジェクトの進め方や費用感を相談したい</li>
-      <li>技術選定やアーキテクチャについて相談したい</li>
-      <li>長期的なパートナーシップを構築したいなど</li>
+      {(t("contact.sectionItems") as unknown as string[]).map((item: string) => (
+        <li>{item}</li>
+      ))}
     </ul>
-    <Button href="/contact/" variant="solid-sub" size="medium">
-      お問い合わせ
+    <Button href={`/${lang}/contact/`} variant="solid-sub" size="medium">
+      {t("contact.sectionCta")}
     </Button>
   </div>
 </section>
@@ -99,7 +101,7 @@ import Button from './Button.astro';
         line-height: 1.6;
 
         &::before {
-          content: "・";
+          content: "·";
           margin-right: 0.25rem;
         }
       }

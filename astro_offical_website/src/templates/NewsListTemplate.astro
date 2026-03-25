@@ -1,44 +1,33 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Contact from "../../components/Contact.astro";
-import { getCollection } from "astro:content";
-import type { PaginateFunction } from "astro";
-import { SITE_CONFIG } from "../../config/site";
+import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+import { type Language, useTranslations, dateLocales } from "../i18n/utils";
+import { SITE_CONFIG } from "../config/site";
+import type { Page } from "astro";
 
-export async function getStaticPaths({
-  paginate,
-}: {
-  paginate: PaginateFunction;
-}) {
-  const allNews = await getCollection("news", ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
-
-  const sortedNews = allNews.sort((a, b) =>
-    b.data.date.valueOf() - a.data.date.valueOf()
-  );
-
-  return paginate(sortedNews, { pageSize: SITE_CONFIG.pagination.newsPageSize });
+interface Props {
+  lang: Language;
+  page: Page<any>;
 }
 
-const { page } = Astro.props;
+const { lang, page } = Astro.props;
+const t = useTranslations(lang);
 
-const categories = ["ALL", "お知らせ", "プレスリリース", "イベント"];
+const categories = t("news.categories") as unknown as string[];
 
-// Build page URLs for pagination
 const totalPages = page.lastPage;
 const currentPage = page.currentPage;
 const getPageUrl = (pageNum: number) => {
-  if (pageNum === 1) return "/news/";
-  return `/news/${pageNum}/`;
+  if (pageNum === 1) return `/${lang}/news/`;
+  return `/${lang}/news/${pageNum}/`;
 };
 ---
 
-<Layout title={`お知らせ | ${SITE_CONFIG.name}`}>
+<Layout title={`${t("news.title")} | ${SITE_CONFIG.name}`}>
   <section class="page-header">
     <div class="page-header__container">
-      <h1 class="page-header__title">News</h1>
-      <p class="page-header__subtitle">お知らせ</p>
+      <h1 class="page-header__title">{t("news.title")}</h1>
+      <p class="page-header__subtitle">{t("news.subtitle")}</p>
     </div>
   </section>
 
@@ -46,9 +35,9 @@ const getPageUrl = (pageNum: number) => {
     <div class="news-list__container">
       <!-- Category Filter -->
       <div class="news-filter">
-        {categories.map((cat) => (
+        {categories.map((cat: string, i: number) => (
           <button
-            class={`news-filter__btn ${cat === "ALL" ? "news-filter__btn--active" : ""}`}
+            class={`news-filter__btn ${i === 0 ? "news-filter__btn--active" : ""}`}
             data-category={cat}
           >
             {cat}
@@ -59,27 +48,27 @@ const getPageUrl = (pageNum: number) => {
       <!-- News Items -->
       {page.data.length > 0 ? (
         <div class="news-list__items">
-          {page.data.map((entry) => (
-            <a href={`/news/${entry.id}`} class="news-item" data-type={entry.data.type || "お知らせ"}>
+          {page.data.map((entry: any) => (
+            <a href={`/${lang}/news/${entry.id}`} class="news-item" data-type={entry.data.type || t("news.defaultType")}>
               <time class="news-item__date">
-                {entry.data.date.toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, ".")}
+                {entry.data.date.toLocaleDateString(dateLocales[lang], { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, ".")}
               </time>
-              <span class="news-item__type">{entry.data.type || "お知らせ"}</span>
+              <span class="news-item__type">{entry.data.type || t("news.defaultType")}</span>
               <span class="news-item__title">{entry.data.title}</span>
             </a>
           ))}
         </div>
       ) : (
-        <p class="news-list__empty">お知らせはまだありません。</p>
+        <p class="news-list__empty">{t("news.empty")}</p>
       )}
 
       <!-- Pagination -->
       {totalPages > 1 && (
-        <nav class="pagination" aria-label="ページナビゲーション">
+        <nav class="pagination" aria-label={t("news.paginationLabel")}>
           {currentPage <= 1 ? (
-            <span class="pagination__btn pagination__btn--disabled">最初</span>
+            <span class="pagination__btn pagination__btn--disabled">{t("news.first")}</span>
           ) : (
-            <a href={getPageUrl(1)} class="pagination__btn">最初</a>
+            <a href={getPageUrl(1)} class="pagination__btn">{t("news.first")}</a>
           )}
 
           {currentPage <= 1 ? (
@@ -103,9 +92,9 @@ const getPageUrl = (pageNum: number) => {
           )}
 
           {currentPage >= totalPages ? (
-            <span class="pagination__btn pagination__btn--disabled">最後</span>
+            <span class="pagination__btn pagination__btn--disabled">{t("news.last")}</span>
           ) : (
-            <a href={getPageUrl(totalPages)} class="pagination__btn">最後</a>
+            <a href={getPageUrl(totalPages)} class="pagination__btn">{t("news.last")}</a>
           )}
         </nav>
       )}
@@ -122,15 +111,14 @@ const getPageUrl = (pageNum: number) => {
 
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        // Update active state
         buttons.forEach((b) => b.classList.remove("news-filter__btn--active"));
         btn.classList.add("news-filter__btn--active");
 
         const category = btn.dataset.category;
+        const isAll = btn === buttons[0];
 
-        // Filter items
         items.forEach((item) => {
-          if (category === "ALL" || item.dataset.type === category) {
+          if (isAll || item.dataset.type === category) {
             item.style.display = "";
           } else {
             item.style.display = "none";

@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { type Language, useTranslations } from "../i18n/utils";
+import { SITE_CONFIG } from "../config/site";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const collectionItems = t("privacy.collection.items") as unknown as string[];
+---
+
+<Layout title={`${t("privacy.title")} | ${t("site.title")}`}>
+  <section class="page-header">
+    <div class="page-header__container">
+      <h1>{t("privacy.title")}</h1>
+    </div>
+  </section>
+
+  <section class="page-content">
+    <div class="page-content__container">
+      <h2>{t("privacy.policy.title")}</h2>
+      <p>{t("privacy.policy.content").replace("{company}", SITE_CONFIG.name)}</p>
+
+      <h2>{t("privacy.definition.title")}</h2>
+      <p>{t("privacy.definition.content")}</p>
+
+      <h2>{t("privacy.collection.title")}</h2>
+      <p>{t("privacy.collection.content")}</p>
+      <ul>
+        {collectionItems.map((item: string) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+
+      <h2>{t("privacy.management.title")}</h2>
+      <p>{t("privacy.management.content")}</p>
+
+      <h2>{t("privacy.contactInfo.title")}</h2>
+      <p>{t("privacy.contactInfo.content")}</p>
+      <p>
+        {SITE_CONFIG.name}<br />
+        Email: <a href="mailto:privacy@nagi.co.jp">privacy@nagi.co.jp</a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem 1.5rem; text-align: center;
+    @media (min-width: 768px) { padding: 3rem 2rem; }
+    &__container { max-width: 1200px; margin: 0 auto; h1 { font-size: 2rem; margin: 0; @media (min-width: 768px) { font-size: 2.5rem; } } }
+  }
+  .page-content {
+    padding: 2rem 1.5rem; max-width: 900px; margin: 0 auto;
+    @media (min-width: 768px) { padding: 3rem 2rem; }
+    &__container {
+      h2 { font-size: 1.2rem; margin: 1.5rem 0 0.8rem; color: var(--c-text); @media (min-width: 768px) { font-size: 1.5rem; margin: 2rem 0 1rem; } }
+      p { color: var(--c-text-sub); line-height: 1.8; margin-bottom: 1rem; font-size: 0.9rem; @media (min-width: 768px) { margin-bottom: 1.5rem; font-size: 1rem; } }
+      ul { margin: 0 0 1rem 1.2rem; list-style: disc; @media (min-width: 768px) { margin: 0 0 1.5rem 1.5rem; } li { color: var(--c-text-sub); margin-bottom: 0.4rem; line-height: 1.6; font-size: 0.9rem; @media (min-width: 768px) { margin-bottom: 0.5rem; font-size: 1rem; } } }
+      a { color: var(--c-primary); text-decoration: none; &:hover { text-decoration: underline; } }
+    }
+  }
+</style>

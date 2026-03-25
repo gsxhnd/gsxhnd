@@ -1,7 +1,12 @@
 ---
 import Container from './Container.astro';
 import Logo from './Logo.astro';
-import { SITE_CONFIG } from '../config/site';
+import { SITE_CONFIG, getFooterNavigation } from '../config/site';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const footerNav = getFooterNavigation(lang);
 ---
 
 <footer class="footer">
@@ -10,7 +15,7 @@ import { SITE_CONFIG } from '../config/site';
       <div class="footer-info">
         <Logo class="footer-logo" />
         <p class="footer-business-hours">
-          {SITE_CONFIG.company.businessHoursFull}
+          {t("footer.businessHours")}
         </p>
         <ul class="footer-social">
           <li class="social-item">
@@ -59,9 +64,9 @@ import { SITE_CONFIG } from '../config/site';
 
       <nav class="footer-nav">
         <div class="nav-group">
-          <h3 class="nav-group-title">サービス</h3>
+          <h3 class="nav-group-title">{t("footer.servicesTitle")}</h3>
           <ul class="nav-group-list">
-            {SITE_CONFIG.footerNavigation.services.map((item) => (
+            {footerNav.services.map((item) => (
               <li class="nav-group-item">
                 <a href={item.href} class="nav-group-link">{item.label}</a>
               </li>
@@ -69,9 +74,9 @@ import { SITE_CONFIG } from '../config/site';
           </ul>
         </div>
         <div class="nav-group">
-          <h3 class="nav-group-title">リソース</h3>
+          <h3 class="nav-group-title">{t("footer.resourcesTitle")}</h3>
           <ul class="nav-group-list">
-            {SITE_CONFIG.footerNavigation.resources.map((item) => (
+            {footerNav.resources.map((item) => (
               <li class="nav-group-item">
                 <a href={item.href} class="nav-group-link">{item.label}</a>
               </li>
@@ -79,9 +84,9 @@ import { SITE_CONFIG } from '../config/site';
           </ul>
         </div>
         <div class="nav-group">
-          <h3 class="nav-group-title">会社情報</h3>
+          <h3 class="nav-group-title">{t("footer.companyTitle")}</h3>
           <ul class="nav-group-list">
-            {SITE_CONFIG.footerNavigation.company.map((item) => (
+            {footerNav.company.map((item) => (
               <li class="nav-group-item">
                 <a href={item.href} class="nav-group-link">{item.label}</a>
               </li>
@@ -93,7 +98,7 @@ import { SITE_CONFIG } from '../config/site';
 
       <div class="footer-copyright">
         <p class="copyright-text">
-          &copy; {new Date().getFullYear()} {SITE_CONFIG.company.name} Designed &amp; Developed by yohaku.
+          &copy; {new Date().getFullYear()} {SITE_CONFIG.name} Designed &amp; Developed by yohaku.
         </p>
       </div>
   </Container>

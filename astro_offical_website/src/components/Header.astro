@@ -3,19 +3,22 @@ import Container from "./Container.astro";
 import Logo from "./Logo.astro";
 import Button from "./Button.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
-import { SITE_CONFIG } from "../config/site";
+import { SITE_CONFIG, getNavigation } from "../config/site";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const navigation = getNavigation(lang);
 ---
 
 <header class="header" id="header">
   <Container size="large">
     <div class="header-inner">
-      <Logo class="header-logo" />
+      <a href={`/${lang}/`}>
+        <Logo class="header-logo" />
+      </a>
 
-      <button class="menu-button" aria-label="メニューを開く">
+      <button class="menu-button" aria-label={t("common.openMenu")}>
         <span></span>
         <span></span>
         <span></span>
@@ -25,7 +28,7 @@ const t = useTranslations(lang);
         <nav class="nav">
           <ul class="nav-list">
             {
-              SITE_CONFIG.navigation.map((item) => (
+              navigation.map((item) => (
                 <li class="nav-list-item">
                   <a href={item.href} class="nav-list-link">
                     {item.label}
@@ -48,7 +51,7 @@ const t = useTranslations(lang);
           <div class="menu-actions">
             <LanguageSwitcher />
             <Button
-              href="/contact"
+              href={`/${lang}/contact`}
               variant="solid"
               size="medium"
               class="menu-contact"
