@@ -2,8 +2,10 @@ package filetree_test
 
 import (
 	"context"
+	"errors"
 	"testing"
 
+	"go_sample_code/internal/errno"
 	filetreeservice "go_sample_code/internal/service/filetree"
 
 	"github.com/stretchr/testify/assert"
@@ -31,11 +33,19 @@ func TestServiceAddNodeValidation(t *testing.T) {
 
 	_, err := svc.AddNode(context.Background(), "/", "", true, 0)
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "name cannot be empty")
+	assert.Equal(t, errno.RequestValidateError.Message, err.Error())
+
+	var eno errno.Errno
+	require.True(t, errors.As(err, &eno))
+	assert.Equal(t, errno.RequestValidateError.Code, eno.GetCode())
+	assert.Equal(t, "name cannot be empty", eno.GetData())
 
 	_, err = svc.AddNode(context.Background(), "/", "readme.md", false, 0)
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "file_id must be greater than 0")
+	assert.Equal(t, errno.RequestValidateError.Message, err.Error())
+	require.True(t, errors.As(err, &eno))
+	assert.Equal(t, errno.RequestValidateError.Code, eno.GetCode())
+	assert.Equal(t, "file_id must be greater than 0", eno.GetData())
 }
 
 func TestServiceRenameAndRemoveNode(t *testing.T) {

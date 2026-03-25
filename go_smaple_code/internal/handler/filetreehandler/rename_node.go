@@ -1,25 +1,25 @@
 package filetreehandler
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"go_sample_code/internal/errno"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func (h *handler) RenameNode(c *fiber.Ctx) error {
 	var req RenameNodeRequest
 	if err := c.BodyParser(&req); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "invalid request body",
-		})
+		err = errno.RequestParserError.WithData(err.Error())
+		decoded := errno.Decode(nil, err)
+		return c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 	}
 
 	tree, err := h.svc.RenameNode(c.UserContext(), req.OldPath, req.NewName)
 	if err != nil {
 		h.log.Warn("failed to rename node")
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": err.Error(),
-		})
+		decoded := errno.Decode(nil, err)
+		return c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 	}
 
-	return c.JSON(fiber.Map{
-		"message": "node renamed successfully",
-		"tree":    tree,
-	})
+	return c.JSON(errno.Decode(tree, nil))
 }

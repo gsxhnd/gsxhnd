@@ -2,9 +2,9 @@ package filetree
 
 import (
 	"context"
-	"fmt"
 	"sync"
 
+	"go_sample_code/internal/errno"
 	pkgtree "go_sample_code/pkg/filetree"
 )
 
@@ -32,7 +32,7 @@ func (s *service) AddNode(_ context.Context, parentPath, name string, isDir bool
 		parentPath = "/"
 	}
 	if name == "" {
-		return nil, fmt.Errorf("name cannot be empty")
+		return nil, errno.RequestValidateError.WithData("name cannot be empty")
 	}
 
 	s.mu.Lock()
@@ -40,24 +40,24 @@ func (s *service) AddNode(_ context.Context, parentPath, name string, isDir bool
 
 	tree, err := pkgtree.Deserialize(s.tree)
 	if err != nil {
-		return nil, err
+		return nil, errno.DataConversionError.WithData(err.Error())
 	}
 
 	if isDir {
 		err = tree.AddDir(parentPath, name)
 	} else {
 		if fileID == 0 {
-			return nil, fmt.Errorf("file_id must be greater than 0")
+			return nil, errno.RequestValidateError.WithData("file_id must be greater than 0")
 		}
 		err = tree.AddFile(parentPath, name, fileID)
 	}
 	if err != nil {
-		return nil, err
+		return nil, errno.RequestValidateError.WithData(err.Error())
 	}
 
 	serialized, err := tree.Serialize()
 	if err != nil {
-		return nil, err
+		return nil, errno.DataConversionError.WithData(err.Error())
 	}
 	s.tree = serialized
 
@@ -70,16 +70,16 @@ func (s *service) RemoveNode(_ context.Context, path string) (*pkgtree.FileNode,
 
 	tree, err := pkgtree.Deserialize(s.tree)
 	if err != nil {
-		return nil, err
+		return nil, errno.DataConversionError.WithData(err.Error())
 	}
 
 	if err := tree.RemoveNode(path); err != nil {
-		return nil, err
+		return nil, errno.RequestValidateError.WithData(err.Error())
 	}
 
 	serialized, err := tree.Serialize()
 	if err != nil {
-		return nil, err
+		return nil, errno.DataConversionError.WithData(err.Error())
 	}
 	s.tree = serialized
 
@@ -88,7 +88,7 @@ func (s *service) RemoveNode(_ context.Context, path string) (*pkgtree.FileNode,
 
 func (s *service) RenameNode(_ context.Context, oldPath, newName string) (*pkgtree.FileNode, error) {
 	if newName == "" {
-		return nil, fmt.Errorf("new_name cannot be empty")
+		return nil, errno.RequestValidateError.WithData("new_name cannot be empty")
 	}
 
 	s.mu.Lock()
@@ -96,16 +96,16 @@ func (s *service) RenameNode(_ context.Context, oldPath, newName string) (*pkgtr
 
 	tree, err := pkgtree.Deserialize(s.tree)
 	if err != nil {
-		return nil, err
+		return nil, errno.DataConversionError.WithData(err.Error())
 	}
 
 	if err := tree.RenameNode(oldPath, newName); err != nil {
-		return nil, err
+		return nil, errno.RequestValidateError.WithData(err.Error())
 	}
 
 	serialized, err := tree.Serialize()
 	if err != nil {
-		return nil, err
+		return nil, errno.DataConversionError.WithData(err.Error())
 	}
 	s.tree = serialized
 
@@ -126,7 +126,7 @@ func (s *service) GetTree(_ context.Context) (*pkgtree.FileNode, error) {
 
 	tree, err := pkgtree.Deserialize(s.tree)
 	if err != nil {
-		return nil, err
+		return nil, errno.DataConversionError.WithData(err.Error())
 	}
 	return tree, nil
 }

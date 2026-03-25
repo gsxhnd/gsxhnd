@@ -30,5 +30,9 @@ func TestCheck(t *testing.T) {
 	var body map[string]any
 	err = json.NewDecoder(resp.Body).Decode(&body)
 	require.NoError(t, err)
-	assert.Equal(t, "ok", body["status"])
+
+	assert.Equal(t, float64(0), body["code"])
+	assert.Equal(t, "OK", body["message"])
+
+	assert.Equal(t, "ok", body["data"])
 }

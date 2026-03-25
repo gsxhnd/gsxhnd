@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"go_sample_code/internal/errno"
 	"go_sample_code/pkg/logger"
 
 	"github.com/gofiber/fiber/v2"
@@ -16,9 +17,9 @@ func Recovery(log logger.Logger) fiber.Handler {
 					zap.String("path", c.Path()),
 				)
 
-				c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-					"error": "internal server error",
-				})
+				err := errno.InternalServerError
+				decoded := errno.Decode(nil, err)
+				c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 			}
 		}()
 

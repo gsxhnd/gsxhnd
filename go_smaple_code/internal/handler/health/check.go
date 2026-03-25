@@ -1,9 +1,12 @@
 package health
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"go_sample_code/internal/errno"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func (h *handler) Check(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"status": "ok",
-	})
+	decoded := errno.Decode("ok", nil)
+	return c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 }

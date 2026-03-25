@@ -66,7 +66,7 @@ func TestAddNodeAndQueryEndpoints(t *testing.T) {
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
 
 	body := parseBody(t, resp.Body)
-	files, ok := body["files"].([]any)
+	files, ok := body["data"].([]any)
 	require.True(t, ok)
 	require.Len(t, files, 1)
 
@@ -80,7 +80,9 @@ func TestAddNodeAndQueryEndpoints(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
 
-	tree := parseBody(t, resp.Body)
+	treeBody := parseBody(t, resp.Body)
+	tree, ok := treeBody["data"].(map[string]any)
+	require.True(t, ok)
 	assert.Equal(t, "root", tree["name"])
 	assert.Equal(t, true, tree["is_dir"])
 }
@@ -95,7 +97,9 @@ func TestAddNodeValidationError(t *testing.T) {
 	require.Equal(t, fiber.StatusBadRequest, resp.StatusCode)
 
 	body := parseBody(t, resp.Body)
-	assert.Equal(t, "file_id must be greater than 0", body["error"])
+	assert.Equal(t, float64(1003), body["code"])
+	assert.Equal(t, "Request Validate Error", body["message"])
+	assert.Equal(t, "file_id must be greater than 0", body["data"])
 }
 
 func TestAddNodeInvalidBody(t *testing.T) {
@@ -108,7 +112,9 @@ func TestAddNodeInvalidBody(t *testing.T) {
 	require.Equal(t, fiber.StatusBadRequest, resp.StatusCode)
 
 	body := parseBody(t, resp.Body)
-	assert.Equal(t, "invalid request body", body["error"])
+	assert.Equal(t, float64(1002), body["code"])
+	assert.Equal(t, "Request Parser Error", body["message"])
+	assert.NotNil(t, body["data"])
 }
 
 func TestRenameAndRemoveEndpoints(t *testing.T) {
