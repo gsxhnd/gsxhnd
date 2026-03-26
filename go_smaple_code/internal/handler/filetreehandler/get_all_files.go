@@ -7,7 +7,7 @@ import (
 )
 
 func (h *handler) GetAllFiles(c *fiber.Ctx) error {
-	files, err := h.svc.GetAllFiles(c.UserContext())
+	files, err := h.svc.GetAllFiles(requestContext(c))
 	if err != nil {
 		h.log.Warn("failed to get files")
 		decoded := errno.Decode(nil, err)

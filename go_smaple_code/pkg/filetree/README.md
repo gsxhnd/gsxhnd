@@ -36,6 +36,9 @@ type FileNode struct {
     FileID   uint64      `json:"file_id,omitempty"` // 文件 ID（仅文件节点有值，目录节点省略）
     Children []*FileNode `json:"children"`    // 子节点列表
 }
+
+// SetMaxDepth 设置目录最大深度（必须 > 0）
+func (f *FileNode) SetMaxDepth(maxDepth int) error
 ```
 
 ### 2. 序列化/反序列化
@@ -50,11 +53,14 @@ func Serialize(root *FileNode) (string, error) {
     return string(data), nil
 }
 
-// Deserialize 将 JSON 字符串反序列化为 N 叉树
-func Deserialize(data string) (*FileNode, error) {
+// Deserialize 将 JSON 字符串反序列化为 N 叉树，并要求传入最大深度配置
+func Deserialize(data string, maxDepth int) (*FileNode, error) {
     var root *FileNode
     err := json.Unmarshal([]byte(data), &root)
     if err != nil {
+        return nil, err
+    }
+    if err := root.SetMaxDepth(maxDepth); err != nil {
         return nil, err
     }
     return root, nil
@@ -115,6 +121,7 @@ func AddFile(root *FileNode, dirPath string, fileName string, fileID uint64) err
 
 // AddDir 添加子目录到指定目录
 func AddDir(root *FileNode, parentPath, dirName string) error {
+    // 新目录深度 = parentPath 深度 + 1，超过最大深度时返回错误
     parent := FindNode(root, parentPath)
     if parent == nil || !parent.IsDir {
         return fmt.Errorf("目录不存在：%s", parentPath)
@@ -173,6 +180,15 @@ func RenameNode(root *FileNode, oldPath, newName string) error {
     return nil
 }
 
+// MoveNode 移动节点到指定目录
+func MoveNode(root *FileNode, sourcePath, targetDirPath string) error {
+    // 1) 找到源节点和父目录
+    // 2) 校验目标目录存在且无重名
+    // 3) 目录禁止移动到自己或子目录下
+    // 4) 从源父目录摘除并挂载到目标目录
+    return nil
+}
+
 // GetFileID 获取文件的 ID
 func GetFileID(root *FileNode, path string) (uint64, error) {
     node := FindNode(root, path)
@@ -220,8 +236,8 @@ func main() {
         ]
     }`
     
-    // 2. 反序列化为 N 叉树
-    tree, err := Deserialize(dbJSON)
+    // 2. 反序列化为 N 叉树（必须传入最大深度）
+    tree, err := Deserialize(dbJSON, 30)
     if err != nil {
         log.Fatal(err)
     }
@@ -251,14 +267,20 @@ func main() {
         log.Fatal(err)
     }
     
-    // 7. 获取文件 FileID
-    fileID, err := GetFileID(tree, "src/utils.go")
+    // 7. 移动文件
+    err = MoveNode(tree, "src/utils.go", "docs")
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 8. 获取文件 FileID
+    fileID, err := GetFileID(tree, "docs/utils.go")
     if err != nil {
         log.Fatal(err)
     }
     fmt.Printf("文件 FileID: %d\n", fileID)
     
-    // 8. 序列化存储回数据库
+    // 9. 序列化存储回数据库
     result, err := Serialize(tree)
     if err != nil {
         log.Fatal(err)

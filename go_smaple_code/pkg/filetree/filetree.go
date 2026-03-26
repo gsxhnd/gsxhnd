@@ -12,6 +12,7 @@ type FileNode struct {
 	IsDir    bool        `json:"is_dir"`
 	FileID   uint64      `json:"file_id,omitempty"`
 	Children []*FileNode `json:"children"`
+	maxDepth int         `json:"-"`
 }
 
 type FileEntry struct {
@@ -28,14 +29,65 @@ func (f *FileNode) Serialize() (string, error) {
 	return string(data), nil
 }
 
-// Deserialize converts a JSON string to an N-ary tree
-func Deserialize(data string) (*FileNode, error) {
+// Deserialize converts a JSON string to an N-ary tree with max depth config.
+func Deserialize(data string, maxDepth int) (*FileNode, error) {
 	var root *FileNode
 	err := json.Unmarshal([]byte(data), &root)
 	if err != nil {
 		return nil, err
 	}
+	if root != nil {
+		if err := root.SetMaxDepth(maxDepth); err != nil {
+			return nil, err
+		}
+	}
 	return root, nil
+}
+
+// SetMaxDepth sets the maximum allowed directory depth for AddDir.
+func (f *FileNode) SetMaxDepth(maxDepth int) error {
+	if f == nil {
+		return fmt.Errorf("file tree is nil")
+	}
+	if maxDepth <= 0 {
+		return fmt.Errorf("max depth must be greater than 0")
+	}
+	f.maxDepth = maxDepth
+	return nil
+}
+
+func (f *FileNode) configuredMaxDepth() (int, error) {
+	if f == nil {
+		return 0, fmt.Errorf("file tree is nil")
+	}
+	if f.maxDepth <= 0 {
+		return 0, fmt.Errorf("max depth is not configured")
+	}
+	return f.maxDepth, nil
+}
+
+func pathDepth(path string) int {
+	trimmed := strings.Trim(path, "/")
+	if trimmed == "" {
+		return 0
+	}
+	return len(strings.Split(trimmed, "/"))
+}
+
+func maxDirDepthInSubtree(node *FileNode) int {
+	if node == nil || !node.IsDir {
+		return 0
+	}
+
+	maxDepth := 1
+	for _, child := range node.Children {
+		childDepth := 1 + maxDirDepthInSubtree(child)
+		if childDepth > maxDepth {
+			maxDepth = childDepth
+		}
+	}
+
+	return maxDepth
 }
 
 // FindNode finds the node at the specified path
@@ -88,9 +140,19 @@ func (f *FileNode) AddFile(dirPath string, fileName string, fileID uint64) error
 
 // AddDir adds a subdirectory to the specified directory
 func (f *FileNode) AddDir(parentPath, dirName string) error {
+	maxDepth, err := f.configuredMaxDepth()
+	if err != nil {
+		return err
+	}
+
 	parent := f.FindNode(parentPath)
 	if parent == nil || !parent.IsDir {
 		return fmt.Errorf("directory does not exist: %s", parentPath)
+	}
+
+	newDepth := pathDepth(parentPath) + 1
+	if newDepth > maxDepth {
+		return fmt.Errorf("directory depth exceeds maximum: %d", maxDepth)
 	}
 
 	for _, child := range parent.Children {
@@ -141,6 +203,72 @@ func (f *FileNode) RenameNode(oldPath, newName string) error {
 	}
 
 	node.Name = newName
+	return nil
+}
+
+// MoveNode moves the node at sourcePath into targetDirPath.
+func (f *FileNode) MoveNode(sourcePath, targetDirPath string) error {
+	if sourcePath == "" || sourcePath == "/" {
+		return fmt.Errorf("cannot move root directory")
+	}
+
+	parts := strings.Split(strings.Trim(sourcePath, "/"), "/")
+	nodeName := parts[len(parts)-1]
+	sourceParentPath := strings.Join(parts[:len(parts)-1], "/")
+
+	sourceParent := f.FindNode(sourceParentPath)
+	if sourceParent == nil || !sourceParent.IsDir {
+		return fmt.Errorf("parent directory does not exist: %s", sourceParentPath)
+	}
+
+	moveIdx := -1
+	var nodeToMove *FileNode
+	for i, child := range sourceParent.Children {
+		if child.Name == nodeName {
+			moveIdx = i
+			nodeToMove = child
+			break
+		}
+	}
+	if moveIdx == -1 {
+		return fmt.Errorf("node does not exist: %s", sourcePath)
+	}
+
+	targetDir := f.FindNode(targetDirPath)
+	if targetDir == nil || !targetDir.IsDir {
+		return fmt.Errorf("directory does not exist: %s", targetDirPath)
+	}
+
+	trimmedSource := strings.Trim(sourcePath, "/")
+	trimmedTarget := strings.Trim(targetDirPath, "/")
+	if nodeToMove.IsDir && (trimmedTarget == trimmedSource || strings.HasPrefix(trimmedTarget, trimmedSource+"/")) {
+		return fmt.Errorf("cannot move directory into itself: %s", targetDirPath)
+	}
+
+	if nodeToMove.IsDir {
+		maxDepth, err := f.configuredMaxDepth()
+		if err != nil {
+			return err
+		}
+		resultDepth := pathDepth(targetDirPath) + maxDirDepthInSubtree(nodeToMove)
+		if resultDepth > maxDepth {
+			return fmt.Errorf("directory depth exceeds maximum: %d", maxDepth)
+		}
+	}
+
+	if sourceParent == targetDir {
+		return nil
+	}
+
+	for _, child := range targetDir.Children {
+		if child.Name == nodeToMove.Name {
+			return fmt.Errorf("node already exists in target directory: %s", nodeToMove.Name)
+		}
+	}
+
+	sourceParent.Children = append(sourceParent.Children[:moveIdx], sourceParent.Children[moveIdx+1:]...)
+	targetDir.Children = append(targetDir.Children, nodeToMove)
+
 	return nil
 }
 

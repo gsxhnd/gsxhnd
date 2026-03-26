@@ -8,7 +8,6 @@ import (
 	filetreehandler "go_sample_code/internal/handler/filetreehandler"
 	healthhandler "go_sample_code/internal/handler/health"
 	"go_sample_code/internal/middleware"
-	filetreeservice "go_sample_code/internal/service/filetree"
 	"go_sample_code/pkg/logger"
 
 	"github.com/gofiber/fiber/v2"
@@ -29,7 +28,6 @@ func main() {
 		fx.Provide(
 			NewLogger,
 			NewFiberApp,
-			filetreeservice.NewService,
 			healthhandler.NewHandler,
 			filetreehandler.NewHandler,
 		),
@@ -68,6 +66,7 @@ func RegisterHooks(
 			api.Post("/node", fileTreeHandler.AddNode)
 			api.Delete("/node", fileTreeHandler.RemoveNode)
 			api.Put("/rename", fileTreeHandler.RenameNode)
+			api.Put("/move", fileTreeHandler.MoveNode)
 			api.Get("/files", fileTreeHandler.GetAllFiles)
 			api.Get("/tree", fileTreeHandler.GetTree)
 

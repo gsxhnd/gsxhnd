@@ -7,7 +7,7 @@ import (
 )
 
 func (h *handler) GetTree(c *fiber.Ctx) error {
-	tree, err := h.svc.GetTree(c.UserContext())
+	tree, err := h.svc.GetTree(requestContext(c))
 	if err != nil {
 		h.log.Warn("failed to get tree")
 		decoded := errno.Decode(nil, err)

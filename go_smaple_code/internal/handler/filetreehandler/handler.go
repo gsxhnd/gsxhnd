@@ -11,6 +11,7 @@ type Handler interface {
 	AddNode(c *fiber.Ctx) error
 	RemoveNode(c *fiber.Ctx) error
 	RenameNode(c *fiber.Ctx) error
+	MoveNode(c *fiber.Ctx) error
 	GetAllFiles(c *fiber.Ctx) error
 	GetTree(c *fiber.Ctx) error
 }

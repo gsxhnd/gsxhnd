@@ -6,17 +6,17 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func (h *handler) RenameNode(c *fiber.Ctx) error {
-	var req RenameNodeRequest
+func (h *handler) MoveNode(c *fiber.Ctx) error {
+	var req MoveNodeRequest
 	if err := c.BodyParser(&req); err != nil {
 		err = errno.RequestParserError.WithData(err.Error())
 		decoded := errno.Decode(nil, err)
 		return c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 	}
 
-	tree, err := h.svc.RenameNode(requestContext(c), req.OldPath, req.NewName)
+	tree, err := h.svc.MoveNode(requestContext(c), req.SourcePath, req.TargetDirPath)
 	if err != nil {
-		h.log.Warn("failed to rename node")
+		h.log.Warn("failed to move node")
 		decoded := errno.Decode(nil, err)
 		return c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 	}

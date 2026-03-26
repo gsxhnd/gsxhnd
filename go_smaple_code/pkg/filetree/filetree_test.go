@@ -1,6 +1,7 @@
 package filetree
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -29,7 +30,7 @@ func TestDeserialize(t *testing.T) {
         ]
     }`
 
-	tree, err := Deserialize(dbJSON)
+	tree, err := Deserialize(dbJSON, 20)
 	require.NoError(t, err, "deserialization failed")
 	assert.Len(t, tree.Children, 2, "root should have 2 children")
 }
@@ -67,6 +68,7 @@ func TestAddDir(t *testing.T) {
 			},
 		},
 	}
+	require.NoError(t, tree.SetMaxDepth(20))
 
 	err := tree.AddDir("src", "pkg")
 	require.NoError(t, err, "failed to add directory")
@@ -74,6 +76,41 @@ func TestAddDir(t *testing.T) {
 	node := tree.FindNode("src/pkg")
 	require.NotNil(t, node, "cannot find newly added directory")
 	assert.True(t, node.IsDir, "should be a directory")
+}
+
+func TestAddDirDepthLimit(t *testing.T) {
+	t.Run("default max depth is 20", func(t *testing.T) {
+		tree := &FileNode{Name: "root", IsDir: true, Children: []*FileNode{}}
+		require.NoError(t, tree.SetMaxDepth(20))
+
+		parent := "/"
+		for i := 1; i <= 20; i++ {
+			dirName := "d" + strconv.Itoa(i)
+			require.NoError(t, tree.AddDir(parent, dirName))
+			if parent == "/" {
+				parent = "/" + dirName
+			} else {
+				parent = parent + "/" + dirName
+			}
+		}
+
+		err := tree.AddDir(parent, "overflow")
+		require.Error(t, err)
+		assert.Contains(t, err.Error(), "directory depth exceeds maximum: 20")
+	})
+
+	t.Run("max depth can be configured", func(t *testing.T) {
+		tree := &FileNode{Name: "root", IsDir: true, Children: []*FileNode{}}
+		require.NoError(t, tree.SetMaxDepth(3))
+
+		require.NoError(t, tree.AddDir("/", "a"))
+		require.NoError(t, tree.AddDir("/a", "b"))
+		require.NoError(t, tree.AddDir("/a/b", "c"))
+
+		err := tree.AddDir("/a/b/c", "d")
+		require.Error(t, err)
+		assert.Contains(t, err.Error(), "directory depth exceeds maximum: 3")
+	})
 }
 
 func TestRemoveNode(t *testing.T) {
@@ -436,6 +473,231 @@ func TestRenameNode(t *testing.T) {
 
 	oldNode := tree.FindNode("src/main.go")
 	assert.Nil(t, oldNode, "old name node should not exist")
+}
+
+func TestMoveNode(t *testing.T) {
+	tests := []struct {
+		name        string
+		tree        *FileNode
+		sourcePath  string
+		targetPath  string
+		wantErr     bool
+		errContains string
+		verifyFunc  func(t *testing.T, tree *FileNode)
+	}{
+		{
+			name: "move file to another directory",
+			tree: &FileNode{
+				Name:  "root",
+				IsDir: true,
+				Children: []*FileNode{
+					{
+						Name:  "docs",
+						IsDir: true,
+						Children: []*FileNode{
+							{Name: "readme.md", IsDir: false, FileID: 1001},
+						},
+					},
+					{
+						Name:     "archive",
+						IsDir:    true,
+						Children: []*FileNode{},
+					},
+				},
+			},
+			sourcePath: "docs/readme.md",
+			targetPath: "archive",
+			verifyFunc: func(t *testing.T, tree *FileNode) {
+				assert.Nil(t, tree.FindNode("docs/readme.md"), "source path should no longer exist")
+				moved := tree.FindNode("archive/readme.md")
+				require.NotNil(t, moved, "moved file should exist in target")
+				assert.Equal(t, uint64(1001), moved.FileID, "file ID should be preserved")
+			},
+		},
+		{
+			name: "move directory with children",
+			tree: &FileNode{
+				Name:  "root",
+				IsDir: true,
+				Children: []*FileNode{
+					{
+						Name:  "src",
+						IsDir: true,
+						Children: []*FileNode{
+							{Name: "main.go", IsDir: false, FileID: 1002},
+						},
+					},
+					{
+						Name:     "backup",
+						IsDir:    true,
+						Children: []*FileNode{},
+					},
+				},
+			},
+			sourcePath: "src",
+			targetPath: "backup",
+			verifyFunc: func(t *testing.T, tree *FileNode) {
+				assert.Nil(t, tree.FindNode("src"), "old directory path should not exist")
+				movedDir := tree.FindNode("backup/src")
+				require.NotNil(t, movedDir, "moved directory should exist")
+				assert.NotNil(t, tree.FindNode("backup/src/main.go"), "nested children should move together")
+			},
+		},
+		{
+			name: "move root should fail",
+			tree: &FileNode{
+				Name:     "root",
+				IsDir:    true,
+				Children: []*FileNode{},
+			},
+			sourcePath:  "/",
+			targetPath:  "docs",
+			wantErr:     true,
+			errContains: "cannot move root directory",
+		},
+		{
+			name: "target directory does not exist",
+			tree: &FileNode{
+				Name:  "root",
+				IsDir: true,
+				Children: []*FileNode{
+					{
+						Name:  "docs",
+						IsDir: true,
+						Children: []*FileNode{
+							{Name: "readme.md", IsDir: false, FileID: 1001},
+						},
+					},
+				},
+			},
+			sourcePath:  "docs/readme.md",
+			targetPath:  "missing",
+			wantErr:     true,
+			errContains: "directory does not exist",
+		},
+		{
+			name: "move directory into itself should fail",
+			tree: &FileNode{
+				Name:  "root",
+				IsDir: true,
+				Children: []*FileNode{
+					{
+						Name:  "src",
+						IsDir: true,
+						Children: []*FileNode{
+							{
+								Name:     "pkg",
+								IsDir:    true,
+								Children: []*FileNode{},
+							},
+						},
+					},
+				},
+			},
+			sourcePath:  "src",
+			targetPath:  "src/pkg",
+			wantErr:     true,
+			errContains: "cannot move directory into itself",
+		},
+		{
+			name: "name conflict in target directory",
+			tree: &FileNode{
+				Name:  "root",
+				IsDir: true,
+				Children: []*FileNode{
+					{
+						Name:  "docs",
+						IsDir: true,
+						Children: []*FileNode{
+							{Name: "readme.md", IsDir: false, FileID: 1001},
+						},
+					},
+					{
+						Name:  "archive",
+						IsDir: true,
+						Children: []*FileNode{
+							{Name: "readme.md", IsDir: false, FileID: 2001},
+						},
+					},
+				},
+			},
+			sourcePath:  "docs/readme.md",
+			targetPath:  "archive",
+			wantErr:     true,
+			errContains: "node already exists in target directory",
+		},
+		{
+			name: "move to same directory is no-op",
+			tree: &FileNode{
+				Name:  "root",
+				IsDir: true,
+				Children: []*FileNode{
+					{
+						Name:  "docs",
+						IsDir: true,
+						Children: []*FileNode{
+							{Name: "readme.md", IsDir: false, FileID: 1001},
+						},
+					},
+				},
+			},
+			sourcePath: "docs/readme.md",
+			targetPath: "docs",
+			verifyFunc: func(t *testing.T, tree *FileNode) {
+				node := tree.FindNode("docs/readme.md")
+				require.NotNil(t, node, "file should remain in same directory")
+				docs := tree.FindNode("docs")
+				require.NotNil(t, docs, "docs should exist")
+				assert.Len(t, docs.Children, 1, "should not duplicate children")
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			require.NoError(t, tt.tree.SetMaxDepth(20))
+			err := tt.tree.MoveNode(tt.sourcePath, tt.targetPath)
+
+			if tt.wantErr {
+				assert.Error(t, err, "expected an error")
+				if tt.errContains != "" {
+					assert.Contains(t, err.Error(), tt.errContains, "error message should contain expected text")
+				}
+				return
+			}
+
+			require.NoError(t, err, "expected no error")
+			if tt.verifyFunc != nil {
+				tt.verifyFunc(t, tt.tree)
+			}
+		})
+	}
+}
+
+func TestMoveNodeRespectsDepthLimit(t *testing.T) {
+	tree := &FileNode{
+		Name:  "root",
+		IsDir: true,
+		Children: []*FileNode{
+			{
+				Name:  "a",
+				IsDir: true,
+				Children: []*FileNode{
+					{Name: "b", IsDir: true, Children: []*FileNode{}},
+				},
+			},
+			{
+				Name:     "target",
+				IsDir:    true,
+				Children: []*FileNode{},
+			},
+		},
+	}
+	require.NoError(t, tree.SetMaxDepth(2))
+
+	err := tree.MoveNode("a", "target")
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "directory depth exceeds maximum: 2")
 }
 
 func TestGetFileID(t *testing.T) {

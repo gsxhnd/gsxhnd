@@ -3,6 +3,7 @@ package filetreehandler_test
 import (
 	"encoding/json"
 	"io"
+	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
@@ -22,7 +23,8 @@ func newTestApp(t *testing.T) *fiber.App {
 	log, err := logger.NewLogger(logger.DefaultConfig())
 	require.NoError(t, err)
 
-	svc := filetreeservice.NewService()
+	svc, err := filetreeservice.NewService(20)
+	require.NoError(t, err)
 	h := filetreehandler.NewHandler(log, svc)
 
 	app := fiber.New()
@@ -30,10 +32,16 @@ func newTestApp(t *testing.T) *fiber.App {
 	api.Post("/node", h.AddNode)
 	api.Delete("/node", h.RemoveNode)
 	api.Put("/rename", h.RenameNode)
+	api.Put("/move", h.MoveNode)
 	api.Get("/files", h.GetAllFiles)
 	api.Get("/tree", h.GetTree)
 
 	return app
+}
+
+func setRequestHeaders(req *http.Request) {
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("X-User-ID", "test-user")
 }
 
 func parseBody(t *testing.T, body io.Reader) map[string]any {
@@ -49,18 +57,19 @@ func TestAddNodeAndQueryEndpoints(t *testing.T) {
 	app := newTestApp(t)
 
 	req := httptest.NewRequest("POST", "/api/filetree/node", strings.NewReader(`{"parent_path":"/","name":"docs","is_dir":true}`))
-	req.Header.Set("Content-Type", "application/json")
+	setRequestHeaders(req)
 	resp, err := app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
 
 	req = httptest.NewRequest("POST", "/api/filetree/node", strings.NewReader(`{"parent_path":"/docs","name":"readme.md","is_dir":false,"file_id":1001}`))
-	req.Header.Set("Content-Type", "application/json")
+	setRequestHeaders(req)
 	resp, err = app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
 
 	req = httptest.NewRequest("GET", "/api/filetree/files", nil)
+	setRequestHeaders(req)
 	resp, err = app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
@@ -76,6 +85,7 @@ func TestAddNodeAndQueryEndpoints(t *testing.T) {
 	assert.Equal(t, float64(1001), entry["file_id"])
 
 	req = httptest.NewRequest("GET", "/api/filetree/tree", nil)
+	setRequestHeaders(req)
 	resp, err = app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
@@ -91,7 +101,7 @@ func TestAddNodeValidationError(t *testing.T) {
 	app := newTestApp(t)
 
 	req := httptest.NewRequest("POST", "/api/filetree/node", strings.NewReader(`{"parent_path":"/","name":"readme.md","is_dir":false}`))
-	req.Header.Set("Content-Type", "application/json")
+	setRequestHeaders(req)
 	resp, err := app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusBadRequest, resp.StatusCode)
@@ -106,7 +116,7 @@ func TestAddNodeInvalidBody(t *testing.T) {
 	app := newTestApp(t)
 
 	req := httptest.NewRequest("POST", "/api/filetree/node", strings.NewReader(`{"parent_path":`))
-	req.Header.Set("Content-Type", "application/json")
+	setRequestHeaders(req)
 	resp, err := app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusBadRequest, resp.StatusCode)
@@ -121,26 +131,53 @@ func TestRenameAndRemoveEndpoints(t *testing.T) {
 	app := newTestApp(t)
 
 	req := httptest.NewRequest("POST", "/api/filetree/node", strings.NewReader(`{"parent_path":"/","name":"docs","is_dir":true}`))
-	req.Header.Set("Content-Type", "application/json")
+	setRequestHeaders(req)
 	resp, err := app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
 
 	req = httptest.NewRequest("POST", "/api/filetree/node", strings.NewReader(`{"parent_path":"/docs","name":"readme.md","is_dir":false,"file_id":1001}`))
-	req.Header.Set("Content-Type", "application/json")
+	setRequestHeaders(req)
+	resp, err = app.Test(req)
+	require.NoError(t, err)
+	require.Equal(t, fiber.StatusOK, resp.StatusCode)
+
+	req = httptest.NewRequest("POST", "/api/filetree/node", strings.NewReader(`{"parent_path":"/","name":"archive","is_dir":true}`))
+	setRequestHeaders(req)
 	resp, err = app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
 
 	req = httptest.NewRequest("PUT", "/api/filetree/rename", strings.NewReader(`{"old_path":"/docs/readme.md","new_name":"README.md"}`))
-	req.Header.Set("Content-Type", "application/json")
+	setRequestHeaders(req)
 	resp, err = app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
 
-	req = httptest.NewRequest("DELETE", "/api/filetree/node", strings.NewReader(`{"path":"/docs/README.md"}`))
-	req.Header.Set("Content-Type", "application/json")
+	req = httptest.NewRequest("PUT", "/api/filetree/move", strings.NewReader(`{"source_path":"/docs/README.md","target_dir_path":"/archive"}`))
+	setRequestHeaders(req)
 	resp, err = app.Test(req)
 	require.NoError(t, err)
 	require.Equal(t, fiber.StatusOK, resp.StatusCode)
+
+	req = httptest.NewRequest("DELETE", "/api/filetree/node", strings.NewReader(`{"path":"/archive/README.md"}`))
+	setRequestHeaders(req)
+	resp, err = app.Test(req)
+	require.NoError(t, err)
+	require.Equal(t, fiber.StatusOK, resp.StatusCode)
+}
+
+func TestMoveNodeValidationError(t *testing.T) {
+	app := newTestApp(t)
+
+	req := httptest.NewRequest("PUT", "/api/filetree/move", strings.NewReader(`{"source_path":"/missing.md","target_dir_path":"/docs"}`))
+	setRequestHeaders(req)
+	resp, err := app.Test(req)
+	require.NoError(t, err)
+	require.Equal(t, fiber.StatusBadRequest, resp.StatusCode)
+
+	body := parseBody(t, resp.Body)
+	assert.Equal(t, float64(1003), body["code"])
+	assert.Equal(t, "Request Validate Error", body["message"])
+	assert.NotNil(t, body["data"])
 }

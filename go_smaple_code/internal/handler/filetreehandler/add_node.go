@@ -14,7 +14,7 @@ func (h *handler) AddNode(c *fiber.Ctx) error {
 		return c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 	}
 
-	tree, err := h.svc.AddNode(c.UserContext(), req.ParentPath, req.Name, req.IsDir, req.FileID)
+	tree, err := h.svc.AddNode(requestContext(c), req.ParentPath, req.Name, req.IsDir, req.FileID)
 	if err != nil {
 		h.log.Warn("failed to add node")
 		decoded := errno.Decode(nil, err)

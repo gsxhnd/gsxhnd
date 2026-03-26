@@ -14,7 +14,7 @@ func (h *handler) RemoveNode(c *fiber.Ctx) error {
 		return c.Status(decoded.GetHTTPStatus()).JSON(decoded)
 	}
 
-	tree, err := h.svc.RemoveNode(c.UserContext(), req.Path)
+	tree, err := h.svc.RemoveNode(requestContext(c), req.Path)
 	if err != nil {
 		h.log.Warn("failed to remove node")
 		decoded := errno.Decode(nil, err)

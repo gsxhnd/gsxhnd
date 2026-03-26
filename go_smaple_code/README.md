@@ -56,35 +56,17 @@ curl http://localhost:8080/api/health
 
 ```bash
 # 添加节点（目录）
-curl -X POST http://localhost:8080/api/filetree/node \
-  -H "Content-Type: application/json" \
-  -d '{"parent_path": "/", "name": "docs", "is_dir": true}'
-
 # 添加节点（文件）
-curl -X POST http://localhost:8080/api/filetree/node \
-  -H "Content-Type: application/json" \
-  -d '{"parent_path": "/docs", "name": "readme.md", "is_dir": false, "file_id": 1001}'
-
 # 获取完整树结构
-curl http://localhost:8080/api/filetree/tree
-
 # 获取所有文件
-curl http://localhost:8080/api/filetree/files
-
 # 重命名节点
-curl -X PUT http://localhost:8080/api/filetree/rename \
-  -H "Content-Type: application/json" \
-  -d '{"old_path": "/docs/readme.md", "new_name": "README.md"}'
-
 # 删除节点
-curl -X DELETE http://localhost:8080/api/filetree/node \
-  -H "Content-Type: application/json" \
-  -d '{"path": "/docs/README.md"}'
 ```
 
 ## 📝 开发指南
 
 每个模块都包含：
+
 - 完整的实现代码
 - 单元测试
 - 使用文档

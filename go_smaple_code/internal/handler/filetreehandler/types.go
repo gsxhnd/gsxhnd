@@ -15,3 +15,8 @@ type RenameNodeRequest struct {
 	OldPath string `json:"old_path"`
 	NewName string `json:"new_name"`
 }
+
+type MoveNodeRequest struct {
+	SourcePath    string `json:"source_path"`
+	TargetDirPath string `json:"target_dir_path"`
+}
