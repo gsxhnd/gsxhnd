@@ -596,12 +596,7 @@
   "news": {
     "title": "News",
     "subtitle": "Latest Updates",
-    "categories": [
-      "ALL",
-      "News",
-      "Press Release",
-      "Event"
-    ],
+    "categories": ["ALL", "News", "Press Release", "Event"],
     "empty": "No news articles yet.",
     "first": "First",
     "last": "Last",
@@ -612,32 +607,73 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "policy": {
-      "title": "Personal Information Protection Policy",
-      "content": "{company} complies with the Personal Information Protection Act and related laws and guidelines, and handles personal information appropriately."
-    },
-    "definition": {
-      "title": "Definition of Personal Information",
-      "content": "Personal information refers to information that can identify an individual or may potentially identify an individual."
-    },
-    "collection": {
-      "title": "Collection of Personal Information",
-      "content": "We collect customers' personal information through contact forms, email, phone, and other means. Collected information is used only for the following purposes.",
-      "items": [
-        "Responding to inquiries",
-        "Service provision",
-        "Billing and payment processing",
-        "Project progress reports",
-        "Marketing information (with consent only)"
-      ]
-    },
-    "management": {
-      "title": "Management of Personal Information",
-      "content": "We implement appropriate security measures for collected personal information and will not disclose or provide it to third parties without legitimate reason."
-    },
-    "contactInfo": {
-      "title": "Contact Information",
-      "content": "If you have any questions about the handling of personal information, please contact us at the following address."
+    "intro": "Stargazers Club (hereinafter referred to as 'our company') has established the following personal information protection policy, built a mechanism for personal information protection, made all employees aware of the importance of personal information protection, and thoroughly implemented measures to promote personal information protection.",
+    "sections": [
+      {
+        "id": "collection",
+        "title": "Personal Information Collected",
+        "content": "Our company collects the following personal information through the contact form:",
+        "items": [
+          "Name",
+          "Company name",
+          "Email address",
+          "Phone number",
+          "Inquiry content"
+        ]
+      },
+      {
+        "id": "management",
+        "title": "Management of Personal Information",
+        "content": "Our company keeps customers' personal information accurate and up-to-date. To prevent unauthorized access, loss, damage, tampering, or leakage of personal information, we take necessary measures such as maintaining security systems, developing management structures, and strengthening employee training to strictly manage personal information."
+      },
+      {
+        "id": "purpose",
+        "title": "Purpose of Use of Personal Information",
+        "content": "Personal information obtained from customers will be used by our company to contact you, send business notices, respond to your inquiries or questions, and send emails or materials."
+      },
+      {
+        "id": "third-party",
+        "title": "Prohibition of Disclosure/Provision of Personal Information to Third Parties",
+        "content": "Our company properly manages personal information obtained from customers and will not disclose it to third parties except in the following cases:",
+        "items": [
+          "When there is customer consent",
+          "When disclosing to a service provider to whom our company has entrusted business in order to provide the service desired by the customer",
+          "When required by law to disclose"
+        ]
+      },
+      {
+        "id": "security",
+        "title": "Security Measures for Personal Information",
+        "content": "Our company takes comprehensive security measures to ensure the accuracy and security of personal information."
+      },
+      {
+        "id": "inquiry",
+        "title": "Inquiry by the Person",
+        "content": "If a customer wishes to inquire, correct, or delete their own personal information, we will respond after confirming that it is the person."
+      },
+      {
+        "id": "compliance",
+        "title": "Compliance with Laws, Regulations and Review",
+        "content": "Our company complies with Japanese laws and other regulations applicable to the personal information we hold, and will appropriately review the content of this policy and strive for improvement."
+      },
+      {
+        "id": "analytics",
+        "title": "About Access Analysis Tools",
+        "content": "This website uses 'Google Analytics', an access analysis tool provided by Google. This Google Analytics uses cookies to collect data. This data is collected anonymously and cannot identify individuals. You can refuse the collection by disabling cookies, so please check your browser settings.",
+        "items": [
+          "Google Analytics Terms of Service: https://marketingplatform.google.com/about/analytics/terms/jp/",
+          "Google Privacy Policy: https://policies.google.com/privacy"
+        ]
+      },
+      {
+        "id": "cookie",
+        "title": "About Cookie Usage",
+        "content": "This website uses cookies for access analysis. Cookies are small text files that are saved in your browser when you visit a website. For information on how to disable cookies, please check your browser's help page. However, please note that some functions of this website may not be available if you disable cookies."
+      }
+    ],
+    "contact": {
+      "title": "Contact Us",
+      "description": "If you have any inquiries regarding our company's handling of personal information, please contact us at the following address."
     }
   },
   "footer": {

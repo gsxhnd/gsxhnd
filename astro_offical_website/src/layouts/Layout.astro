@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_CONFIG } from "../config/site";
@@ -17,6 +18,7 @@ const { title = t("site.title") } = Astro.props;
 <!doctype html>
 <html lang={lang} style={`--headerHeight: ${SITE_CONFIG.layout.headerHeight}; --headerHeightMobile: ${SITE_CONFIG.layout.headerHeightMobile};`}>
   <head>
+    <ClientRouter />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />

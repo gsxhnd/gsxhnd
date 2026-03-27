@@ -67,7 +67,7 @@ const navigation = getNavigation(lang);
 
 <style>
   .header {
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     display: grid;
     place-items: center;
@@ -163,8 +163,9 @@ const navigation = getNavigation(lang);
     padding: var(--sp-xl) var(--sp-xl);
     background-color: var(--c-bg-alt);
     opacity: 0;
-    overflow-y: hidden;
+    overflow-y: auto;
     visibility: hidden;
+    pointer-events: none;
     transition-property: transform, opacity, background-color, visibility;
     transition-duration: var(--transition-slow);
     transition-timing-function: ease;
@@ -178,9 +179,10 @@ const navigation = getNavigation(lang);
       padding: 0;
       opacity: 1;
       visibility: visible;
+      pointer-events: auto;
       overflow-y: visible;
       background-color: transparent;
-      display: block;
+      align-items: center;
     }
   }
 
@@ -213,6 +215,7 @@ const navigation = getNavigation(lang);
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
+      margin-left: auto;
     }
   }
 
@@ -245,10 +248,10 @@ const navigation = getNavigation(lang);
     display: block;
     padding: var(--sp-sm) 0;
     color: var(--c-text);
-    font-size: var(--fs-lg);
+    font-size: var(--fs-base);
     font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: 0.025em;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
     text-decoration: none;
     transition: color var(--transition-base);
   }
@@ -256,7 +259,8 @@ const navigation = getNavigation(lang);
   @media (min-width: 900px) {
     .nav-list-link {
       padding: var(--sp-xs) 0;
-      font-size: var(--fs-sm);
+      font-size: 0.8125rem;
+      white-space: nowrap;
     }
   }
 
@@ -269,7 +273,7 @@ const navigation = getNavigation(lang);
     display: none;
     list-style: none;
     padding-left: var(--sp-lg);
-    margin-top: var(--sp-sm);
+    /* margin-top: var(--sp-sm); */
     margin-bottom: var(--sp-sm);
   }
 
@@ -285,7 +289,7 @@ const navigation = getNavigation(lang);
       padding: var(--sp-sm);
       min-width: 200px;
       box-shadow: var(--shadow-lg);
-      margin-top: var(--sp-xs);
+      /* margin-top: var(--sp-xs); */
     }
   }
 
@@ -345,61 +349,100 @@ const navigation = getNavigation(lang);
     const menuButton = document.querySelector(".menu-button");
     const menu = document.querySelector(".menu");
     const menuLinks = document.querySelectorAll(".menu a");
+    const isDesktop = () => window.matchMedia("(min-width: 900px)").matches;
+    const controller = new AbortController();
     let isOpen = false;
 
+    const closeMenu = () => {
+      menu?.classList.remove("is-open");
+      menuButton?.classList.remove("is-open");
+      document.body.style.overflow = "";
+      isOpen = false;
+    };
+
     // Reset state
-    menu?.classList.remove("is-open");
-    menuButton?.classList.remove("is-open");
-    document.body.style.overflow = "";
+    closeMenu();
+
+    const openMenu = () => {
+      menu?.classList.add("is-open");
+      menuButton?.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      isOpen = true;
+    };
 
     const toggleMenu = (e: Event) => {
       e.stopPropagation();
-      menu?.classList.toggle("is-open");
-      menuButton?.classList.toggle("is-open");
-      document.body.style.overflow = isOpen ? "" : "hidden";
-      isOpen = !isOpen;
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     };
 
-    menuButton?.addEventListener("click", (e) => toggleMenu(e));
+    menuButton?.addEventListener("click", (e) => toggleMenu(e), {
+      signal: controller.signal,
+    });
 
     menuLinks?.forEach((link) => {
-      link.addEventListener("click", (e) => toggleMenu(e));
+      link.addEventListener(
+        "click",
+        () => {
+          // Avoid scrollbar flicker on desktop nav; only close overlay menu on mobile.
+          if (!isDesktop() && isOpen) {
+            closeMenu();
+          }
+        },
+        { signal: controller.signal },
+      );
+    });
+
+    document.addEventListener("astro:before-swap", () => controller.abort(), {
+      once: true,
     });
   });
 </script>
 
 <script>
-  // Header hide on scroll
-  const header = document.getElementById("header");
-  let lastScroll = 0;
-  let ticking = false;
+  document.addEventListener("astro:page-load", () => {
+    const header = document.getElementById("header");
+    const controller = new AbortController();
+    let lastScroll = 0;
+    let ticking = false;
 
-  const updateHeader = () => {
-    const currentScroll = window.scrollY;
+    const updateHeader = () => {
+      const currentScroll = window.scrollY;
 
-    if (currentScroll <= 0) {
-      header?.classList.remove("is-hidden");
+      if (currentScroll <= 0) {
+        header?.classList.remove("is-hidden");
+        lastScroll = currentScroll;
+        ticking = false;
+        return;
+      }
+
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header?.classList.add("is-hidden");
+      } else if (currentScroll < lastScroll) {
+        header?.classList.remove("is-hidden");
+      }
+
       lastScroll = currentScroll;
       ticking = false;
-      return;
-    }
+    };
 
-    if (currentScroll > lastScroll && currentScroll > 100) {
-      header?.classList.add("is-hidden");
-    } else if (currentScroll < lastScroll) {
-      header?.classList.remove("is-hidden");
-    }
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    };
 
-    lastScroll = currentScroll;
-    ticking = false;
-  };
+    window.addEventListener("scroll", requestTick, {
+      passive: true,
+      signal: controller.signal,
+    });
 
-  const requestTick = () => {
-    if (!ticking) {
-      requestAnimationFrame(updateHeader);
-      ticking = true;
-    }
-  };
-
-  window.addEventListener("scroll", requestTick, { passive: true });
+    document.addEventListener("astro:before-swap", () => controller.abort(), {
+      once: true,
+    });
+  });
 </script>
