@@ -4,9 +4,9 @@
 
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Waving%20Hand.png" alt="Waving Hand" width="50" />
 
-# Hey, I'm gsxhnd
+# Hey, I'm gsxhnd ✨
 
-> Building reliable tools, backend systems, and developer-first products.
+> *Building things that matter. One line of code at a time.*
 
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=gsxhnd&theme=radical&hide_border=true&background=0D1117&stroke=F85D7F&ring=F85D7F&fire=F85D7F&currStreakNum=C9D1D9&sideNums=C9D1D9&currStreakLabel=C9D1D9&sideLabels=C9D1D9)](https://github.com/gsxhnd)
 
@@ -16,17 +16,21 @@
 
 ## 👨‍💻 About Me
 
-- Backend-focused developer who enjoys building fast, maintainable systems.
-- Comfortable across Go, Rust, TypeScript, and modern frontend tooling.
-- Interested in networking, infrastructure, framework design, and developer experience.
-- Usually exploring how to make tools smaller, clearer, and more dependable.
+- ⚡ Backend-focused developer who enjoys building fast, maintainable systems.
+- 🦀 Comfortable across Go, Rust, TypeScript, and modern frontend tooling.
+- 🌐 Interested in networking, infrastructure, framework design, and developer experience.
+- 🔍 Usually exploring how to make tools smaller, clearer, and more dependable.
 
 ## 🚀 What I Build
 
-- High-performance backend services and CLI tools.
-- Experimental frameworks and infrastructure-oriented side projects.
-- Frontend demos to validate UI systems and engineering ideas.
-- Learning projects that turn new stacks into reusable experience.
+- 🛠️ High-performance backend services and CLI tools.
+- 🧪 Experimental frameworks and infrastructure-oriented side projects.
+- 🎯 Frontend demos to validate UI systems and engineering ideas.
+- 📚 Learning projects that turn new stacks into reusable experience.
+
+## 🎈 A Few Keywords
+
+`Go` `Rust` `TypeScript` `CLI` `MQTT` `HTTP` `DX` `Infra` `Astro` `Vue`
 
 ## 🛠️ Tech Stack
 
@@ -108,6 +112,8 @@
 ## 💡 Philosophy
 
 > Code should be simple to use, easy to inspect, and reliable under pressure.
+
+> Build fast, keep it clear, and make it pleasant to maintain.
 
 <div align="center">
 
