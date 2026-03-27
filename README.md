@@ -8,7 +8,6 @@
 
 > Building reliable tools, backend systems, and developer-first products.
 
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=gsxhnd&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&icon_color=F85D7F&text_color=C9D1D9)](https://github.com/gsxhnd)
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=gsxhnd&theme=radical&hide_border=true&background=0D1117&stroke=F85D7F&ring=F85D7F&fire=F85D7F&currStreakNum=C9D1D9&sideNums=C9D1D9&currStreakLabel=C9D1D9&sideLabels=C9D1D9)](https://github.com/gsxhnd)
 
 </div>
