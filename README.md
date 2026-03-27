@@ -18,7 +18,36 @@
 
 ## 🛠️ Tech Stack
 
+### Code with
+
+![macos](https://img.shields.io/badge/macOS-M2-white?style=for-the-badge&logo=Apple)
+![ubuntu](https://img.shields.io/badge/-ubuntu-white?style=for-the-badge&logo=ubuntu)
+![vscode](https://img.shields.io/badge/-vscode-blue?style=for-the-badge&logo=visualstudiocode)
+![neovim](https://img.shields.io/badge/-Neovim-grey?style=for-the-badge&logo=neovim)
+![zsh](https://img.shields.io/badge/-zsh-grey?style=for-the-badge&logo=gnubash&logoColor=white)
+![git](https://img.shields.io/badge/-Git-ee462c?style=for-the-badge&logo=git&logoColor=white)
+![alacritty](https://img.shields.io/badge/-Alacritty-grey?style=for-the-badge&logo=alacritty)
+![obsidian](https://img.shields.io/badge/-Obsidian-grey?style=for-the-badge&logo=obsidian)
+
 ### Languages
+
+![go](https://img.shields.io/badge/-Go-grey?style=for-the-badge&logo=go)
+![rust](https://img.shields.io/badge/-Rust-grey?style=for-the-badge&logo=rust)
+![nodejs](https://img.shields.io/badge/-Node.js-3C873A?style=for-the-badge&logo=Node.js&logoColor=white)
+![typescript](https://img.shields.io/badge/-TypeScript-2b6dbf?style=for-the-badge&logo=typescript&logoColor=white)
+![javascript](https://img.shields.io/badge/JavaScript-ES6-f6da1c?style=for-the-badge&logo=javascript&logoColor=f6da1c)
+![python](https://img.shields.io/badge/Python-grey?style=for-the-badge&logo=python)
+![dart](https://img.shields.io/badge/Dart-grey?style=for-the-badge&logo=dart)
+
+![flutter](https://img.shields.io/badge/-Flutter-grey?style=for-the-badge&logo=flutter)
+![storybook](https://img.shields.io/badge/-Storybook-grey?style=for-the-badge&logo=storybook)
+![koa](https://img.shields.io/badge/-Koa-33333D?style=for-the-badge&logo=koa&logoColor=white)
+![sass](https://img.shields.io/badge/-Scss-bf608e?style=for-the-badge&logo=less&logoColor=white)
+![reactivex](https://img.shields.io/badge/-Reactivex-grey?style=for-the-badge&logo=reactivex)
+
+![docker](https://img.shields.io/badge/-Docker-grey?style=for-the-badge&logo=docker)
+![kubernetes](https://img.shields.io/badge/-Kubernetes-grey?style=for-the-badge&logo=kubernetes)
+![helm](https://img.shields.io/badge/-Helm-grey?style=for-the-badge&logo=helm)
 
 ![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
@@ -50,6 +79,13 @@
 ![Neovim](https://img.shields.io/badge/Neovim-57A143?style=for-the-badge&logo=neovim&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
+### Learning
+
+![blender](https://img.shields.io/badge/-Blender-grey?style=for-the-badge&logo=blender)
+![wasm](https://img.shields.io/badge/-Webassembly-white?style=for-the-badge&logo=webassembly)
+![lua](https://img.shields.io/badge/-Lua-grey?style=for-the-badge&logo=lua)
+![tensorflow](https://img.shields.io/badge/-Tensorflow-grey?style=for-the-badge&logo=tensorflow)
+![affinityphoto](https://img.shields.io/badge/-AffinityPhoto-blue?style=for-the-badge&logo=affinityphoto&logoColor=white)
 ---
 
 ## 🚀 Projects
@@ -76,33 +112,6 @@
 | [demo_rust_gpui](https://github.com/gsxhnd/demo_rust_gpui) | Desktop GUI app with GPUI framework | Rust, GPUI |
 | [demo_vue_reka_ui](https://github.com/gsxhnd/demo_vue_reka_ui) | Vue 3 component library showcase | Vue, TypeScript, Reka UI |
 
-### Templates
-
-| Template | Description |
-|----------|-------------|
-| [vue-template](https://github.com/gsxhnd/vue-template) | Vue + Vite + Pinia + Primevue + Less |
-| [ts-api-template](https://github.com/gsxhnd/ts-api-template) | TypeScript + Nodemon + Koa + Winston |
-| [go-api-template](https://github.com/gsxhnd/go-api-template) | Go + Gin + Zap + Wire + GRPC + OpenTelemetry |
-
----
-
-## 📊 GitHub Activity
-
-<div align="center">
-
-[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=gsxhnd&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&text_color=C9D1D9)](https://github.com/gsxhnd)
-
-</div>
-
----
-
-## 🌱 Currently Learning
-
-- **Blender** - 3D modeling and animation
-- **WebAssembly** - High-performance web applications
-- **GPUI** - Native desktop GUI development in Rust
-- **System Design** - Building scalable distributed systems
-
 ---
 
 <div align="center">
@@ -112,4 +121,3 @@
 [![Visitors](https://visitor-badge.laobi.icu/badge?page_id=gsxhnd.gsxhnd)](https://github.com/gsxhnd)
 
 </div>
-
