@@ -161,7 +161,7 @@ const navigation = getNavigation(lang);
     flex-direction: column;
     gap: var(--sp-md);
     padding: var(--sp-xl) var(--sp-xl);
-    background-color: var(--c-bg-alt);
+    background-color: var(--c-bg);
     opacity: 0;
     overflow-y: auto;
     visibility: hidden;
@@ -246,9 +246,8 @@ const navigation = getNavigation(lang);
 
   .nav-list-link {
     display: block;
-    padding: var(--sp-sm) 0;
     color: var(--c-text);
-    font-size: var(--fs-base);
+    font-size: var(--fs-lg);
     font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0.02em;
@@ -270,14 +269,20 @@ const navigation = getNavigation(lang);
 
   /* Sub Menu */
   .sub-menu {
-    display: none;
+    display: flex;
+    flex-direction: column;
     list-style: none;
-    padding-left: var(--sp-lg);
-    /* margin-top: var(--sp-sm); */
+    padding-left: 0;
+    gap: var(--sp-sm);
+    margin-top: var(--sp-xs);
     margin-bottom: var(--sp-sm);
   }
 
   @media (min-width: 900px) {
+    .sub-menu {
+      display: none;
+    }
+
     .nav-list-item:hover .sub-menu {
       display: block;
       position: absolute;
@@ -286,10 +291,9 @@ const navigation = getNavigation(lang);
       background-color: var(--c-bg);
       border: 1px solid var(--c-border-light);
       border-radius: var(--radius-lg);
-      padding: var(--sp-sm);
+      /* padding: var(--sp-sm); */
       min-width: 200px;
       box-shadow: var(--shadow-lg);
-      /* margin-top: var(--sp-xs); */
     }
   }
 
@@ -297,10 +301,18 @@ const navigation = getNavigation(lang);
     margin: 0;
   }
 
+  @media (min-width: 900px) {
+    .sub-menu-item {
+      border-left: none;
+    }
+  }
+
   .sub-menu-link {
     display: block;
-    padding: var(--sp-sm);
+    padding: var(--sp-sm) var(--sp-md);
     color: var(--c-text-sub);
+    border-radius: 10px;
+    background-color: var(--c-bg-secondary);
     font-size: var(--fs-sm);
     text-decoration: none;
     transition: color var(--transition-base);
@@ -310,6 +322,8 @@ const navigation = getNavigation(lang);
   @media (min-width: 900px) {
     .sub-menu-link {
       font-size: var(--fs-xs);
+      padding: var(--sp-sm);
+      background-color: var(--c-bg);
     }
   }
 
@@ -323,6 +337,8 @@ const navigation = getNavigation(lang);
     flex-direction: column;
     gap: var(--sp-md);
     align-items: stretch;
+    margin-top: auto;
+    padding-top: var(--sp-xl);
   }
 
   @media (min-width: 900px) {
@@ -330,6 +346,8 @@ const navigation = getNavigation(lang);
       flex-direction: row;
       align-items: center;
       gap: var(--sp-lg);
+      margin-top: 0;
+      padding-top: 0;
     }
   }
 
@@ -396,9 +414,17 @@ const navigation = getNavigation(lang);
       );
     });
 
-    document.addEventListener("astro:before-swap", () => controller.abort(), {
-      once: true,
-    });
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        // Ensure body scroll is restored before DOM swap
+        document.body.style.overflow = "";
+        controller.abort();
+      },
+      {
+        once: true,
+      },
+    );
   });
 </script>
 
@@ -406,8 +432,14 @@ const navigation = getNavigation(lang);
   document.addEventListener("astro:page-load", () => {
     const header = document.getElementById("header");
     const controller = new AbortController();
-    let lastScroll = 0;
     let ticking = false;
+
+    // Initialize lastScroll with current scroll position to prevent
+    // header from hiding immediately after page navigation
+    let lastScroll = window.scrollY;
+
+    // Ensure header is visible on page load
+    header?.classList.remove("is-hidden");
 
     const updateHeader = () => {
       const currentScroll = window.scrollY;

@@ -78,42 +78,44 @@ const faqItems = t("services.faq.items") as unknown as {
   </section>
 
   <!-- Service Sections -->
-  {serviceSections.map((section) => {
-    const items = t(section.itemsKey) as unknown as string[];
-    return (
-      <section class="service-section" id={section.anchorId}>
-        <div class="service-section__container">
-          <div class="service-section__header">
-            <span class="service-section__number">{section.number}</span>
-            <h2 class="service-section__title">{t(section.titleKey)}</h2>
-          </div>
-          <div class="service-section__content">
-            <div class="service-section__image">
-              <div class="service-section__image-placeholder"></div>
+  {
+    serviceSections.map((section) => {
+      const items = t(section.itemsKey) as unknown as string[];
+      return (
+        <section class="service-section" id={section.anchorId}>
+          <div class="service-section__container">
+            <div class="service-section__header">
+              <span class="service-section__number">{section.number}</span>
+              <h2 class="service-section__title">{t(section.titleKey)}</h2>
             </div>
-            <div class="service-section__description">
-              <p>{t(section.descriptionKey)}</p>
+            <div class="service-section__content">
+              <div class="service-section__image">
+                <div class="service-section__image-placeholder" />
+              </div>
+              <div class="service-section__description">
+                <p>{t(section.descriptionKey)}</p>
+              </div>
+            </div>
+            <div class="service-section__services">
+              <h3 class="service-section__services-title">
+                {t("services.providedServices")}
+              </h3>
+              <ul class="service-section__services-list">
+                {items.map((item: string) => (
+                  <li class="service-section__services-item">{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="service-section__action">
+              <Button href={`/${lang}/contact/`} variant="solid" size="medium">
+                {t("services.consultButton")}
+              </Button>
             </div>
           </div>
-          <div class="service-section__services">
-            <h3 class="service-section__services-title">
-              {t("services.providedServices")}
-            </h3>
-            <ul class="service-section__services-list">
-              {items.map((item: string) => (
-                <li class="service-section__services-item">{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div class="service-section__action">
-            <Button href={`/${lang}/contact/`} variant="solid" size="medium">
-              {t("services.consultButton")}
-            </Button>
-          </div>
-        </div>
-      </section>
-    );
-  })}
+        </section>
+      );
+    })
+  }
 
   <!-- FAQ Section -->
   <section class="faq">
@@ -123,17 +125,19 @@ const faqItems = t("services.faq.items") as unknown as {
         <p class="faq__subtitle">{t("services.faq.title")}</p>
       </div>
       <div class="faq__list">
-        {faqItems.map((item, index) => (
-          <details class="faq__item" open={index === 0}>
-            <summary class="faq__question">
-              <span class="faq__question-text">{item.question}</span>
-              <span class="faq__question-icon" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__answer">
-              <p>{item.answer}</p>
-            </div>
-          </details>
-        ))}
+        {
+          faqItems.map((item, index) => (
+            <details class="faq__item" open={index === 0}>
+              <summary class="faq__question">
+                <span class="faq__question-text">{item.question}</span>
+                <span class="faq__question-icon" aria-hidden="true" />
+              </summary>
+              <div class="faq__answer">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -370,12 +374,12 @@ const faqItems = t("services.faq.items") as unknown as {
     &__list {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: var(--sp-md);
     }
 
     &__item {
       border: 1px solid var(--c-border);
-      border-radius: 4px;
+      border-radius: 20px;
       margin-bottom: -1px;
 
       &[open] {
