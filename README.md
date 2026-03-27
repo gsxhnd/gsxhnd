@@ -14,23 +14,23 @@
 
 ---
 
-## About Me
+## 👨‍💻 About Me
 
 - Backend-focused developer who enjoys building fast, maintainable systems.
 - Comfortable across Go, Rust, TypeScript, and modern frontend tooling.
 - Interested in networking, infrastructure, framework design, and developer experience.
 - Usually exploring how to make tools smaller, clearer, and more dependable.
 
-## What I Build
+## 🚀 What I Build
 
 - High-performance backend services and CLI tools.
 - Experimental frameworks and infrastructure-oriented side projects.
 - Frontend demos to validate UI systems and engineering ideas.
 - Learning projects that turn new stacks into reusable experience.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-### Languages
+### 💬 Languages
 
 ![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
@@ -40,7 +40,7 @@
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 
-### Frontend
+### 🎨 Frontend
 
 ![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
 ![Astro](https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white)
@@ -49,7 +49,7 @@
 ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
 ![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
-### Backend & Infra
+### 🧩 Backend & Infra
 
 ![Fiber](https://img.shields.io/badge/Fiber-00ACD7?style=for-the-badge&logo=go&logoColor=white)
 ![Axum](https://img.shields.io/badge/Axum-000000?style=for-the-badge&logo=rust&logoColor=white)
@@ -59,7 +59,7 @@
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white)
 
-### Workflow
+### ⚙️ Workflow
 
 ![macOS](https://img.shields.io/badge/macOS-M2-black?style=for-the-badge&logo=apple&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
@@ -71,7 +71,7 @@
 ![Zsh](https://img.shields.io/badge/Zsh-F15A24?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![Obsidian](https://img.shields.io/badge/Obsidian-7C3AED?style=for-the-badge&logo=obsidian&logoColor=white)
 
-### Currently Exploring
+### 🌱 Currently Exploring
 
 ![Blender](https://img.shields.io/badge/Blender-F5792A?style=for-the-badge&logo=blender&logoColor=white)
 ![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?style=for-the-badge&logo=webassembly&logoColor=white)
@@ -81,16 +81,16 @@
 
 ---
 
-## Featured Projects
+## 📦 Featured Projects
 
-### Production Ready
+### ✅ Production Ready
 
 | Project | What it does | Stack |
 | --- | --- | --- |
 | [Garage](https://github.com/gsxhnd/garage) | CLI toolkit for javbus crawling and ffmpeg batch workflows | Go, CLI |
 | [Dubhe](https://github.com/gsxhnd/Dubhe) | High-performance MQTT broker with v3, v4, and v5 support | Go, Networking |
 
-### Experiments & Learning
+### 🧪 Experiments & Learning
 
 | Project | What it explores | Stack |
 | --- | --- | --- |
@@ -105,7 +105,7 @@
 
 ---
 
-## Philosophy
+## 💡 Philosophy
 
 > Code should be simple to use, easy to inspect, and reliable under pressure.
 
