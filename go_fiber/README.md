@@ -1,74 +1,97 @@
-# Go Sample Code
+# Go Fiber API
 
-Go 语言示例代码集合，提供实用的代码示例和可复用的工具包。
+基于 Go Fiber 的 Web API 项目，支持从单体模板到微服务架构的渐进式演进。
 
-## 📦 项目结构
+## 项目定位
+
+**第一阶段：API Web Framework Template**
+
+提供开箱即用的 Web API 基础框架，包含：
+- HTTP 路由与中间件（Fiber）
+- 依赖注入（fx）
+- 结构化日志（zap + OpenTelemetry）
+- 健康检查端点
+
+**第二阶段：微服务集成**
+
+在第一阶段基础上扩展微服务能力：
+- 服务注册与发现
+- 分布式链路追踪
+- 负载均衡与熔断
+- 消息队列集成
+
+## 项目结构
 
 ```
 go_sample_code/
 ├── cmd/
-│   └── server/         # Fiber Web 服务
-├── internal/
-│   ├── handler/        # HTTP 处理器（按模块拆分）
-│   ├── service/        # 业务服务层
-│   └── middleware/     # 中间件
-├── pkg/
-│   ├── filetree/       # 文件树 N 叉树实现
-│   └── logger/         # 通用日志工具包
+│   └── server/         # 服务入口
+├── internal/           # 内部代码
+│   ├── handler/        # HTTP 处理器
+│   ├── middleware/     # 中间件
+│   ├── service/        # 业务逻辑
+│   └── errno/          # 错误码
+├── pkg/                # 公共包
+│   └── logger/         # 结构化日志
 └── README.md
 ```
 
-## 📚 模块说明
+## 快速开始
 
-### filetree - 文件树数据结构
-
-基于 N 叉树的文件/目录结构实现，支持序列化存储。
-
-[查看详细文档](./pkg/filetree/README.md)
-
-### logger - 日志工具包
-
-基于 zap 的高性能日志库，支持 OpenTelemetry 集成。
-
-[查看详细文档](./pkg/logger/README.md)
-
-## 🚀 快速开始
+### 运行服务
 
 ```bash
-# 运行服务
 go run cmd/server/main.go
-
-# 运行测试
-go test ./...
 ```
 
-## 🌐 API 端点
-
-服务启动后访问 `http://localhost:8080`
-
-### 健康检查
+### 测试健康检查
 
 ```bash
 curl http://localhost:8080/api/health
 ```
 
-### 文件树操作
+## 技术栈
 
-```bash
-# 添加节点（目录）
-# 添加节点（文件）
-# 获取完整树结构
-# 获取所有文件
-# 重命名节点
-# 删除节点
-```
+- **Web 框架**: [Fiber](https://github.com/gofiber/fiber) - 高性能 Web 框架
+- **依赖注入**: [uber-go/fx](https://github.com/uber-go/fx) - 依赖注入框架
+- **日志**: [zap](https://github.com/uber-go/zap) + OpenTelemetry
+- **配置**: 支持 YAML/JSON 配置文件
 
-## 📝 开发指南
+## 未来规划
 
-每个模块都包含：
+### 第二阶段待办
 
-- 完整的实现代码
-- 单元测试
-- 使用文档
+- [ ] 集成 gRPC 服务
+- [ ] 添加服务注册中心（Consul/etcd）
+- [ ] 实现分布式链路追踪（Jaeger）
+- [ ] 添加消息队列支持（Kafka/RabbitMQ）
+- [ ] 实现熔断和重试机制
 
-欢迎贡献新的示例和工具包！
+## 开发指南
+
+### 添加新的 Handler
+
+1. 在 `internal/handler/` 创建新的 handler 包
+2. 实现 handler 接口和构造函数
+3. 在 `cmd/server/main.go` 的 `RegisterHooks` 中注册路由
+
+### 中间件使用
+
+项目已内置中间件：
+- `Recovery` -  panic 恢复
+- `Logger` - 请求日志记录
+
+在 `RegisterHooks` 的 `OnStart` 中按顺序添加中间件。
+
+## 贡献指南
+
+欢迎提交 Issue 和 PR！
+
+请确保：
+- 代码通过 `go fmt` 格式化
+- 添加单元测试
+- 更新相关文档
+
+## License
+
+MIT License

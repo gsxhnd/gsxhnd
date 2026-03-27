@@ -5,7 +5,6 @@ import (
 	"flag"
 	"time"
 
-	filetreehandler "go_sample_code/internal/handler/filetreehandler"
 	healthhandler "go_sample_code/internal/handler/health"
 	"go_sample_code/internal/middleware"
 	"go_sample_code/pkg/logger"
@@ -29,7 +28,6 @@ func main() {
 			NewLogger,
 			NewFiberApp,
 			healthhandler.NewHandler,
-			filetreehandler.NewHandler,
 		),
 		fx.Invoke(RegisterHooks),
 	).Run()
@@ -53,7 +51,6 @@ func RegisterHooks(
 	app *fiber.App,
 	log logger.Logger,
 	healthHandler healthhandler.Handler,
-	fileTreeHandler filetreehandler.Handler,
 ) {
 	lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
@@ -61,14 +58,6 @@ func RegisterHooks(
 			app.Use(middleware.Logger(log))
 
 			app.Get("/api/health", healthHandler.Check)
-
-			api := app.Group("/api/filetree")
-			api.Post("/node", fileTreeHandler.AddNode)
-			api.Delete("/node", fileTreeHandler.RemoveNode)
-			api.Put("/rename", fileTreeHandler.RenameNode)
-			api.Put("/move", fileTreeHandler.MoveNode)
-			api.Get("/files", fileTreeHandler.GetAllFiles)
-			api.Get("/tree", fileTreeHandler.GetTree)
 
 			go func() {
 				if err := app.Listen(":8080"); err != nil {
