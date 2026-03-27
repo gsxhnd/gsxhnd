@@ -1,8 +1,0 @@
-host = "0.0.0.0"
-port = 8080
-
-[database]
-url = "postgresql://prod_user:secure_password@prod-db.example.com:5432/prod_db"
-
-[redis]
-url = "redis://prod-redis.example.com:6379/0"

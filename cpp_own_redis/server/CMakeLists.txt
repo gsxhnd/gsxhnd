@@ -1,1 +1,0 @@
-add_executable(redisServer main.cpp)
