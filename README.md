@@ -93,6 +93,9 @@
 | --- | --- | --- |
 | [Garage](https://github.com/gsxhnd/garage) | CLI toolkit for javbus crawling and ffmpeg batch workflows | Go, CLI |
 | [Dubhe](https://github.com/gsxhnd/Dubhe) | High-performance MQTT broker with v3, v4, and v5 support | Go, Networking |
+| [Lottery](https://github.com/gsxhnd/Lottery) | Lottery Predict | AI |
+| [Tenpai](https://github.com/gsxhnd/Tenpai) | Mahjong Predict | AI |
+| [QuantBot](https://github.com/gsxhnd/QuantBot) | Predict | AI |
 
 ### 🧪 Experiments & Learning
 
